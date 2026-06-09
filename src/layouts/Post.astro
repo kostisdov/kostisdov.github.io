@@ -1,0 +1,31 @@
+---
+import Base from './Base.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+
+const formatted = date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Base title={`${title} — Kostis Dovelos`} description={description}>
+  <header class="article-header">
+    <p class="meta">
+      {formatted}{tags.length > 0 && ` · ${tags.join(' · ')}`}
+    </p>
+    <h1>{title}</h1>
+    {description && <p class="description">{description}</p>}
+  </header>
+  <hr class="article-rule" />
+  <article class="prose">
+    <slot />
+  </article>
+</Base>

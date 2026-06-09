@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Notes on waves, signals, and other curiosities.' } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="site-nav">
+        <a class="wordmark" href="/"><span class="tilde">~</span> Kostis Dovelos</a>
+        <ul>
+          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Notes</a></li>
+          <li>
+            <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} Kostis Dovelos</span>
+        <span>
+          <a href="https://www.linkedin.com/in/kostis-dovelos-88219656/">LinkedIn</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:konstantinos.dovelos@gmail.com">Email</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

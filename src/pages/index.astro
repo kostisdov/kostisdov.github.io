@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+
+<Base title="Kostis Dovelos — Notes">
+  <section class="hero">
+    <h1>Signals, systems,<br />and <em>other curiosities</em>.</h1>
+    <p class="lede">
+      I'm Kostis — a wireless systems architect. I design radios for a living and write here
+      about the mathematics behind them, and occasionally about things that have nothing to do
+      with either.
+    </p>
+    <canvas class="field-art" id="field-art" aria-hidden="true"></canvas>
+    <p class="field-caption">fig. 0 — interference field, four coherent sources</p>
+  </section>
+
+  <section>
+    <p class="section-label">Notes</p>
+    <ul class="post-index">
+      {
+        posts.map((post) => (
+          <li>
+            <p class="meta">
+              <span>{fmt(post.data.date)}</span>
+              {post.data.tags.length > 0 && <span class="tag">{post.data.tags.join(' · ')}</span>}
+            </p>
+            <h2>
+              <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            {post.data.description && <p>{post.data.description}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<script>
+  // Ridgeline rendering of a 2-D interference field: a handful of coherent
+  // point sources above the canvas plane, sampled along horizontal scan lines.
+  const canvas = document.getElementById('field-art') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const sources = [
+    { x: 0.18, y: -0.25, k: 38, amp: 1.0 },
+    { x: 0.52, y: -0.4, k: 52, amp: 0.8 },
+    { x: 0.8, y: -0.2, k: 30, amp: 0.9 },
+    { x: 0.38, y: 1.35, k: 44, amp: 0.6 },
+  ];
+
+  let width = 0;
+  let height = 0;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function field(x: number, y: number, t: number) {
+    let v = 0;
+    for (const s of sources) {
+      const dx = x - s.x;
+      const dy = y - s.y;
+      const r = Math.sqrt(dx * dx + dy * dy);
+      v += s.amp * Math.sin(s.k * r - t) / (1 + 2.5 * r);
+    }
+    return v;
+  }
+
+  function draw(t: number) {
+    ctx.clearRect(0, 0, width, height);
+    const rows = 36;
+    const cols = 140;
+    const inkLine = 'rgba(34, 30, 23, 0.55)';
+    const accentEvery = 9;
+
+    for (let j = 0; j <= rows; j++) {
+      const ny = j / rows;
+      const baseY = 14 + ny * (height - 28);
+      const isAccent = j % accentEvery === 4;
+      ctx.beginPath();
+      for (let i = 0; i <= cols; i++) {
+        const nx = i / cols;
+        const v = field(nx, ny, t);
+        const px = nx * width;
+        const py = baseY - v * 11;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = isAccent ? 'rgba(195, 74, 34, 0.8)' : inkLine;
+      ctx.lineWidth = isAccent ? 1.1 : 0.7;
+      ctx.stroke();
+    }
+  }
+
+  let phase = Math.PI; // start mid-evolution so the static frame looks good too
+  function loop() {
+    phase += 0.012;
+    draw(phase);
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener('resize', () => {
+    resize();
+    draw(phase);
+  });
+
+  if (reduceMotion) {
+    draw(phase);
+  } else {
+    loop();
+  }
+</script>
