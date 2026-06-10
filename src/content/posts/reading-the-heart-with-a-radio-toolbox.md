@@ -107,13 +107,13 @@ tachogram arrives one irregular sample per beat, while the DFT assumes uniform s
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg)
 
-Two peaks, two stories. The **high-frequency band (HF, 0.15–0.4 Hz)** sits right at the
+Two peaks, two stories. The high-frequency band (HF, 0.15–0.4 Hz) sits right at the
 rhythm of normal breathing. Your heart speeds up slightly as you inhale and slows as you
 exhale, an effect called respiratory sinus arrhythmia, and it is driven by the vagus
 nerve, the parasympathetic "rest and digest" branch of the nervous system. A tall HF peak
 means strong vagal tone: the signature of a calm, well-recovered heart.
 
-The **low-frequency band (LF, 0.04–0.15 Hz)** is messier. It centres near 0.1 Hz, the
+The low-frequency band (LF, 0.04–0.15 Hz) is messier. It centres near 0.1 Hz, the
 natural period of the baroreflex, the feedback loop that keeps your blood pressure steady,
 and it carries a blend of both sympathetic ("fight or flight") and parasympathetic activity.
 
@@ -125,7 +125,7 @@ $$
 
 read as a dial for "sympathovagal balance." It is a handy shorthand, though the tidy
 "LF equals sympathetic" story is an oversimplification and worth treating with some caution. The
-far more robust signal is the bigger picture: the **total power** under this curve, overall
+far more robust signal is the bigger picture: the total power under this curve, overall
 heart-rate variability, is a well-established marker of autonomic health. Depressed
 variability tracks with stress, fatigue, overtraining, and, over the long run, worse
 cardiovascular outcomes; rising variability tracks with recovery and fitness. A heart under
