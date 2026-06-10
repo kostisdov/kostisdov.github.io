@@ -374,6 +374,23 @@ a:hover {
   color: var(--ink-soft);
 }
 
+.project-index .project-link {
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.project-index .project-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.project-index .project-link a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (max-width: 640px) {
   .project-index {
     grid-template-columns: 1fr;
