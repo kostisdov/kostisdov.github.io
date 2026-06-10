@@ -10,20 +10,20 @@ const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
 
-<Base title="Kostis Dovelos — Notes">
+<Base title="Kostis Dovelos">
   <section class="hero">
     <h1>Signals, systems,<br />and <em>other curiosities</em>.</h1>
     <p class="lede">
-      I'm Kostis — a wireless systems architect. I design radios for a living and write here
-      about the mathematics behind them, and occasionally about things that have nothing to do
-      with either.
+      I'm Kostis, a wireless systems architect working at the intersection of signal
+      processing and ML/AI. Passionate about science and understanding how things work.
+      I post about topics I find interesting, spanning from wireless communications to
+      biomedical signal processing.
     </p>
     <canvas class="field-art" id="field-art" aria-hidden="true"></canvas>
-    <p class="field-caption">fig. 0 — interference field, four coherent sources</p>
   </section>
 
-  <section>
-    <p class="section-label">Notes</p>
+  <section class="post-section">
+    <p class="section-label">Posts</p>
     <ul class="post-index">
       {
         posts.map((post) => (
@@ -43,7 +43,7 @@ const fmt = (d: Date) =>
   </section>
 
   <section class="side-projects">
-    <p class="section-label">Side Projects</p>
+    <p class="section-label">AI Side Projects</p>
     <ul class="project-index">
       <li>
         <h2><a href="https://pyxida.io">pyxida</a></h2>
@@ -52,7 +52,8 @@ const fmt = (d: Date) =>
           A personal companion for adults living with congenital heart disease. Your entire
           cardiac story in one place: records explained in plain language, echo findings
           tracked over time, and heart-rate zones calibrated to your condition and medication
-          — not population averages.
+          — not population averages. Developed during LifeHack Athens 2026, a 36-hour life
+          sciences hackathon at the heart of Panathēnea.
         </p>
       </li>
       <li>
@@ -61,7 +62,8 @@ const fmt = (d: Date) =>
         <p>
           A cardiometabolic companion. Reads the medical record, connects to wearable trends,
           and gives clinically-contextualised, medication-aware feedback on whether
-          interventions are actually working.
+          interventions are actually working. Developed during LifeHack Athens 2026, a 36-hour
+          life sciences hackathon at the heart of Panathēnea.
         </p>
       </li>
       <li>

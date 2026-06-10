@@ -29,9 +29,9 @@ const path = Astro.url.pathname;
   <body>
     <div class="wrap">
       <nav class="site-nav">
-        <a class="wordmark" href="/"><span class="tilde">~</span> Kostis Dovelos</a>
+        <a class="wordmark" href="/">Kostis Dovelos</a>
         <ul>
-          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Notes</a></li>
+          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Posts</a></li>
           <li>
             <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
           </li>
