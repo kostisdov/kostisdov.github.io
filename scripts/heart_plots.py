@@ -159,9 +159,9 @@ ax.set_yticks([])
 despine(ax)
 
 ymax = ax.get_ylim()[1]
-ax.text(0.095, ymax * 0.92, "LF", color=ACCENT_DEEP, ha="center", fontsize=12,
+ax.text(0.058, ymax * 0.92, "LF", color=ACCENT_DEEP, ha="center", fontsize=12,
         style="italic")
-ax.text(0.275, ymax * 0.92, "HF", color=ACCENT, ha="center", fontsize=12,
+ax.text(0.32, ymax * 0.92, "HF", color=ACCENT, ha="center", fontsize=12,
         style="italic")
 ax.set_title("the autonomic fingerprint: LF vs HF power", loc="left", color=INK,
              fontsize=12, style="italic")
