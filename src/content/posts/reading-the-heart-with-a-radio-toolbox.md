@@ -106,7 +106,7 @@ is exactly right: we do not need pinpoint resolution, we just need to see reliab
 band the power lives in. (And the resampling onto an even grid matters because the raw
 tachogram arrives one irregular sample per beat, while the DFT assumes uniform spacing.)
 
-![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg)
+![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
 Two peaks, two stories. The high-frequency band (HF, 0.15–0.4 Hz) sits right at the
 rhythm of normal breathing. Your heart speeds up slightly as you inhale and slows as you
