@@ -341,7 +341,7 @@ a:hover {
 
 .project-index {
   list-style: none;
-  margin: 1rem 0 0;
+  margin: 1.9rem 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
