@@ -372,6 +372,10 @@ a:hover {
   margin: 0 0 0.2rem;
 }
 
+.project-index h2 a {
+  text-decoration: none;
+}
+
 .project-index .meta {
   font-family: var(--mono);
   font-size: 0.68rem;
