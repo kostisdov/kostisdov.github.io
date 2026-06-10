@@ -1,6 +1,6 @@
 ---
 title: "Reading the heart with a radio engineer's toolbox"
-description: "An ECG is just a noisy one-dimensional signal. The same DSP that pulls a voice out of static pulls a story about your nervous system out of a heartbeat."
+description: "An ECG is just a noisy one-dimensional signal. The same DSP that pulls a voice out of static pulls a story about your nervous system out of your heartbeats."
 date: 2026-06-10
 tags: ["signals", "biomedical"]
 ---
