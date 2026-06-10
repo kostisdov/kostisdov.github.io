@@ -84,7 +84,8 @@ where $r[m]$ measures how much a sample resembles the one $m$ steps away, and $\
 the normalized angular frequency in radians per sample. We first remove the slow trend and
 mean, so the spectrum reflects the fluctuations rather than a spike at zero frequency. Since
 we resampled at $f_s = 4$ Hz, a normalized $\omega$ corresponds to a physical frequency
-$f = \omega f_s / 2\pi$ in hertz.
+$f = \omega f_s / 2\pi$ in hertz. That rate is deliberately generous: by Nyquist it captures
+frequencies up to 2 Hz, comfortably above the 0.4 Hz ceiling of the bands we care about.
 
 In practice we never have the true autocorrelation; we have a finite record. The obvious
 estimate is the **periodogram**: take the discrete Fourier transform of the $N$ samples and
@@ -97,8 +98,8 @@ $$
 The $|\cdot|^2$ turns amplitude into power. It is technically correct but uselessly noisy:
 its variance does not shrink as you collect more data, so the spectrum comes out looking
 like grass, real peaks buried in spikes. **Welch's method** is the standard fix. Chop the
-record into overlapping segments, taper each one with a window to stop energy leaking
-between frequencies, compute the periodogram of each segment, and average them. Averaging
+record into overlapping segments, taper each one with a window (a Hann window here) to stop
+energy leaking between frequencies, compute the periodogram of each segment, and average them. Averaging
 $K$ roughly-independent estimates cuts the variance by about a factor of $K$, trading a
 little frequency resolution for a far smoother, more trustworthy spectrum. Here that trade
 is exactly right: we do not need pinpoint resolution, we just need to see reliably which
@@ -123,7 +124,8 @@ $$
 \frac{\text{LF}}{\text{HF}} = \frac{\displaystyle\int_{0.04}^{0.15} S(f)\,df}{\displaystyle\int_{0.15}^{0.40} S(f)\,df},
 $$
 
-read as a dial for "sympathovagal balance." It is a handy shorthand, though the tidy
+read as a dial for "sympathovagal balance"; at rest it typically sits somewhere around 1 to
+2, climbing as stress shifts the balance. It is a handy shorthand, though the tidy
 "LF equals sympathetic" story is an oversimplification and worth treating with some caution. The
 far more robust signal is the bigger picture: the total power under this curve, overall
 heart-rate variability, is a well-established marker of autonomic health. Depressed
@@ -145,6 +147,9 @@ is. A waveform from an antenna and a waveform from an artery are, to the math, t
 kind of object. Learn the toolbox once and the heart becomes just another channel worth
 decoding, which is more or less the bet behind everything I am building in health right now.
 
+Next time: detecting arrhythmias the way a radio detects a dropped packet, where a missed or
+malformed beat is just an error in a stream you were expecting to be regular.
+
 ## References
 
 1. Task Force of the European Society of Cardiology and the North American Society of Pacing
@@ -159,3 +164,9 @@ decoding, which is more or less the bet behind everything I am building in healt
    Biomedical Engineering*, vol. 32, no. 3, pp. 230–236, 1985.
 5. A. V. Oppenheim and R. W. Schafer, *Discrete-Time Signal Processing*, 3rd ed. Pearson,
    2009.
+
+---
+
+*Kostis Dovelos is a wireless systems architect with a PhD in wireless communications. He
+spent a decade designing radio PHY for defense and telecom, and now builds health tools at
+[Pyxida](https://pyxida.io).*
