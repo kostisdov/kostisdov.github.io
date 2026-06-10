@@ -416,9 +416,10 @@ a:hover {
 /* Uniform spacing above the three section headings on the About page,
    matching the lighter weight/size of the post titles (not the heavier prose h2). */
 .about-grid .section-head {
-  font-weight: 450;
+  font-weight: 380;
   font-size: 1.7rem;
   line-height: 1.18;
+  letter-spacing: -0.018em;
   margin-top: 3.5rem;
   margin-bottom: 0.8rem;
 }
