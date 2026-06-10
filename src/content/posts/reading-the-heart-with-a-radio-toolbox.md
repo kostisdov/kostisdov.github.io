@@ -1,6 +1,6 @@
 ---
 title: "Reading the heart with a radio engineer's toolbox"
-description: "An electrocardiogram is a noisy one-dimensional signal. The same digital signal processing used in wireless receivers, band-pass filtering followed by spectral estimation, extracts a measure of autonomic health from it."
+description: "An electrocardiogram is a noisy one-dimensional signal. The same signal processing used in radio receivers, filtering and spectral estimation, turns it into a measure of autonomic health."
 date: 2026-06-10
 tags: ["signals", "biomedical"]
 ---
@@ -15,9 +15,9 @@ health tools in development, [Pyxida](https://pyxida.io) and FindMyHeart.
 
 ## Filtering: isolating the heartbeat
 
-A raw ECG recording contains several noise sources: power-line interference at 50 Hz (60 Hz
-in the Americas), low-frequency baseline wander caused by respiration and electrode motion,
-and wideband measurement noise. The diagnostically relevant component is the QRS complex, the
+A raw ECG recording contains several noise sources: power-line interference at 50 Hz,
+low-frequency baseline wander caused by respiration and electrode motion, and wideband
+measurement noise. The diagnostically relevant component is the QRS complex, the
 large, sharp deflection of each beat. Its name denotes three successive deflections, a small
 negative Q wave, a tall positive R wave, and a subsequent negative S wave, and it corresponds
 to depolarization and contraction of the ventricles, the heart's main pumping chambers. The
@@ -91,19 +91,22 @@ $$
 $$
 
 where $X[k]$ is the $N$-point DFT and bin $k$ corresponds to the physical frequency
-$f_k = k f_s / N$. The discrete index $k$ therefore samples the continuous spectrum
-$S(e^{j\omega})$ at $\omega_k = 2\pi k / N$: the DTFT supplies the definition, the DFT supplies
-the computation.
+$f_k = k f_s / N$.
 
-The periodogram is an inconsistent estimator. Its variance does not decrease as the record
+The periodogram is an inconsistent estimator: its variance does not decrease as the record
 length grows, so genuine peaks are obscured by large random fluctuations. Welch's method
-reduces this variance. The record is divided into overlapping segments; each segment is
-multiplied by a window function (a Hann window here) to limit spectral leakage; a periodogram
-is computed for each segment; and the periodograms are averaged. Averaging $K$ approximately
-independent estimates reduces the variance by a factor of roughly $K$, at the cost of reduced
-frequency resolution. The trade-off is acceptable here, since only the distribution of power
-between bands is required. Resampling onto a uniform grid is necessary because the tachogram
-is sampled irregularly, once per beat, whereas the DFT assumes uniform sampling.
+reduces the variance by averaging. The record is split into $K$ segments of length $L$, each
+multiplied by a window (a Hann window here) to limit spectral leakage, and the periodograms of
+the segments are averaged. The segments overlap, typically by 50%: because the window
+attenuates each segment toward its edges, overlapping lets those edge samples still
+contribute, giving about $K \approx 2N/L$ segments from a record of length $N$, against $N/L$
+for non-overlapping blocks. Averaging lowers the variance roughly in proportion to the number
+of segments, though by somewhat less than a factor of $K$, since overlapping segments are not
+fully independent. The cost is coarser frequency resolution, set by the segment length $L$,
+which is acceptable here because only the distribution of power between bands is required.
+
+Resampling onto a uniform grid is necessary because the tachogram is sampled irregularly, once
+per beat, whereas the DFT assumes uniform sampling.
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
