@@ -335,6 +335,66 @@ a:hover {
   font-size: 1.04em;
 }
 
+/* ---------- side projects ---------- */
+
+.side-projects {
+  margin-top: 4rem;
+}
+
+.side-projects .section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+.project-index {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.project-index li {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+}
+
+.project-index h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.2rem;
+}
+
+.project-index .meta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin: 0 0 0.5rem;
+}
+
+.project-index p:not(.meta) {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .project-index {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
 /* ---------- about ---------- */
 
 .about-grid {

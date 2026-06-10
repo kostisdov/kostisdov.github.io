@@ -3,8 +3,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  // Set this to your real domain (or https://<user>.github.io) before deploying.
-  site: 'https://kostisdovelos.com',
+  site: 'https://kostisdov.github.io',
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
