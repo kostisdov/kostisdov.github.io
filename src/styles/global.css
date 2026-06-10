@@ -257,16 +257,16 @@ a:hover {
 }
 
 .prose h2 {
-  font-family: var(--display);
-  font-weight: 500;
+  font-family: var(--serif);
+  font-weight: 600;
   font-size: 1.45rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   margin: 2.6rem 0 0.8rem;
 }
 
 .prose h3 {
-  font-family: var(--display);
-  font-weight: 550;
+  font-family: var(--serif);
+  font-weight: 600;
   font-size: 1.1rem;
   margin: 2rem 0 0.6rem;
 }
