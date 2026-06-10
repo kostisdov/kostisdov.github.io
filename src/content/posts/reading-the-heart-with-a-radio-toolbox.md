@@ -21,10 +21,9 @@ toolbox transfers almost intact.
 A raw recording is a mess. Mains interference hums at 50 Hz (60 Hz across the Atlantic),
 the electrode baseline drifts as the patient breathes and moves, and broadband noise sits
 on top of everything. The heartbeat we actually want is the **QRS complex**, the
-tall, spiky part of each beat. The name is just the labels for its three consecutive
-deflections (a small dip Q, a tall peak R, another dip S), and physiologically it marks the
-moment the heart's main pumping chambers, the ventricles, depolarize and contract to push
-blood out to the body. That sharp spike lives in a band of roughly 0.5 to 40 Hz. Everything
+tall, spiky part of each beat. The name simply labels its three consecutive deflections (a
+small dip Q, a tall peak R, another dip S); physiologically, it marks the moment the heart's
+main pumping chambers, the ventricles, depolarize and contract to push blood out to the body. That sharp spike lives in a band of roughly 0.5 to 40 Hz. Everything
 outside that band is someone else's signal.
 
 The fix is the first thing any radio engineer reaches for: a band-pass filter. Knock out
@@ -67,8 +66,8 @@ The wobble looks random in time. It is not: it is a sum of oscillations layered 
 one another, and the tool for pulling oscillations out of a signal is, of course, the
 Fourier transform. It re-expresses the wiggling tachogram as a recipe of sinusoids and
 tells you how much power sits at each frequency. The quantity we want is the **power
-spectral density** (PSD): a description of how the variance of the signal, how much it
-wobbles, is distributed across frequency.
+spectral density** (PSD): a description of how the variance of the signal (how much it
+wobbles) is distributed across frequency.
 
 We are working with a discrete-time signal $x[n]$, the tachogram resampled onto an even
 grid (more on that below). The cleanest definition of its PSD comes from the
@@ -84,7 +83,7 @@ where $r[m]$ measures how much a sample resembles the one $m$ steps away, and $\
 the normalized angular frequency in radians per sample. We first remove the slow trend and
 mean, so the spectrum reflects the fluctuations rather than a spike at zero frequency. Since
 we resampled at $f_s = 4$ Hz, a normalized $\omega$ corresponds to a physical frequency
-$f = \omega f_s / 2\pi$ in hertz. That rate is deliberately generous: by Nyquist it captures
+$f = \omega f_s / 2\pi$ in Hz. That rate is deliberately generous: by Nyquist it captures
 frequencies up to 2 Hz, comfortably above the 0.4 Hz ceiling of the bands we care about.
 
 In practice we never have the true autocorrelation; we have a finite record. The obvious
@@ -97,14 +96,15 @@ $$
 
 The $|\cdot|^2$ turns amplitude into power. It is technically correct but uselessly noisy:
 its variance does not shrink as you collect more data, so the spectrum comes out looking
-like grass, real peaks buried in spikes. **Welch's method** is the standard fix. Chop the
-record into overlapping segments, taper each one with a window (a Hann window here) to stop
-energy leaking between frequencies, compute the periodogram of each segment, and average them. Averaging
-$K$ roughly-independent estimates cuts the variance by about a factor of $K$, trading a
+like grass, with the real peaks buried among the noise. **Welch's method** is the standard
+fix. Chop the record into overlapping segments, taper each one with a window (a Hann window
+here) to stop energy leaking between frequencies, compute the periodogram of each segment,
+and average them. Averaging $K$ roughly independent estimates cuts the variance by about a
+factor of $K$, trading a
 little frequency resolution for a far smoother, more trustworthy spectrum. Here that trade
 is exactly right: we do not need pinpoint resolution, we just need to see reliably which
-band the power lives in. (And the resampling onto an even grid matters because the raw
-tachogram arrives one irregular sample per beat, while the DFT assumes uniform spacing.)
+band the power lives in. (The resampling onto an even grid matters because the raw tachogram
+arrives one irregular sample per beat, whereas the DFT assumes uniform spacing.)
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
@@ -116,7 +116,7 @@ means strong vagal tone: the signature of a calm, well-recovered heart.
 
 The low-frequency band (LF, 0.04–0.15 Hz) is messier. It centres near 0.1 Hz, the
 natural period of the baroreflex, the feedback loop that keeps your blood pressure steady,
-and it carries a blend of both sympathetic ("fight or flight") and parasympathetic activity.
+and it carries a blend of sympathetic ("fight or flight") and parasympathetic activity.
 
 People often compress the two into a single number, their ratio,
 
@@ -125,7 +125,7 @@ $$
 $$
 
 read as a dial for "sympathovagal balance"; at rest it typically sits somewhere around 1 to
-2, climbing as stress shifts the balance. It is a handy shorthand, though the tidy
+2, climbing as stress tips the scale. It is a handy shorthand, though the tidy
 "LF equals sympathetic" story is an oversimplification and worth treating with some caution. The
 far more robust signal is the bigger picture: the total power under this curve, overall
 heart-rate variability, is a well-established marker of autonomic health. Depressed
