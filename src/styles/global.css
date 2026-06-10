@@ -157,6 +157,13 @@ a:hover {
   margin: 0 0 0.4rem;
 }
 
+.section-intro {
+  max-width: 34rem;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
 .post-index {
   list-style: none;
   margin: 1.5rem 0 0;

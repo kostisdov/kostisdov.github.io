@@ -13,16 +13,16 @@ const fmt = (d: Date) =>
 <Base title="Kostis Dovelos">
   <section class="hero">
     <h1>Signals, systems,<br />and <em>other curiosities</em>.</h1>
-    <p class="lede">
-      Passionate about science and understanding how things work from the ground up. I write
-      about topics that hook me, from wireless communications and physics to AI and biomedical
-      signal processing.
-    </p>
     <canvas class="field-art" id="field-art" aria-hidden="true"></canvas>
   </section>
 
   <section class="post-section">
     <p class="section-label">Posts</p>
+    <p class="section-intro">
+      Passionate about science and understanding how things work from the ground up. I write
+      about topics that hook me, from wireless communications and physics to AI and biomedical
+      signal processing.
+    </p>
     <ul class="post-index">
       {
         posts.map((post) => (
@@ -43,6 +43,10 @@ const fmt = (d: Date) =>
 
   <section class="side-projects">
     <p class="section-label">AI Side Projects</p>
+    <p class="section-intro">
+      Fascinated by technology and the impact it has on our lives. Here I use AI to tackle
+      problems with high societal impact.
+    </p>
     <ul class="project-index">
       <li>
         <h2><a href="https://pyxida.io">pyxida</a></h2>
@@ -56,7 +60,7 @@ const fmt = (d: Date) =>
         <p class="project-link"><a href="https://pyxida.io">pyxida.io →</a></p>
       </li>
       <li>
-        <h2>OpenHeart</h2>
+        <h2>FindMyHeart</h2>
         <p class="meta">health · cardiology</p>
         <p>
           A cardiometabolic companion built for what generic fitness apps miss. It
