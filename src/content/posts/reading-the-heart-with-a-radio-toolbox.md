@@ -1,154 +1,151 @@
 ---
 title: "Reading the heart with a radio engineer's toolbox"
-description: "An ECG is just a noisy one-dimensional signal. The same DSP that pulls a voice out of static pulls a story about your nervous system out of your heartbeats."
+description: "An electrocardiogram is a noisy one-dimensional signal. The same digital signal processing used in wireless receivers, band-pass filtering followed by spectral estimation, extracts a measure of autonomic health from it."
 date: 2026-06-10
 tags: ["signals", "biomedical"]
 ---
 
-Spend a decade pulling faint signals out of noisy radio channels and you start to see
-the same problem everywhere. A radio receiver gets a weak waveform smothered in
-interference and has to recover what was sent. A cardiologist gets a weak waveform
-smothered in interference and has to recover what the heart is doing. Same problem.
-Mostly the same math.
+Signal recovery in wireless communications and signal analysis in cardiology pose the same
+underlying problem: a weak waveform of interest is buried in interference, and the task is to
+recover meaningful information from it. The mathematical toolbox is largely shared. An
+electrocardiogram (ECG) is a one-dimensional signal $x(t)$ sampled at a rate $f_s$,
+structurally identical to the baseband stream of a radio receiver, so the standard processing
+techniques transfer with little modification. The pipeline described below underlies two
+health tools in development, [Pyxida](https://pyxida.io) and FindMyHeart.
 
-So when I started building [Pyxida](https://pyxida.io) and FindMyHeart, I was surprised
-how little I had to relearn. An electrocardiogram is a one-dimensional signal $x(t)$
-sampled at some rate $f_s$, exactly like the baseband stream coming off a radio. The
-toolbox transfers almost intact.
+## Filtering: isolating the heartbeat
 
-## Step one: clean the channel
+A raw ECG recording contains several noise sources: power-line interference at 50 Hz (60 Hz
+in the Americas), low-frequency baseline wander caused by respiration and electrode motion,
+and wideband measurement noise. The diagnostically relevant component is the QRS complex, the
+large, sharp deflection of each beat. Its name denotes three successive deflections, a small
+negative Q wave, a tall positive R wave, and a subsequent negative S wave, and it corresponds
+to depolarization and contraction of the ventricles, the heart's main pumping chambers. The
+QRS complex occupies a band of approximately 0.5 to 40 Hz; energy outside this band belongs
+to other sources.
 
-A raw recording is a mess. Mains interference hums at 50 Hz (60 Hz across the Atlantic),
-the electrode baseline drifts as the patient breathes and moves, and broadband noise sits
-on top of everything. The heartbeat we actually want is the **QRS complex**, the
-tall, spiky part of each beat. The name simply labels its three consecutive deflections (a
-small dip Q, a tall peak R, another dip S); physiologically, it marks the moment the heart's
-main pumping chambers, the ventricles, depolarize and contract to push blood out to the body. That sharp spike lives in a band of roughly 0.5 to 40 Hz. Everything
-outside that band is someone else's signal.
+Removing that out-of-band energy requires a band-pass filter: a high-pass stage suppresses
+the baseline wander, and a low-pass stage attenuates the mains interference and high-frequency
+noise.
 
-The fix is the first thing any radio engineer reaches for: a band-pass filter. Knock out
-the slow baseline wander with a high-pass, knock out the mains hum and high-frequency
-fuzz with a low-pass, and the heartbeat snaps into focus.
+![A raw ECG-like recording dominated by mains interference and baseline wander, and the same trace after a 0.5 to 40 Hz band-pass filter, showing clean QRS peaks.](/posts/heart/ecg-filtering.svg)
 
-![A raw ECG-like recording buried in mains hum and baseline wander, and the same trace after a 0.5 to 40 Hz band-pass filter, showing clean QRS peaks.](/posts/heart/ecg-filtering.svg)
+The effect is substantial. The unfiltered trace is uninterpretable, whereas the filtered
+trace exhibits clearly delineated QRS peaks. This step is not specific to electrocardiography;
+it is the same filtering applied to any noisy communication channel.
 
-That is the entire denoising step. The top trace is unreadable; the bottom one has six
-clean spikes you could count from across the room. Nothing here is specific to medicine;
-it is the same filtering that cleans a noisy audio channel.
+## From waveform to rhythm: the RR-interval series
 
-## Step two: throw away the waveform, keep the rhythm
-
-Here is where it gets interesting. For a lot of cardiology, the shape of each beat
-matters less than the timing between beats. Mark the tall R peak of each QRS complex,
-measure the time from one R peak to the next, and you get the sequence of **RR intervals**,
-the beat-to-beat durations, named after the R waves at each end:
+For many cardiological purposes the morphology of each beat is less informative than the
+intervals between beats. Detecting the R wave of each QRS complex and measuring the time
+between successive R waves yields the sequence of RR intervals,
 
 $$
 \text{RR}_n = t_{n} - t_{n-1},
 $$
 
-where $t_n$ is the time of the $n$-th R peak. So an RR interval of 850 ms simply means
-0.85 seconds elapsed between two heartbeats, a heart rate of about 70 beats per minute.
-Plot those gaps against time and you get a tachogram: a brand-new signal, sampled
-irregularly once per beat, that throws away the voltage waveform entirely and keeps only
-the rhythm.
+where $t_n$ denotes the time of the $n$-th R wave. An RR interval of 850 ms corresponds to
+0.85 s between beats, or a heart rate of approximately 70 beats per minute. Plotting the RR
+intervals against time produces the tachogram, a signal sampled once per beat that discards
+the voltage waveform and retains only the timing.
 
 ![A tachogram: RR interval in milliseconds plotted over several minutes, oscillating around 850 ms.](/posts/heart/tachogram.svg)
 
-A healthy heart is not a metronome. Look at the wobble: the interval breathes up and down
-by tens of milliseconds. That variability is not noise. It is the autonomic nervous system
-leaning on the pacemaker in real time, and it turns out to carry a remarkable amount of
-information about stress, recovery, and health. This is **heart-rate variability**, or HRV.
+The healthy heart is not periodic. The RR interval varies by tens of milliseconds from beat
+to beat. This variation is not measurement noise; it reflects continuous modulation of the
+cardiac pacemaker by the autonomic nervous system and is quantified as heart-rate variability
+(HRV).
 
-## Step three: a Fourier window into the nervous system
+## Spectral analysis of heart-rate variability
 
-The wobble looks random in time. It is not: it is a sum of oscillations layered on top of
-one another, and the tool for pulling oscillations out of a signal is, of course, the
-Fourier transform. It re-expresses the wiggling tachogram as a recipe of sinusoids and
-tells you how much power sits at each frequency. The quantity we want is the **power
-spectral density** (PSD): a description of how the variance of the signal (how much it
-wobbles) is distributed across frequency.
+The RR-interval fluctuations are not random but consist of superimposed oscillations, which
+the Fourier transform resolves into their constituent frequencies. The relevant quantity is
+the power spectral density (PSD), which describes how the variance of the signal is
+distributed over frequency.
 
-We are working with a discrete-time signal $x[n]$, the tachogram resampled onto an even
-grid (more on that below). The cleanest definition of its PSD comes from the
-Wiener–Khinchin theorem: the PSD is the discrete-time Fourier transform of the
-autocorrelation sequence,
+Let $x[n]$ denote the tachogram after resampling onto a uniform grid (discussed below) and
+removal of its mean and slow trend, so that the spectrum reflects the fluctuations rather than
+a component at zero frequency. For a wide-sense stationary process the PSD is defined, through
+the Wiener–Khinchin theorem, as the discrete-time Fourier transform (DTFT) of the
+autocorrelation sequence:
 
 $$
 S\!\left(e^{j\omega}\right) = \sum_{m=-\infty}^{\infty} r[m]\, e^{-j\omega m},
-\qquad r[m] = \mathbb{E}\big\{\,x[n]\,x[n-m]\,\big\},
+\qquad r[m] = \mathbb{E}\big\{\,x[n]\,x[n-m]\,\big\}.
 $$
 
-where $r[m]$ measures how much a sample resembles the one $m$ steps away, and $\omega$ is
-the normalized angular frequency in radians per sample. We first remove the slow trend and
-mean, so the spectrum reflects the fluctuations rather than a spike at zero frequency. Since
-we resampled at $f_s = 4$ Hz, a normalized $\omega$ corresponds to a physical frequency
-$f = \omega f_s / 2\pi$ in Hz. That rate is deliberately generous: by Nyquist it captures
-frequencies up to 2 Hz, comfortably above the 0.4 Hz ceiling of the bands we care about.
+The PSD is a continuous function of the normalized angular frequency $\omega \in [-\pi, \pi]$,
+in radians per sample, because the underlying process is of indefinite length; no block size
+$N$ appears in the definition. The normalized frequency maps to physical frequency through
+$f = \omega f_s / 2\pi$. At $f_s = 4$ Hz the representable band extends to the Nyquist
+frequency of 2 Hz, well above the 0.4 Hz upper limit of the bands of interest.
 
-In practice we never have the true autocorrelation; we have a finite record. The obvious
-estimate is the **periodogram**: take the discrete Fourier transform of the $N$ samples and
-square it,
+The true autocorrelation is unavailable; only a finite record of $N$ samples is observed.
+Estimating the spectrum from that record and evaluating it at the discrete DFT frequencies
+$\omega_k = 2\pi k / N$ gives the periodogram,
 
 $$
-\hat{S}\!\left(e^{j\omega}\right) = \frac{1}{N}\left|\,\sum_{n=0}^{N-1} x[n]\, e^{-j\omega n}\,\right|^2 .
+\hat{S}[k] = \frac{1}{N}\,\big|X[k]\big|^2
+= \frac{1}{N}\left|\,\sum_{n=0}^{N-1} x[n]\, e^{-j 2\pi k n / N}\,\right|^2,
+\qquad k = 0, 1, \dots, N-1,
 $$
 
-The $|\cdot|^2$ turns amplitude into power. It is technically correct but uselessly noisy:
-its variance does not shrink as you collect more data, so the spectrum comes out looking
-like grass, with the real peaks buried among the noise. **Welch's method** is the standard
-fix. Chop the record into overlapping segments, taper each one with a window (a Hann window
-here) to stop energy leaking between frequencies, compute the periodogram of each segment,
-and average them. Averaging $K$ roughly independent estimates cuts the variance by about a
-factor of $K$, trading a
-little frequency resolution for a far smoother, more trustworthy spectrum. Here that trade
-is exactly right: we do not need pinpoint resolution, we just need to see reliably which
-band the power lives in. (The resampling onto an even grid matters because the raw tachogram
-arrives one irregular sample per beat, whereas the DFT assumes uniform spacing.)
+where $X[k]$ is the $N$-point DFT and bin $k$ corresponds to the physical frequency
+$f_k = k f_s / N$. The discrete index $k$ therefore samples the continuous spectrum
+$S(e^{j\omega})$ at $\omega_k = 2\pi k / N$: the DTFT supplies the definition, the DFT supplies
+the computation.
+
+The periodogram is an inconsistent estimator. Its variance does not decrease as the record
+length grows, so genuine peaks are obscured by large random fluctuations. Welch's method
+reduces this variance. The record is divided into overlapping segments; each segment is
+multiplied by a window function (a Hann window here) to limit spectral leakage; a periodogram
+is computed for each segment; and the periodograms are averaged. Averaging $K$ approximately
+independent estimates reduces the variance by a factor of roughly $K$, at the cost of reduced
+frequency resolution. The trade-off is acceptable here, since only the distribution of power
+between bands is required. Resampling onto a uniform grid is necessary because the tachogram
+is sampled irregularly, once per beat, whereas the DFT assumes uniform sampling.
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
-Two peaks, two stories. The high-frequency band (HF, 0.15–0.4 Hz) sits right at the
-rhythm of normal breathing. Your heart speeds up slightly as you inhale and slows as you
-exhale, an effect called respiratory sinus arrhythmia, and it is driven by the vagus
-nerve, the parasympathetic "rest and digest" branch of the nervous system. A tall HF peak
-means strong vagal tone: the signature of a calm, well-recovered heart.
+The spectrum exhibits two distinct bands. The high-frequency band (HF, 0.15 to 0.4 Hz)
+coincides with the respiratory rhythm: heart rate increases during inspiration and decreases
+during expiration, an effect termed respiratory sinus arrhythmia and mediated by the vagus
+nerve, the parasympathetic branch of the autonomic nervous system. Greater HF power indicates
+higher vagal tone.
 
-The low-frequency band (LF, 0.04–0.15 Hz) is messier. It centres near 0.1 Hz, the
-natural period of the baroreflex, the feedback loop that keeps your blood pressure steady,
-and it carries a blend of sympathetic ("fight or flight") and parasympathetic activity.
+The low-frequency band (LF, 0.04 to 0.15 Hz) is centred near 0.1 Hz, the characteristic
+frequency of the baroreflex, the blood-pressure regulation loop, and reflects a combination of
+sympathetic and parasympathetic activity.
 
-People often compress the two into a single number, their ratio,
+The two bands are frequently summarized by their ratio,
 
 $$
 \frac{\text{LF}}{\text{HF}} = \frac{\displaystyle\int_{0.04}^{0.15} S(f)\,df}{\displaystyle\int_{0.15}^{0.40} S(f)\,df},
 $$
 
-read as a dial for "sympathovagal balance"; at rest it typically sits somewhere around 1 to
-2, climbing as stress tips the scale. It is a handy shorthand, though the tidy
-"LF equals sympathetic" story is an oversimplification and worth treating with some caution. The
-far more robust signal is the bigger picture: the total power under this curve, overall
-heart-rate variability, is a well-established marker of autonomic health. Depressed
-variability tracks with stress, fatigue, overtraining, and, over the long run, worse
-cardiovascular outcomes; rising variability tracks with recovery and fitness. A heart under
-chronic stress and one deep in recovery look genuinely different here: not in the waveform,
-not even in the average heart rate, but in how the power splits across a spectrum.
+interpreted as an index of sympathovagal balance, with resting values typically between 1 and
+2 and increasing under stress. This interpretation should be treated with caution, as the
+identification of LF power with sympathetic activity is an oversimplification. A more robust
+indicator is the total power of the spectrum, that is, overall HRV, which is an established
+marker of autonomic function. Reduced variability is associated with stress, fatigue,
+overtraining, and, over the long term, adverse cardiovascular outcomes, whereas increased
+variability is associated with recovery and fitness.
 
-## The same machinery, pointed somewhere new
+## The shared toolbox
 
-Step back and look at what we did. We took a weak signal, band-pass filtered it to reject
-interference, extracted a derived sequence, and read its power spectrum to recover hidden
-structure. Swap a few nouns and that is a description of a radio receiver estimating channel
-statistics. The filters, the spectral estimators, the habit of asking which band carries
-the information: all of it transfers.
+The procedure can be summarized as follows: a weak signal is band-pass filtered to reject
+interference, a derived sequence is extracted, and its power spectrum is estimated to reveal
+latent structure. This is, with minor changes in terminology, the same procedure a radio
+receiver applies when estimating channel statistics. The filtering, the spectral estimators,
+and the principle of identifying the band that carries the information are common to both
+domains.
 
-That is the quiet thrill of signal processing: it does not actually care what the signal
-is. A waveform from an antenna and a waveform from an artery are, to the math, the same
-kind of object. Learn the toolbox once and the heart becomes just another channel worth
-decoding, which is more or less the bet behind everything I am building in health right now.
+Signal processing is indifferent to the physical origin of the signal: a waveform from an
+antenna and a waveform from an artery are, mathematically, the same kind of object. That
+equivalence is the premise of the health tools currently in development.
 
-Next time: detecting arrhythmias the way a radio detects a dropped packet, where a missed or
-malformed beat is just an error in a stream you were expecting to be regular.
+A subsequent post will address arrhythmia detection, framed as the identification of errors in
+an otherwise regular stream, analogous to detecting a dropped packet in a communication link.
 
 ## References
 
