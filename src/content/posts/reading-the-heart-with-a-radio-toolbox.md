@@ -164,9 +164,3 @@ malformed beat is just an error in a stream you were expecting to be regular.
    Biomedical Engineering*, vol. 32, no. 3, pp. 230–236, 1985.
 5. A. V. Oppenheim and R. W. Schafer, *Discrete-Time Signal Processing*, 3rd ed. Pearson,
    2009.
-
----
-
-*Kostis Dovelos is a wireless systems architect with a PhD in wireless communications. He
-spent a decade designing radio PHY for defense and telecom, and now builds health tools at
-[Pyxida](https://pyxida.io).*
