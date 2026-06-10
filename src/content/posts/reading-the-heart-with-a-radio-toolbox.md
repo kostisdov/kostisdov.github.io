@@ -18,9 +18,9 @@ toolbox transfers almost intact.
 
 ## Step one: clean the channel
 
-A raw recording is a mess. Ride-along noise from the mains hums at 50 Hz (60 Hz across the
-Atlantic), the electrode baseline drifts as the patient breathes and moves, and broadband
-noise sits on top of everything. The heartbeat we actually want is the **QRS complex**, the
+A raw recording is a mess. Mains interference hums at 50 Hz (60 Hz across the Atlantic),
+the electrode baseline drifts as the patient breathes and moves, and broadband noise sits
+on top of everything. The heartbeat we actually want is the **QRS complex**, the
 tall, spiky part of each beat. The name is just the labels for its three consecutive
 deflections (a small dip Q, a tall peak R, another dip S), and physiologically it marks the
 moment the heart's main pumping chambers, the ventricles, depolarize and contract to push
@@ -39,8 +39,8 @@ it is the same filtering that cleans a noisy audio channel.
 
 ## Step two: throw away the waveform, keep the rhythm
 
-Here is where it gets interesting. For a lot of cardiology, the *shape* of each beat
-matters less than the *timing between* beats. Mark the tall R peak of each QRS complex,
+Here is where it gets interesting. For a lot of cardiology, the shape of each beat
+matters less than the timing between beats. Mark the tall R peak of each QRS complex,
 measure the time from one R peak to the next, and you get the sequence of **RR intervals**,
 the beat-to-beat durations, named after the R waves at each end:
 
@@ -50,7 +50,7 @@ $$
 
 where $t_n$ is the time of the $n$-th R peak. So an RR interval of 850 ms simply means
 0.85 seconds elapsed between two heartbeats, a heart rate of about 70 beats per minute.
-Plot those gaps against time and you get a *tachogram*: a brand-new signal, sampled
+Plot those gaps against time and you get a tachogram: a brand-new signal, sampled
 irregularly once per beat, that throws away the voltage waveform entirely and keeps only
 the rhythm.
 
@@ -101,20 +101,20 @@ record into overlapping segments, taper each one with a window to stop energy le
 between frequencies, compute the periodogram of each segment, and average them. Averaging
 $K$ roughly-independent estimates cuts the variance by about a factor of $K$, trading a
 little frequency resolution for a far smoother, more trustworthy spectrum. Here that trade
-is exactly right: we do not need pinpoint resolution, we just need to see reliably *which
-band the power lives in*. (And the resampling onto an even grid matters because the raw
+is exactly right: we do not need pinpoint resolution, we just need to see reliably which
+band the power lives in. (And the resampling onto an even grid matters because the raw
 tachogram arrives one irregular sample per beat, while the DFT assumes uniform spacing.)
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg)
 
 Two peaks, two stories. The **high-frequency band (HF, 0.15–0.4 Hz)** sits right at the
 rhythm of normal breathing. Your heart speeds up slightly as you inhale and slows as you
-exhale, an effect called *respiratory sinus arrhythmia*, and it is driven by the vagus
+exhale, an effect called respiratory sinus arrhythmia, and it is driven by the vagus
 nerve, the parasympathetic "rest and digest" branch of the nervous system. A tall HF peak
 means strong vagal tone: the signature of a calm, well-recovered heart.
 
 The **low-frequency band (LF, 0.04–0.15 Hz)** is messier. It centres near 0.1 Hz, the
-natural period of the *baroreflex*, the feedback loop that keeps your blood pressure steady,
+natural period of the baroreflex, the feedback loop that keeps your blood pressure steady,
 and it carries a blend of both sympathetic ("fight or flight") and parasympathetic activity.
 
 People often compress the two into a single number, their ratio,
@@ -124,7 +124,7 @@ $$
 $$
 
 read as a dial for "sympathovagal balance." It is a handy shorthand, though the tidy
-*LF = sympathetic* story is an oversimplification and worth treating with some caution. The
+"LF equals sympathetic" story is an oversimplification and worth treating with some caution. The
 far more robust signal is the bigger picture: the **total power** under this curve, overall
 heart-rate variability, is a well-established marker of autonomic health. Depressed
 variability tracks with stress, fatigue, overtraining, and, over the long run, worse
@@ -137,11 +137,11 @@ not even in the average heart rate, but in how the power splits across a spectru
 Step back and look at what we did. We took a weak signal, band-pass filtered it to reject
 interference, extracted a derived sequence, and read its power spectrum to recover hidden
 structure. Swap a few nouns and that is a description of a radio receiver estimating channel
-statistics. The filters, the spectral estimators, the habit of asking *which band carries
-the information*: all of it transfers.
+statistics. The filters, the spectral estimators, the habit of asking which band carries
+the information: all of it transfers.
 
 That is the quiet thrill of signal processing: it does not actually care what the signal
-*is*. A waveform from an antenna and a waveform from an artery are, to the math, the same
+is. A waveform from an antenna and a waveform from an artery are, to the math, the same
 kind of object. Learn the toolbox once and the heart becomes just another channel worth
 decoding, which is more or less the bet behind everything I am building in health right now.
 
