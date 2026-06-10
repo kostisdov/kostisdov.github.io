@@ -67,28 +67,40 @@ one another, and the tool for pulling oscillations out of a signal is, of course
 Fourier transform. It re-expresses the wiggling tachogram as a recipe of sinusoids and
 tells you how much power sits at each frequency. The quantity we want is the **power
 spectral density** (PSD): a description of how the variance of the signal — how much it
-wobbles — is distributed across frequency. Formally,
+wobbles — is distributed across frequency.
+
+We are working with a discrete-time signal $x[n]$ — the tachogram resampled onto an even
+grid (more on that below). The cleanest definition of its PSD comes from the
+Wiener–Khinchin theorem: the PSD is the discrete-time Fourier transform of the
+autocorrelation sequence,
 
 $$
-S(f) = \lim_{T \to \infty} \frac{1}{T}\, \mathbb{E}\!\left[\,\big|\hat{x}_T(f)\big|^2\,\right],
+S\!\left(e^{j\omega}\right) = \sum_{m=-\infty}^{\infty} r[m]\, e^{-j\omega m},
+\qquad r[m] = \mathbb{E}\big\{\,x[n]\,x[n-m]\,\big\},
 $$
 
-where $\hat{x}_T(f)$ is the Fourier transform of a length-$T$ chunk of the signal. The
-$|\cdot|^2$ turns amplitude into power, and the expectation $\mathbb{E}[\cdot]$ averages
-over many chunks.
+where $r[m]$ measures how much a sample resembles the one $m$ steps away, and $\omega$ is
+the normalized angular frequency in radians per sample. Since we resampled at $f_s = 4$ Hz,
+a normalized $\omega$ corresponds to a physical frequency $f = \omega f_s / 2\pi$ in hertz.
 
-That averaging is the whole game, and it is where most people go wrong. The obvious
-estimate — take one Fourier transform of your entire record and square it, the
-**periodogram** — is technically correct but uselessly noisy: its variance does not shrink
-as you collect more data, so the spectrum comes out looking like grass, real peaks buried
-in spikes. **Welch's method** is the standard fix. Chop the record into overlapping
-segments, taper each one with a window to stop energy leaking between frequencies, take the
-periodogram of each segment, and then average them. Averaging $K$ roughly-independent
-estimates cuts the variance by about a factor of $K$, trading a little frequency resolution
-for a far smoother, more trustworthy spectrum. Here that trade is exactly right: we do not
-need pinpoint resolution, we just need to see reliably *which band the power lives in*.
-(After resampling the tachogram onto an even time grid first, since it arrives one
-irregular sample per beat.)
+In practice we never have the true autocorrelation — we have a finite record. The obvious
+estimate is the **periodogram**: take the discrete Fourier transform of the $N$ samples and
+square it,
+
+$$
+\hat{S}\!\left(e^{j\omega}\right) = \frac{1}{N}\left|\,\sum_{n=0}^{N-1} x[n]\, e^{-j\omega n}\,\right|^2 .
+$$
+
+The $|\cdot|^2$ turns amplitude into power. It is technically correct but uselessly noisy:
+its variance does not shrink as you collect more data, so the spectrum comes out looking
+like grass, real peaks buried in spikes. **Welch's method** is the standard fix. Chop the
+record into overlapping segments, taper each one with a window to stop energy leaking
+between frequencies, compute the periodogram of each segment, and average them. Averaging
+$K$ roughly-independent estimates cuts the variance by about a factor of $K$, trading a
+little frequency resolution for a far smoother, more trustworthy spectrum. Here that trade
+is exactly right: we do not need pinpoint resolution, we just need to see reliably *which
+band the power lives in*. (And the resampling onto an even grid matters because the raw
+tachogram arrives one irregular sample per beat — the DFT assumes uniform spacing.)
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg)
 
@@ -130,3 +142,18 @@ That is the quiet thrill of signal processing: it does not actually care what th
 *is*. A waveform from an antenna and a waveform from an artery are, to the math, the same
 kind of object. Learn the toolbox once and the heart becomes just another channel worth
 decoding — which is more or less the bet behind everything I am building in health right now.
+
+## References
+
+1. Task Force of the European Society of Cardiology and the North American Society of Pacing
+   and Electrophysiology, "Heart rate variability: standards of measurement, physiological
+   interpretation, and clinical use," *Circulation*, vol. 93, no. 5, pp. 1043–1065, 1996.
+2. F. Shaffer and J. P. Ginsberg, "An overview of heart rate variability metrics and norms,"
+   *Frontiers in Public Health*, vol. 5, art. 258, 2017.
+3. P. D. Welch, "The use of fast Fourier transform for the estimation of power spectra: a
+   method based on time averaging over short, modified periodograms," *IEEE Transactions on
+   Audio and Electroacoustics*, vol. 15, no. 2, pp. 70–73, 1967.
+4. J. Pan and W. J. Tompkins, "A real-time QRS detection algorithm," *IEEE Transactions on
+   Biomedical Engineering*, vol. 32, no. 3, pp. 230–236, 1985.
+5. A. V. Oppenheim and R. W. Schafer, *Discrete-Time Signal Processing*, 3rd ed. Pearson,
+   2009.
