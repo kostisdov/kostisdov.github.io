@@ -81,30 +81,21 @@ $N$ appears in the definition. The normalized frequency maps to physical frequen
 $f = \omega f_s / 2\pi$. At $f_s = 4$ Hz the representable band extends to the Nyquist
 frequency of 2 Hz, well above the 0.4 Hz upper limit of the bands of interest.
 
-The true autocorrelation is unavailable; only a finite record of $N$ samples is observed.
-Estimating the spectrum from that record and evaluating it at the discrete DFT frequencies
-$\omega_k = 2\pi k / N$ gives the periodogram,
+The true autocorrelation is unavailable; only a finite record of $N$ samples is observed, so
+the PSD must be estimated. The naive estimate, a single squared DFT of the whole record (the
+periodogram), is inconsistent: its variance does not decrease as the record grows, so genuine
+peaks stay buried in large random fluctuations. Welch's method [3] removes this defect by
+averaging windowed periodograms over shorter, overlapping segments.
+
+The record is split into $K$ segments of length $L$; each segment $x_i[n]$ is multiplied by a
+window $w[n]$ (a Hann window here) to limit spectral leakage, and its modified periodogram is
 
 $$
-\hat{S}[k] = \frac{1}{N}\,\big|X[k]\big|^2
-= \frac{1}{N}\left|\,\sum_{n=0}^{N-1} x[n]\, e^{-j 2\pi k n / N}\,\right|^2,
-\qquad k = 0, 1, \dots, N-1,
+\hat{S}_i[k] = \frac{1}{\sum_{n=0}^{L-1} w[n]^2}\left|\,\sum_{n=0}^{L-1} w[n]\,x_i[n]\,e^{-j 2\pi k n / L}\,\right|^2 ,
 $$
 
-where $X[k]$ is the $N$-point DFT and bin $k$ corresponds to the physical frequency
-$f_k = k f_s / N$.
-
-The periodogram is an inconsistent estimator: its variance does not decrease as the record
-length grows, so genuine peaks are obscured by large random fluctuations. Welch's method [3]
-reduces the variance by averaging. The record is split into $K$ segments of length $L$; each
-segment $x_i[n]$ is multiplied by a window $w[n]$ (a Hann window here) to limit spectral
-leakage, and its modified periodogram is
-
-$$
-\hat{S}_i[k] = \frac{1}{\sum_{n=0}^{L-1} w[n]^2}\left|\,\sum_{n=0}^{L-1} w[n]\,x_i[n]\,e^{-j 2\pi k n / L}\,\right|^2 .
-$$
-
-Welch's estimate is the average over the $K$ segments, $\hat{S}^{\mathrm{W}}[k] = \frac{1}{K}\sum_{i=1}^{K}\hat{S}_i[k]$.
+an $L$-point DFT whose bin $k$ maps to the physical frequency $f_k = k f_s / L$. Welch's
+estimate is the average over the $K$ segments, $\hat{S}^{\mathrm{W}}[k] = \frac{1}{K}\sum_{i=1}^{K}\hat{S}_i[k]$.
 Normalizing by the window energy $\sum_n w[n]^2$ keeps each segment estimate unbiased: for a
 rectangular window $\sum_n w[n]^2 = L$, i.e., one over the segment length, whereas for the
 Hann window $\sum_n w[n]^2 = \tfrac{3}{8}L$, i.e., $8/(3L)$.
