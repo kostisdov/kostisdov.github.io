@@ -96,9 +96,20 @@ $f_k = k f_s / N$.
 
 The periodogram is an inconsistent estimator: its variance does not decrease as the record
 length grows, so genuine peaks are obscured by large random fluctuations. Welch's method [3]
-reduces the variance by averaging. The record is split into $K$ segments of length $L$, each
-multiplied by a window (a Hann window here) to limit spectral leakage, and the periodograms of
-the segments are averaged. The segments overlap, typically by 50%: because the window
+reduces the variance by averaging. The record is split into $K$ segments of length $L$; each
+segment $x_i[n]$ is multiplied by a window $w[n]$ (a Hann window here) to limit spectral
+leakage, and its modified periodogram is
+
+$$
+\hat{S}_i[k] = \frac{1}{\sum_{n=0}^{L-1} w[n]^2}\left|\,\sum_{n=0}^{L-1} w[n]\,x_i[n]\,e^{-j 2\pi k n / L}\,\right|^2 .
+$$
+
+Welch's estimate is the average of these, $\hat{S}^{\mathrm{W}}[k] = \frac{1}{K}\sum_{i=1}^{K}\hat{S}_i[k]$.
+Normalizing by the window energy $\sum_n w[n]^2$ keeps each segment estimate unbiased: for a
+rectangular window $\sum_n w[n]^2 = L$, i.e. one over the segment length, whereas for the Hann
+window $\sum_n w[n]^2 = \tfrac{3}{8}L$, i.e. $8/(3L)$.
+
+The segments overlap, typically by 50%: because the window
 attenuates each segment toward its edges, overlapping lets those edge samples still
 contribute, giving about $K \approx 2N/L$ segments from a record of length $N$, against $N/L$
 for non-overlapping blocks. Averaging lowers the variance roughly in proportion to the number
