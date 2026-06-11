@@ -37,9 +37,9 @@ it is the same filtering applied to any noisy communication channel.
 ## From waveform to rhythm: the RR-interval series
 
 For many cardiological purposes the morphology of each beat is less informative than the
-intervals between beats. Detecting the R wave of each QRS complex, for which the
-Pan–Tompkins algorithm [4] is the classic method, and measuring the time between successive
-R waves yields the sequence of RR intervals,
+intervals between beats. Detecting the R wave of each QRS complex (the Pan–Tompkins
+algorithm [1] is the classic method) and measuring the time between successive R waves yields
+the sequence of RR intervals,
 
 $$
 \text{RR}_n = t_{n} - t_{n-1},
@@ -68,7 +68,7 @@ Let $x[n]$ denote the tachogram after resampling onto a uniform grid (discussed 
 removal of its mean and slow trend, so that the spectrum reflects the fluctuations rather than
 a component at zero frequency. For a wide-sense stationary process the PSD is defined, through
 the Wiener–Khinchin theorem, as the discrete-time Fourier transform (DTFT) of the
-autocorrelation sequence [5]:
+autocorrelation sequence [2]:
 
 $$
 S\!\left(e^{j\omega}\right) = \sum_{m=-\infty}^{\infty} r[m]\, e^{-j\omega m},
@@ -104,10 +104,10 @@ $$
 \hat{S}_i[k] = \frac{1}{\sum_{n=0}^{L-1} w[n]^2}\left|\,\sum_{n=0}^{L-1} w[n]\,x_i[n]\,e^{-j 2\pi k n / L}\,\right|^2 .
 $$
 
-Welch's estimate is the average of these, $\hat{S}^{\mathrm{W}}[k] = \frac{1}{K}\sum_{i=1}^{K}\hat{S}_i[k]$.
+Welch's estimate is the average over the $K$ segments, $\hat{S}^{\mathrm{W}}[k] = \frac{1}{K}\sum_{i=1}^{K}\hat{S}_i[k]$.
 Normalizing by the window energy $\sum_n w[n]^2$ keeps each segment estimate unbiased: for a
-rectangular window $\sum_n w[n]^2 = L$, i.e. one over the segment length, whereas for the Hann
-window $\sum_n w[n]^2 = \tfrac{3}{8}L$, i.e. $8/(3L)$.
+rectangular window $\sum_n w[n]^2 = L$, i.e., one over the segment length, whereas for the
+Hann window $\sum_n w[n]^2 = \tfrac{3}{8}L$, i.e., $8/(3L)$.
 
 The segments overlap, typically by 50%: because the window
 attenuates each segment toward its edges, overlapping lets those edge samples still
@@ -123,7 +123,7 @@ per beat, whereas the DFT assumes uniform sampling.
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
 The spectrum exhibits two distinct bands, whose boundaries follow the standard HRV
-conventions [1]. The high-frequency band (HF, 0.15 to 0.4 Hz)
+conventions [4]. The high-frequency band (HF, 0.15 to 0.4 Hz)
 coincides with the respiratory rhythm: heart rate increases during inspiration and decreases
 during expiration, an effect termed respiratory sinus arrhythmia and mediated by the vagus
 nerve, the parasympathetic branch of the autonomic nervous system. Greater HF power indicates
@@ -140,10 +140,10 @@ $$
 $$
 
 interpreted as an index of sympathovagal balance, with resting values typically between 1 and
-2 and increasing under stress. This interpretation should be treated with caution, as the
+2, increasing under stress. This interpretation should be treated with caution, as the
 identification of LF power with sympathetic activity is an oversimplification. A more robust
 indicator is the total power of the spectrum, that is, overall HRV, which is an established
-marker of autonomic function [2]. Reduced variability is associated with stress, fatigue,
+marker of autonomic function [5]. Reduced variability is associated with stress, fatigue,
 overtraining, and, over the long term, adverse cardiovascular outcomes, whereas increased
 variability is associated with recovery and fitness.
 
@@ -165,15 +165,19 @@ an otherwise regular stream, analogous to detecting a dropped packet in a commun
 
 ## References
 
-1. Task Force of the European Society of Cardiology and the North American Society of Pacing
-   and Electrophysiology, "Heart rate variability: standards of measurement, physiological
-   interpretation, and clinical use," *Circulation*, vol. 93, no. 5, pp. 1043–1065, 1996.
-2. F. Shaffer and J. P. Ginsberg, "An overview of heart rate variability metrics and norms,"
-   *Frontiers in Public Health*, vol. 5, art. 258, 2017.
-3. P. D. Welch, "The use of fast Fourier transform for the estimation of power spectra: a
-   method based on time averaging over short, modified periodograms," *IEEE Transactions on
-   Audio and Electroacoustics*, vol. 15, no. 2, pp. 70–73, 1967.
-4. J. Pan and W. J. Tompkins, "A real-time QRS detection algorithm," *IEEE Transactions on
-   Biomedical Engineering*, vol. 32, no. 3, pp. 230–236, 1985.
-5. A. V. Oppenheim and R. W. Schafer, *Discrete-Time Signal Processing*, 3rd ed. Pearson,
-   2009.
+[1] J. Pan and W. J. Tompkins, "A real-time QRS detection algorithm," *IEEE Transactions on
+Biomedical Engineering*, vol. 32, no. 3, pp. 230–236, 1985.
+
+[2] A. V. Oppenheim and R. W. Schafer, *Discrete-Time Signal Processing*, 3rd ed. Pearson,
+2009.
+
+[3] P. D. Welch, "The use of fast Fourier transform for the estimation of power spectra: a
+method based on time averaging over short, modified periodograms," *IEEE Transactions on
+Audio and Electroacoustics*, vol. 15, no. 2, pp. 70–73, 1967.
+
+[4] Task Force of the European Society of Cardiology and the North American Society of Pacing
+and Electrophysiology, "Heart rate variability: standards of measurement, physiological
+interpretation, and clinical use," *Circulation*, vol. 93, no. 5, pp. 1043–1065, 1996.
+
+[5] F. Shaffer and J. P. Ginsberg, "An overview of heart rate variability metrics and norms,"
+*Frontiers in Public Health*, vol. 5, art. 258, 2017.
