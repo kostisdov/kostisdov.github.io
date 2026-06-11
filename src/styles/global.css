@@ -191,11 +191,11 @@ a:hover {
 }
 
 .post-index h2 {
-  font-family: var(--display);
-  font-weight: 450;
+  font-family: var(--serif);
+  font-weight: 600;
   font-size: 1.7rem;
   line-height: 1.18;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   margin: 0 0 0.4rem;
 }
 
@@ -226,11 +226,11 @@ a:hover {
 }
 
 .article-header h1 {
-  font-family: var(--display);
-  font-weight: 380;
+  font-family: var(--serif);
+  font-weight: 600;
   font-size: clamp(2.1rem, 5.5vw, 3.2rem);
-  line-height: 1.08;
-  letter-spacing: -0.018em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin: 0 0 0.8rem;
 }
 

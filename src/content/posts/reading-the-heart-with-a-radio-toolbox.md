@@ -37,8 +37,9 @@ it is the same filtering applied to any noisy communication channel.
 ## From waveform to rhythm: the RR-interval series
 
 For many cardiological purposes the morphology of each beat is less informative than the
-intervals between beats. Detecting the R wave of each QRS complex and measuring the time
-between successive R waves yields the sequence of RR intervals,
+intervals between beats. Detecting the R wave of each QRS complex, for which the
+Pan–Tompkins algorithm [4] is the classic method, and measuring the time between successive
+R waves yields the sequence of RR intervals,
 
 $$
 \text{RR}_n = t_{n} - t_{n-1},
@@ -67,7 +68,7 @@ Let $x[n]$ denote the tachogram after resampling onto a uniform grid (discussed 
 removal of its mean and slow trend, so that the spectrum reflects the fluctuations rather than
 a component at zero frequency. For a wide-sense stationary process the PSD is defined, through
 the Wiener–Khinchin theorem, as the discrete-time Fourier transform (DTFT) of the
-autocorrelation sequence:
+autocorrelation sequence [5]:
 
 $$
 S\!\left(e^{j\omega}\right) = \sum_{m=-\infty}^{\infty} r[m]\, e^{-j\omega m},
@@ -94,7 +95,7 @@ where $X[k]$ is the $N$-point DFT and bin $k$ corresponds to the physical freque
 $f_k = k f_s / N$.
 
 The periodogram is an inconsistent estimator: its variance does not decrease as the record
-length grows, so genuine peaks are obscured by large random fluctuations. Welch's method
+length grows, so genuine peaks are obscured by large random fluctuations. Welch's method [3]
 reduces the variance by averaging. The record is split into $K$ segments of length $L$, each
 multiplied by a window (a Hann window here) to limit spectral leakage, and the periodograms of
 the segments are averaged. The segments overlap, typically by 50%: because the window
@@ -110,7 +111,8 @@ per beat, whereas the DFT assumes uniform sampling.
 
 ![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
 
-The spectrum exhibits two distinct bands. The high-frequency band (HF, 0.15 to 0.4 Hz)
+The spectrum exhibits two distinct bands, whose boundaries follow the standard HRV
+conventions [1]. The high-frequency band (HF, 0.15 to 0.4 Hz)
 coincides with the respiratory rhythm: heart rate increases during inspiration and decreases
 during expiration, an effect termed respiratory sinus arrhythmia and mediated by the vagus
 nerve, the parasympathetic branch of the autonomic nervous system. Greater HF power indicates
@@ -130,7 +132,7 @@ interpreted as an index of sympathovagal balance, with resting values typically 
 2 and increasing under stress. This interpretation should be treated with caution, as the
 identification of LF power with sympathetic activity is an oversimplification. A more robust
 indicator is the total power of the spectrum, that is, overall HRV, which is an established
-marker of autonomic function. Reduced variability is associated with stress, fatigue,
+marker of autonomic function [2]. Reduced variability is associated with stress, fatigue,
 overtraining, and, over the long term, adverse cardiovascular outcomes, whereas increased
 variability is associated with recovery and fitness.
 
