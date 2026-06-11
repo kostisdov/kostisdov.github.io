@@ -149,10 +149,8 @@ domains.
 
 Signal processing is indifferent to the physical origin of the signal: a waveform from an
 antenna and a waveform from an artery are, mathematically, the same kind of object. That
-equivalence is the premise of the health tools currently in development.
-
-A subsequent post will address arrhythmia detection, framed as the identification of errors in
-an otherwise regular stream, analogous to detecting a dropped packet in a communication link.
+equivalence is the quiet beauty of the discipline: the mathematics does not change, only the
+signal does.
 
 ## References
 

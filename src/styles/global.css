@@ -308,6 +308,31 @@ a:hover {
   border-radius: 4px;
 }
 
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.8rem 0;
+  font-size: 0.92rem;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.prose thead th {
+  border-bottom: 1.5px solid var(--ink-soft);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
 .prose hr {
   border: 0;
   text-align: center;
