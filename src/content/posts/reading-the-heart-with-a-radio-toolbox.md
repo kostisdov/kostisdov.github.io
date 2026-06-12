@@ -87,6 +87,12 @@ $N$ appears in the definition. The normalized frequency maps to physical frequen
 $f = \omega f_s / 2\pi$. At $f_s = 4$ Hz the representable band extends to the Nyquist
 frequency of 2 Hz, well above the 0.4 Hz upper limit of the bands of interest.
 
+Resampling onto a uniform grid is necessary because the tachogram is sampled irregularly, once
+per beat, whereas the DFT assumes uniform spacing. The standard approach fits a cubic spline
+through the $(t_n, \text{RR}_n)$ pairs and evaluates it on a regular grid at $f_s = 4$ Hz;
+the Nyquist limit of 2 Hz lies well above the 0.4 Hz ceiling of the bands of interest, and
+the cubic spline introduces no spectral distortion within that band.
+
 The true autocorrelation is unavailable; only a finite record of $N$ samples is observed, so
 the PSD must be estimated. The naive estimate, a single squared DFT of the whole record (the
 periodogram), is inconsistent: its variance does not decrease as the record grows, so genuine
@@ -113,12 +119,6 @@ for non-overlapping blocks. Averaging lowers the variance roughly in proportion 
 of segments, though by somewhat less than a factor of $K$, since overlapping segments are not
 fully independent. The cost is coarser frequency resolution, set by the segment length $L$,
 which is acceptable here because only the distribution of power between bands is required.
-
-Resampling onto a uniform grid is necessary because the tachogram is sampled irregularly, once
-per beat, whereas the DFT assumes uniform spacing. The standard approach fits a cubic spline
-through the $(t_n, \text{RR}_n)$ pairs and evaluates it on a regular grid at $f_s = 4$ Hz;
-the Nyquist limit of 2 Hz lies well above the 0.4 Hz ceiling of the bands of interest, and
-the cubic spline introduces no spectral distortion within that band.
 
 <figure>
 <img src="/posts/heart/hrv-psd.svg?v=3" alt="Power spectral density of the RR-interval series with LF and HF bands shaded." />
