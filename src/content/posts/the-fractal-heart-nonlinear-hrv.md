@@ -1,6 +1,6 @@
 ---
 title: "What statistical physics sees in the heartbeat"
-description: "DFA was invented to find long-range correlations in DNA. Applied to cardiac rhythm, it measures the fractal scaling that standard HRV metrics are blind to, and that deteriorates before the linear statistics change."
+description: "Detrended fluctuation analysis (DFA) was invented to find long-range correlations in DNA. Applied to cardiac rhythm, it measures the fractal scaling that standard HRV metrics are blind to, and that deteriorates before the linear statistics change."
 date: 2026-06-12
 tags: ["signals", "biomedical"]
 draft: false
@@ -61,7 +61,7 @@ Dynamically they are not.
 The upper trace shows slow undulations and drift that persist across hundreds of beats; the
 middle trace, the same values reordered, is uncorrelated and structureless. The mean and SDNN
 are identical (850 ms and 45 ms). Yet one is a correlated fractal process and the other is white noise. The lower panel shows
-the detrended fluctuation analysis (DFA) scaling exponent (defined in full below): it falls from $\alpha_1 = 1.03$ for the
+the DFA scaling exponent (defined in full below): it falls from $\alpha_1 = 1.03$ for the
 healthy series to $0.55$ for the shuffled one.
 
 This is the central motivation. The magnitude of the variability is conserved; its
