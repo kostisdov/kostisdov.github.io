@@ -86,9 +86,7 @@ filt = filtfilt(b_lp, a_lp, filt)
 
 fig, axes = plt.subplots(2, 1, figsize=(7.2, 4.2), sharex=True)
 axes[0].plot(t, raw, color=INK_SOFT, lw=0.7)
-axes[0].set_title("raw recording", loc="left", color=INK, fontsize=12, style="italic")
 axes[1].plot(t, filt, color=ACCENT, lw=0.9)
-axes[1].set_title("after a 0.5–40 Hz band-pass", loc="left", color=INK, fontsize=12, style="italic")
 for ax in axes:
     despine(ax, keep=("bottom",))
     ax.set_yticks([])
@@ -128,8 +126,6 @@ ax.plot(beat_times, rr * 1000, color=ACCENT_DEEP, lw=1.0, marker="o", ms=2.4,
         mfc=ACCENT_DEEP, mec="none")
 ax.set_xlabel("time (s)")
 ax.set_ylabel("RR interval (ms)")
-ax.set_title("the tachogram: time between heartbeats", loc="left", color=INK,
-             fontsize=12, style="italic")
 despine(ax)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "tachogram.svg"))
@@ -163,8 +159,6 @@ ax.text(0.058, ymax * 0.92, "LF", color=ACCENT_DEEP, ha="center", fontsize=12,
         style="italic")
 ax.text(0.32, ymax * 0.92, "HF", color=ACCENT, ha="center", fontsize=12,
         style="italic")
-ax.set_title("the autonomic fingerprint: LF vs HF power", loc="left", color=INK,
-             fontsize=12, style="italic")
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "hrv-psd.svg"))
 plt.close(fig)

@@ -40,7 +40,9 @@ def despine(ax, keep=("left", "bottom")):
 
 
 def title(ax, t):
-    ax.set_title(t, loc="left", color=INK, fontsize=12, style="italic")
+    # Figure titles are rendered as <figcaption> in the post, not baked into the SVG,
+    # so this is intentionally a no-op (the call sites document each panel's content).
+    return
 
 
 # ---- synthetic RR via 1/f^beta spectral synthesis (DFA alpha = (beta+1)/2) --

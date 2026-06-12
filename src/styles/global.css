@@ -308,6 +308,22 @@ a:hover {
   border-radius: 4px;
 }
 
+.prose figure {
+  margin: 2rem 0;
+}
+
+.prose figure img {
+  display: block;
+}
+
+.prose figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;

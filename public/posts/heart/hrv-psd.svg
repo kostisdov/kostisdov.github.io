@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-06-10T17:13:56.661093</dc:date>
+    <dc:date>2026-06-12T09:57:28.990663</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,37 +32,37 @@ z
    <g id="patch_2">
     <path d="M 29.92 180.52 
 L 496.935 180.52 
-L 496.935 29.04 
-L 29.92 29.04 
+L 496.935 12.96 
+L 29.92 12.96 
 z
 " style="fill: #f6f1e7"/>
    </g>
    <g id="patch_3">
     <path d="M 67.2812 180.52 
 L 170.0245 180.52 
-L 170.0245 29.04 
-L 67.2812 29.04 
+L 170.0245 12.96 
+L 67.2812 12.96 
 z
-" clip-path="url(#pea683cf3f4)" style="fill: #1e3d52; opacity: 0.16"/>
+" clip-path="url(#p1eddf26bcd)" style="fill: #1e3d52; opacity: 0.16"/>
    </g>
    <g id="patch_4">
     <path d="M 170.0245 180.52 
 L 403.532 180.52 
-L 403.532 29.04 
-L 170.0245 29.04 
+L 403.532 12.96 
+L 170.0245 12.96 
 z
-" clip-path="url(#pea683cf3f4)" style="fill: #c34a22; opacity: 0.16"/>
+" clip-path="url(#p1eddf26bcd)" style="fill: #c34a22; opacity: 0.16"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="mb95bc910be" d="M 0 0 
+       <path id="ma9fcc7831a" d="M 0 0 
 L 0 3.5 
 " style="stroke: #5c554a; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mb95bc910be" x="29.92" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="29.92" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -72,7 +72,7 @@ L 0 3.5
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#mb95bc910be" x="123.323" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="123.323" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -82,7 +82,7 @@ L 0 3.5
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#mb95bc910be" x="216.726" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="216.726" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
@@ -92,7 +92,7 @@ L 0 3.5
     <g id="xtick_4">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#mb95bc910be" x="310.129" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="310.129" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
@@ -102,7 +102,7 @@ L 0 3.5
     <g id="xtick_5">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#mb95bc910be" x="403.532" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="403.532" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
@@ -112,7 +112,7 @@ L 0 3.5
     <g id="xtick_6">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#mb95bc910be" x="496.935" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#ma9fcc7831a" x="496.935" y="180.52" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
@@ -125,44 +125,44 @@ L 0 3.5
    </g>
    <g id="matplotlib.axis_2">
     <g id="text_8">
-     <text style="font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #5c554a" x="23.3175" y="104.78" transform="rotate(-90 23.3175 104.78)">power spectral density</text>
+     <text style="font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #5c554a" x="23.3175" y="96.74" transform="rotate(-90 23.3175 96.74)">power spectral density</text>
     </g>
    </g>
    <g id="line2d_7">
-    <path d="M 29.92 173.162421 
-L 44.514219 172.950347 
-L 59.108437 173.36626 
-L 73.702656 173.184783 
-L 88.296875 172.486078 
-L 102.891094 165.462402 
-L 117.485312 35.925455 
-L 132.079531 69.838948 
-L 146.67375 171.194457 
-L 161.267969 172.362985 
-L 175.862187 173.275383 
-L 205.050625 172.701155 
-L 219.644844 173.210803 
-L 234.239062 173.495067 
-L 248.833281 158.84995 
-L 263.4275 116.088657 
-L 278.021719 158.971367 
-L 292.615937 172.999447 
-L 307.210156 172.907377 
-L 321.804375 173.285234 
-L 336.398594 173.355808 
-L 350.992812 173.247341 
-L 380.18125 173.326146 
-L 423.963906 173.439861 
-L 438.558125 173.3548 
-L 496.935 173.500557 
-L 511.529219 173.363922 
-L 519.4 173.416496 
-L 519.4 173.416496 
-" clip-path="url(#pea683cf3f4)" style="fill: none; stroke: #221e17; stroke-width: 1.2; stroke-linecap: square"/>
+    <path d="M 29.92 172.381395 
+L 44.514219 172.146809 
+L 59.108437 172.606872 
+L 73.702656 172.40613 
+L 88.296875 171.633256 
+L 102.891094 163.863999 
+L 117.485312 20.576364 
+L 132.079531 58.089863 
+L 146.67375 170.204527 
+L 161.267969 171.497096 
+L 175.862187 172.506348 
+L 205.050625 171.871164 
+L 219.644844 172.434913 
+L 234.239062 172.749352 
+L 248.833281 156.549618 
+L 263.4275 109.249101 
+L 278.021719 156.683923 
+L 292.615937 172.201121 
+L 307.210156 172.099277 
+L 321.804375 172.517245 
+L 336.398594 172.59531 
+L 350.992812 172.475329 
+L 380.18125 172.5625 
+L 423.963906 172.688286 
+L 438.558125 172.594196 
+L 496.935 172.755424 
+L 511.529219 172.604286 
+L 519.4 172.662441 
+L 519.4 172.662441 
+" clip-path="url(#p1eddf26bcd)" style="fill: none; stroke: #221e17; stroke-width: 1.2; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
     <path d="M 29.92 180.52 
-L 29.92 29.04 
+L 29.92 12.96 
 " style="fill: none; stroke: #d8cfbc; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_6">
@@ -171,19 +171,16 @@ L 496.935 180.52
 " style="fill: none; stroke: #d8cfbc; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_9">
-    <text style="font-style: italic; font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #1e3d52" x="84.09374" y="40.60758" transform="rotate(-0 84.09374 40.60758)">LF</text>
+    <text style="font-style: italic; font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #1e3d52" x="84.09374" y="25.755509" transform="rotate(-0 84.09374 25.755509)">LF</text>
    </g>
    <g id="text_10">
-    <text style="font-style: italic; font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #c34a22" x="328.8096" y="40.60758" transform="rotate(-0 328.8096 40.60758)">HF</text>
-   </g>
-   <g id="text_11">
-    <text style="font-style: italic; font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: start; fill: #221e17" x="29.92" y="23.04" transform="rotate(-0 29.92 23.04)">the autonomic fingerprint: LF vs HF power</text>
+    <text style="font-style: italic; font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #c34a22" x="328.8096" y="25.755509" transform="rotate(-0 328.8096 25.755509)">HF</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pea683cf3f4">
-   <rect x="29.92" y="29.04" width="467.015" height="151.48"/>
+  <clipPath id="p1eddf26bcd">
+   <rect x="29.92" y="12.96" width="467.015" height="167.56"/>
   </clipPath>
  </defs>
 </svg>
