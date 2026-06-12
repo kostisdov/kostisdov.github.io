@@ -1,6 +1,6 @@
 ---
-title: "The fractal heart: what standard HRV can't see"
-description: "Standard HRV measures how much the rhythm varies. This post is about how it varies: the fractal organization across time scales that the standard metrics miss."
+title: "What statistical physics sees in the heartbeat"
+description: "DFA was invented to find long-range correlations in DNA. Applied to cardiac rhythm, it measures the fractal scaling that standard HRV metrics are blind to, and that deteriorates before the linear statistics change."
 date: 2026-06-12
 tags: ["signals", "biomedical"]
 draft: false
@@ -12,8 +12,9 @@ R-peak detection to form a tachogram of RR intervals, and Welch's method to esti
 spectrum, yielding the low- and high-frequency bands and the LF/HF ratio.
 
 That pipeline rests on an implicit assumption: that the information of interest resides in the
-amplitude and the spectrum of the variability: how much it varies (the standard deviation of
-the intervals, SDNN), at what rates (the spectral bands), and in what balance (LF/HF). This
+amplitude and the spectrum of the variability, specifically how much it varies (the standard
+deviation of the intervals, SDNN), at what rates (the spectral bands), and in what balance
+(LF/HF). This
 post concerns what that assumption omits. A healthy heart is not a noisy metronome but a
 fractal, self-organizing system, and the salient property of its rhythm is not the magnitude
 of the wandering but the way the wandering is structured across time scales. Linear measures
@@ -24,12 +25,12 @@ in the slow progression toward decompensation, the variability can appear unchan
 linear measures while its temporal architecture deteriorates. A summary restricted to SDNN and
 LF/HF can therefore miss the change entirely.
 
-## Homeodynamics and fractal physiology
+## Fractal physiology and self-similarity
 
 Two physiological ideas frame the problem.
 
-The first is homeodynamics, a refinement of homeostasis: a healthy organism is not held at a
-fixed set-point but in a restless, fluctuating equilibrium. The fluctuations are not noise to
+The first is a refinement of homeostasis: a healthy organism is not held at a fixed set-point
+but in a restless, fluctuating equilibrium. The fluctuations are not noise to
 be removed; they constitute the regulation. An excessively steady heart rate is a warning sign
 rather than a sign of health.
 
@@ -48,21 +49,20 @@ destroy the structure deliberately.
 
 Consider a healthy, 1/f-like RR series, and a second series formed by shuffling it: the same
 values in random order. Shuffling preserves every amplitude statistic that does not depend on
-order. The mean is unchanged, and so is SDNN, the most frequently reported HRV measure [2];
+order. The mean is unchanged, and so is SDNN, the most frequently reported heart-rate variability (HRV) measure [2];
 the histogram is identical. By those measures the two recordings are indistinguishable.
 Dynamically they are not.
 
 <figure>
 <img src="/posts/the-fractal-heart-nonlinear-hrv/fig1_blindspot.svg?v=2" alt="Healthy 1/f rhythm versus the same values shuffled, and their DFA curves." />
-<figcaption>Fig. 1: A healthy 1/f rhythm (top) and the same values shuffled (middle). The mean and SDNN are identical (850 ms, 45 ms), yet the DFA fluctuation curves (bottom; DFA and α₁ defined below) give α₁ = 1.03 for the healthy series and 0.55 for the shuffled one.</figcaption>
+<figcaption>Fig. 1: A healthy 1/f rhythm (top) and the same values shuffled (middle). The mean and SDNN are identical (850 ms, 45 ms), yet the DFA fluctuation curves (bottom; α₁ is the DFA scaling exponent, defined in the DFA section below) give α₁ = 1.03 for the healthy series and 0.55 for the shuffled one.</figcaption>
 </figure>
 
 The upper trace shows slow undulations and drift that persist across hundreds of beats; the
 middle trace, the same values reordered, is uncorrelated and structureless. The mean and SDNN
-are identical (850 ms and 45 ms). Yet one is a correlated fractal process and the other is
-white noise, and the lower panel shows a measure that distinguishes them, the detrended
-fluctuation analysis scaling exponent (developed below), which falls from $\alpha_1 = 1.03$
-for the healthy series to $0.55$ for the shuffled one.
+are identical (850 ms and 45 ms). Yet one is a correlated fractal process and the other is white noise. The lower panel shows
+the detrended fluctuation analysis (DFA) scaling exponent (defined in full below): it falls from $\alpha_1 = 1.03$ for the
+healthy series to $0.55$ for the shuffled one.
 
 This is the central motivation. The magnitude of the variability is conserved; its
 organization is destroyed; the standard measures do not respond. A measure of the
@@ -71,19 +71,19 @@ organization is required.
 ## Poincaré plots: beat-to-beat geometry
 
 The simplest nonlinear view is geometric. Each interval is plotted against the next, $RR_n$ on
-the horizontal axis and $RR_{n+1}$ on the vertical axis. A perfectly regular rhythm collapses
-to a single point; a healthy rhythm forms an elongated cloud whose shape is summarized by
-fitting an ellipse [3]:
+the horizontal axis and $RR_{n+1}$ on the vertical axis. A perfectly regular rhythm collapses to a single point; a healthy rhythm forms an elongated
+cloud. The cloud's shape is captured by fitting an ellipse [3]. SD1 measures the width
+perpendicular to the line of identity, picking out the beat-to-beat differences; it is
+dominated by vagal (parasympathetic) activity. SD2 measures the length along the line of
+identity, capturing longer-range trends. Formally:
 
 $$
 \mathrm{SD1} = \sqrt{\tfrac{1}{2}\,\mathrm{Var}(RR_{n+1}-RR_n)}, \qquad
 \mathrm{SD2} = \sqrt{2\,\mathrm{Var}(RR) - \tfrac{1}{2}\,\mathrm{Var}(\Delta RR)}.
 $$
 
-SD1, the width perpendicular to the line of identity, measures short-term, beat-to-beat
-variability, which is dominated by vagal (parasympathetic) activity. SD2, the length along
-that line, measures long-term variability. Their ratio is a compact descriptor of the
-dynamics.
+Their ratio SD1/SD2 is a compact descriptor of the balance between short- and long-term
+regulation.
 
 <figure>
 <img src="/posts/the-fractal-heart-nonlinear-hrv/fig2_poincare.svg?v=2" alt="Poincaré plot of the healthy rhythm with the SD1/SD2 ellipse." />
@@ -91,8 +91,10 @@ dynamics.
 </figure>
 
 The Poincaré description is intuitive and clinically common, but it remains essentially
-second-order: SD1 and SD2 are functions of variances. It indicates the presence of structure
-without quantifying it across scales. A scale-resolved measure is needed.
+second-order: SD1 and SD2 are functions of variances. The method detects the presence of
+structure without quantifying it across scales. Before arriving at a measure that does, it is worth
+posing a simpler question: how predictable is the next beat from the ones before it? The
+answer illuminates exactly what a scale-resolved measure must add.
 
 ## Sample entropy: the predictability of the next beat
 
@@ -106,22 +108,31 @@ $$
 \mathrm{SampEn}(m,r) = -\ln \frac{A}{B},
 $$
 
-where $B$ is the number of segment pairs matching within $r$ over length $m$, and $A$ the
-number still matching at length $m+1$. Higher SampEn corresponds to lower predictability.
+where $B$ is the number of template pairs (length-$m$ windows that agree beat-by-beat within
+tolerance $r$) and $A$ the subset that still agree when extended to length $m+1$. Higher
+SampEn corresponds to lower predictability.
 
 A caution is warranted, because the point is easily misread: irregularity is not health. A
 Brownian (random-walk) rhythm is smooth and highly predictable, giving low SampEn, and is
 pathological. White noise is maximally unpredictable, giving high SampEn, and is also
 pathological. Health lies between the two, at the 1/f regime. SampEn is therefore informative
 but non-monotonic; greater entropy is not uniformly better. This non-monotonicity motivates a
-measure that locates the rhythm on the continuum between rigid and random, which is what DFA
-provides.
+measure that locates the rhythm on the continuum between rigid and random, which is what
+DFA provides.
 
 ## Detrended fluctuation analysis
 
-Detrended fluctuation analysis (DFA) [5] yields a single exponent describing the fractal
-organization of the rhythm, and does so robustly even when the signal drifts, as physiological
-signals invariably do. The procedure has three steps.
+DFA [5] estimates the spectral exponent of the rhythm. A fractal time series has a power
+spectral density that obeys $S(f) \propto f^{-\beta}$, where $\beta$ is the spectral exponent:
+$\beta \approx 0$ for white noise (flat spectrum), $\beta \approx 1$ for a healthy 1/f rhythm,
+$\beta \approx 2$ for Brownian motion. In principle one could estimate $\beta$ directly from
+the periodogram. In practice, physiological recordings are short and non-stationary, and the
+spectral estimate is correspondingly unreliable. DFA estimates the equivalent exponent $\alpha$
+(related to $\beta$ by $\alpha = (\beta + 1)/2$) from the time domain, robustly even when the
+signal drifts. The method was not developed in a cardiology laboratory: introduced in the early
+1990s by Peng, Havlin, Stanley, and Goldberger at Boston University to detect long-range
+correlations in non-stationary DNA nucleotide sequences [6], it reached cardiac rhythm by the
+same mathematical route. The procedure has three steps.
 
 First, integrate. The RR series is converted into a profile, the cumulative sum of the
 mean-removed intervals:
@@ -160,7 +171,7 @@ result: shuffling whitens the spectrum and drives $\alpha_1$ from approximately 
 $0.5$, while leaving the mean and SDNN unchanged.
 
 The clinical relevance is that a reduced or drifting $\alpha_1$ has been associated with
-autonomic dysfunction and with adverse outcomes in heart failure [6]: the failing heart tends
+autonomic dysfunction and with adverse outcomes in heart failure [7]: the failing heart tends
 to lose its 1/f signature, moving toward either over-regular ($\alpha_1 \to 1.5$) or
 disorganized ($\alpha_1 \to 0.5$) dynamics before the linear summaries change. This is the kind
 of early structural drift that a longitudinal monitor would aim to detect.
@@ -191,14 +202,15 @@ wrist-worn optical sensor (photoplethysmography, PPG) in a consumer watch, the s
 most patients possess, is precisely the source that produces ectopic-like spikes and
 dropped beats under motion, poor perfusion, or low peripheral temperature. The most prognostic
 HRV measures are thus the most fragile, and they depend on the least reliable hardware
-available to the patient.
+available to the patient. This is the constraint that frames the engineering problem
+downstream.
 
 ## Summary
 
-The conclusion of this post is a change of perspective: the heart is not a metronome, the
-variability is the regulation, and its fractal organization, quantified by $\alpha_1$, carries
-information that the linear summaries cannot. The remaining difficulty is earning the ability
-to measure it reliably.
+The heart is not a metronome, the variability is the regulation, and its fractal organization,
+quantified by $\alpha_1$, carries information that the linear summaries cannot retrieve. The
+remaining difficulty is measurement: obtaining the artifact-free interval sequences that the
+nonlinear measures require.
 
 ## References
 
@@ -222,6 +234,10 @@ Physiology*, vol. 278, no. 6, pp. H2039–H2049, 2000.
 exponents and crossover phenomena in nonstationary heartbeat time series," *Chaos*, vol. 5,
 no. 1, pp. 82–87, 1995.
 
-[6] H. V. Huikuri et al., "Fractal correlation properties of R-R interval dynamics and
+[6] C.-K. Peng, S. V. Buldyrev, A. L. Goldberger, S. Havlin, F. Sciortino, M. Simons, and
+H. E. Stanley, "Long-range correlations in nucleotide sequences," *Nature*, vol. 356,
+pp. 168–170, 1992.
+
+[7] H. V. Huikuri et al., "Fractal correlation properties of R-R interval dynamics and
 mortality in patients with depressed left ventricular function after an acute myocardial
 infarction," *Circulation*, vol. 101, no. 1, pp. 47–53, 2000.
