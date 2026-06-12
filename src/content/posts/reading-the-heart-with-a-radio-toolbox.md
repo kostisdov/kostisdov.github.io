@@ -28,7 +28,10 @@ Removing that out-of-band energy requires a band-pass filter: a high-pass stage 
 the baseline wander, and a low-pass stage attenuates the mains interference and high-frequency
 noise.
 
-![A raw ECG-like recording dominated by mains interference and baseline wander, and the same trace after a 0.5 to 40 Hz band-pass filter, showing clean QRS peaks.](/posts/heart/ecg-filtering.svg)
+<figure>
+<img src="/posts/heart/ecg-filtering.svg?v=2" alt="A raw ECG-like recording and the same trace after band-pass filtering." />
+<figcaption>Fig. 1: A raw ECG-like recording (top), dominated by mains interference and baseline wander, and the same trace after a 0.5 to 40 Hz band-pass filter (bottom), which isolates the QRS peaks.</figcaption>
+</figure>
 
 The effect is substantial. The unfiltered trace is uninterpretable, whereas the filtered
 trace exhibits clearly delineated QRS peaks. This step is not specific to electrocardiography;
@@ -50,7 +53,10 @@ where $t_n$ denotes the time of the $n$-th R wave. An RR interval of 850 ms corr
 intervals against time produces the tachogram, a signal sampled once per beat that discards
 the voltage waveform and retains only the timing.
 
-![A tachogram: RR interval in milliseconds plotted over several minutes, oscillating around 850 ms.](/posts/heart/tachogram.svg)
+<figure>
+<img src="/posts/heart/tachogram.svg?v=2" alt="A tachogram of RR intervals over several minutes." />
+<figcaption>Fig. 2: The tachogram of RR intervals over several minutes, oscillating around 850 ms.</figcaption>
+</figure>
 
 The healthy heart is not periodic. The RR interval varies by tens of milliseconds from beat
 to beat. This variation is not measurement noise; it reflects continuous modulation of the
@@ -111,7 +117,10 @@ which is acceptable here because only the distribution of power between bands is
 Resampling onto a uniform grid is necessary because the tachogram is sampled irregularly, once
 per beat, whereas the DFT assumes uniform sampling.
 
-![Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz, the LF and HF bands shaded.](/posts/heart/hrv-psd.svg?v=2)
+<figure>
+<img src="/posts/heart/hrv-psd.svg?v=3" alt="Power spectral density of the RR-interval series with LF and HF bands shaded." />
+<figcaption>Fig. 3: Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz; the LF and HF bands are shaded.</figcaption>
+</figure>
 
 The spectrum exhibits two distinct bands, whose boundaries follow the standard HRV
 conventions [4]. The high-frequency band (HF, 0.15 to 0.4 Hz)
