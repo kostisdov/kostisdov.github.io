@@ -7,7 +7,7 @@ draft: false
 ---
 
 The [first post](https://kostisdov.github.io/posts/reading-the-heart-with-a-radio-toolbox/)
-in this series analysed an ECG with a linear signal-processing pipeline: a band-pass filter,
+in this series analysed an ECG with a linear signal processing pipeline: a band-pass filter,
 R-peak detection to form a tachogram of RR intervals, and Welch's method to estimate the
 spectrum, yielding the low- and high-frequency bands and the LF/HF ratio.
 
@@ -42,7 +42,7 @@ appears as a 1/f (pink-noise) spectrum and a power-law scaling of fluctuations. 
 tends to move the heart away from 1/f, either toward rigid, random-walk dynamics (loss of
 responsiveness) or toward uncorrelated noise (loss of integration).
 
-The linear measures of Part I cannot resolve this. The most direct demonstration is to
+The amplitude statistics of Part I cannot resolve this. The most direct demonstration is to
 destroy the structure deliberately.
 
 ## What linear measures miss
@@ -67,6 +67,15 @@ healthy series to $0.55$ for the shuffled one.
 This is the central motivation. The magnitude of the variability is conserved; its
 organization is destroyed; the standard measures do not respond. A measure of the
 organization is required.
+
+One caveat sharpens the claim. The power spectrum is not itself blind to order: by the
+Wiener–Khinchin theorem it is the Fourier transform of the autocorrelation, so the shuffle
+that whitens the autocorrelation also flattens the spectrum. Two things, however, escape the
+linear pipeline of Part I. SDNN is order-independent and registers nothing; and the reported
+LF/HF summary compresses the spectrum into a few fixed bands, discarding the broadband 1/f
+slope in which the scaling actually lives. The nonlinear measures that follow recover that
+scaling directly and, beyond it, capture higher-order dependence that no power spectrum, a
+purely second-order quantity, can express.
 
 ## Poincaré plots: beat-to-beat geometry
 
