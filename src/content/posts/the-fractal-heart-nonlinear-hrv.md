@@ -54,7 +54,7 @@ the histogram is identical. By those measures the two recordings are indistingui
 Dynamically they are not.
 
 <figure>
-<img src="/posts/the-fractal-heart-nonlinear-hrv/fig1_blindspot.svg?v=2" alt="Healthy 1/f rhythm versus the same values shuffled, and their DFA curves." />
+<img src="/posts/the-fractal-heart-nonlinear-hrv/fig1_blindspot.svg?v=3" alt="Healthy 1/f rhythm versus the same values shuffled, and their DFA curves." />
 <figcaption>Fig. 1: A healthy 1/f rhythm (top) and the same values shuffled (middle). The mean and SDNN are identical (850 ms, 45 ms), yet the DFA fluctuation curves (bottom; α₁ is the DFA scaling exponent, defined in the DFA section below) give α₁ = 1.03 for the healthy series and 0.55 for the shuffled one.</figcaption>
 </figure>
 
@@ -95,7 +95,7 @@ Their ratio SD1/SD2 is a compact descriptor of the balance between short- and lo
 regulation.
 
 <figure>
-<img src="/posts/the-fractal-heart-nonlinear-hrv/fig2_poincare.svg?v=2" alt="Poincaré plot of the healthy rhythm with the SD1/SD2 ellipse." />
+<img src="/posts/the-fractal-heart-nonlinear-hrv/fig2_poincare.svg?v=3" alt="Poincaré plot of the healthy rhythm with the SD1/SD2 ellipse." />
 <figcaption>Fig. 2: Poincaré plot of the healthy rhythm, with the fitted SD1/SD2 ellipse (SD1 = 21 ms, SD2 = 60 ms).</figcaption>
 </figure>
 
@@ -170,7 +170,7 @@ over $4 \le n \le 16$ beats is denoted $\alpha_1$.
 | $\approx 1.5$ | Brownian (random walk) | over-smooth, sluggish; loss of complexity |
 
 <figure>
-<img src="/posts/the-fractal-heart-nonlinear-hrv/fig3_dfa.svg?v=2" alt="Three synthetic rhythms and their DFA fluctuation curves." />
+<img src="/posts/the-fractal-heart-nonlinear-hrv/fig3_dfa.svg?v=3" alt="Three synthetic rhythms and their DFA fluctuation curves." />
 <figcaption>Fig. 3: Three synthetic rhythms (left) and their DFA fluctuation curves (right). The slope on log-log axes is the scaling exponent, recovering α₁ ≈ 0.59 (white), 1.03 (1/f), and 1.54 (Brownian).</figcaption>
 </figure>
 
@@ -195,7 +195,7 @@ injects a large artificial step) and dropped beats (a missed detection that merg
 intervals into one). The effect of even a small rate of each on $\alpha_1$ is severe.
 
 <figure>
-<img src="/posts/the-fractal-heart-nonlinear-hrv/fig4_reckoning.svg?v=2" alt="Effect of ectopic and dropped beats on the DFA exponent." />
+<img src="/posts/the-fractal-heart-nonlinear-hrv/fig4_reckoning.svg?v=3" alt="Effect of ectopic and dropped beats on the DFA exponent." />
 <figcaption>Fig. 4: A 1.5% ectopic rate against the clean rhythm (left) and the resulting DFA curves (right): α₁ collapses from the clean value of 1.03 to 0.35 with ectopics and to 0.64 with a 6% drop rate.</figcaption>
 </figure>
 
