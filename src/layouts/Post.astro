@@ -16,7 +16,7 @@ const formatted = date.toLocaleDateString('en-GB', {
 });
 ---
 
-<Base title={`${title} — Kostis Dovelos`} description={description} image={image}>
+<Base title={`${title} — Kostis Dovelos`} ogTitle={title} description={description} image={image}>
   <header class="article-header">
     <p class="meta">
       {formatted}{tags.length > 0 && ` · ${tags.join(' · ')}`}
