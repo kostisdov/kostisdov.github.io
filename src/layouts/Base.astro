@@ -6,12 +6,14 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  ogTitle?: string;
 }
 
 const {
   title,
   description = 'Notes on waves, signals, and other curiosities.',
   image = '/og/default.png',
+  ogTitle = title,
 } = Astro.props;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site);
@@ -29,7 +31,7 @@ const ogImage = new URL(image, Astro.site);
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Kostis Dovelos" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
@@ -37,7 +39,7 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
