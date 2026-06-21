@@ -1,11 +1,11 @@
 :root {
-  --paper: #f6f1e7;
-  --paper-deep: #ede5d3;
+  --paper: #fbfaf8;
+  --paper-deep: #f1efe9;
   --ink: #221e17;
   --ink-soft: #5c554a;
   --accent: #c34a22;
   --accent-deep: #1e3d52;
-  --rule: #d8cfbc;
+  --rule: #e5e3dd;
   --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
   --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
@@ -288,7 +288,7 @@ a:hover {
 }
 
 .prose pre {
-  background: #fbf8f1;
+  background: #f6f5f1;
   border: 1px solid var(--rule);
   border-radius: 6px;
   padding: 1rem 1.2rem;

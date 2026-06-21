@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, interpolate
 
 # ---- site palette ----------------------------------------------------------
-PAPER = "#f6f1e7"; INK = "#221e17"; INK_SOFT = "#5c554a"
+PAPER = "#fbfaf8"; INK = "#221e17"; INK_SOFT = "#5c554a"
 ACCENT = "#c34a22"; ACCENT_DEEP = "#1e3d52"; RULE = "#d8cfbc"
 SAGE = "#6f8b6a"   # third series colour, harmonised with the warm paper
 
