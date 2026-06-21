@@ -29,7 +29,7 @@ the baseline wander, and a low-pass stage attenuates the mains interference and 
 noise.
 
 <figure>
-<img src="/posts/heart/ecg-filtering.svg?v=2" alt="A raw ECG-like recording and the same trace after band-pass filtering." />
+<img src="/posts/heart/ecg-filtering.svg?v=3" alt="A raw ECG-like recording and the same trace after band-pass filtering." />
 <figcaption>Fig. 1: A raw ECG-like recording (top), dominated by mains interference and baseline wander, and the same trace after a 0.5 to 40 Hz band-pass filter (bottom), which isolates the QRS peaks.</figcaption>
 </figure>
 
@@ -54,7 +54,7 @@ intervals against time produces the tachogram, a signal sampled once per beat th
 the voltage waveform and retains only the timing.
 
 <figure>
-<img src="/posts/heart/tachogram.svg?v=2" alt="A tachogram of RR intervals over several minutes." />
+<img src="/posts/heart/tachogram.svg?v=3" alt="A tachogram of RR intervals over several minutes." />
 <figcaption>Fig. 2: The tachogram of RR intervals over several minutes, oscillating around 850 ms.</figcaption>
 </figure>
 
@@ -121,7 +121,7 @@ fully independent. The cost is coarser frequency resolution, set by the segment 
 which is acceptable here because only the distribution of power between bands is required.
 
 <figure>
-<img src="/posts/heart/hrv-psd.svg?v=3" alt="Power spectral density of the RR-interval series with LF and HF bands shaded." />
+<img src="/posts/heart/hrv-psd.svg?v=4" alt="Power spectral density of the RR-interval series with LF and HF bands shaded." />
 <figcaption>Fig. 3: Power spectral density of the RR-interval series, with a low-frequency peak near 0.1 Hz and a high-frequency peak near 0.25 Hz; the LF and HF bands are shaded.</figcaption>
 </figure>
 

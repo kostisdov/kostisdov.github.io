@@ -44,12 +44,12 @@ reaches $\delta = -\varepsilon$. The declination therefore oscillates between $\
 with a one-year period, and the solstices are precisely its extrema.
 
 <figure>
-<img src="/posts/solstice/declination-geometry.svg" alt="Schematic of the celestial sphere: the equator and the tilted ecliptic crossing at the equinoxes, with the Sun at the June solstice." />
+<img src="/posts/solstice/declination-geometry.svg?v=2" alt="Schematic of the celestial sphere: the equator and the tilted ecliptic crossing at the equinoxes, with the Sun at the June solstice." />
 <figcaption>Fig. 1: The celestial sphere viewed obliquely. The Sun travels once a year around the ecliptic (red), tilted by the obliquity ε from the celestial equator (grey); the two cross at the equinoxes, where the declination is zero. The declination δ is the Sun's angular height above the equator, and it reaches its extreme values of +ε at the June solstice and −ε at the December solstice.</figcaption>
 </figure>
 
 <figure>
-<img src="/posts/solstice/declination.svg" alt="Solar declination over the year, a smooth oscillation between plus and minus the obliquity." />
+<img src="/posts/solstice/declination.svg?v=2" alt="Solar declination over the year, a smooth oscillation between plus and minus the obliquity." />
 <figcaption>Fig. 2: Solar declination δ through the year. It oscillates between +ε and −ε, with the equinoxes at the zero crossings; the June solstice (dashed) is the maximum, where the curve flattens.</figcaption>
 </figure>
 
@@ -86,7 +86,7 @@ $\delta = \varepsilon$ gives $\cos H_0 = -\tan 38^\circ \tan 23.44^\circ \approx
 $H_0 \approx 109.8^\circ$ and $D \approx 14$ h $38$ min.
 
 <figure>
-<img src="/posts/solstice/daylight.svg" alt="Length of daylight through the year at the equator, Athens, and 60 degrees north." />
+<img src="/posts/solstice/daylight.svg?v=2" alt="Length of daylight through the year at the equator, Athens, and 60 degrees north." />
 <figcaption>Fig. 3: Length of daylight through the year at three latitudes. All curves cross 12 hours at the equinoxes and reach their northern-hemisphere maximum at the June solstice (dashed); the amplitude grows with latitude, and the maximum is visibly flat.</figcaption>
 </figure>
 
@@ -155,7 +155,7 @@ and that is what gives the full curve its lopsided shape, dipping and peaking by
 amounts.
 
 <figure>
-<img src="/posts/solstice/equation-of-time.svg" alt="The equation of time decomposed into a semiannual obliquity component, an annual eccentricity component, and their sum." />
+<img src="/posts/solstice/equation-of-time.svg?v=2" alt="The equation of time decomposed into a semiannual obliquity component, an annual eccentricity component, and their sum." />
 <figcaption>Fig. 4: The equation of time (solid) as the sum of a twice-yearly obliquity term (dashed) and a once-yearly eccentricity term (dotted). The two are of comparable size; adding them produces the lopsided annual curve.</figcaption>
 </figure>
 
@@ -172,7 +172,7 @@ because the once- and twice-yearly contributions to the sideways motion are diff
 the same lopsidedness already seen in Fig. 4.
 
 <figure>
-<img src="/posts/solstice/analemma.svg" alt="The analemma, a figure-eight of declination plotted against the equation of time, with solstices and equinoxes marked." />
+<img src="/posts/solstice/analemma.svg?v=2" alt="The analemma, a figure-eight of declination plotted against the equation of time, with solstices and equinoxes marked." />
 <figcaption>Fig. 5: The analemma, declination plotted against the equation of time over a year. The solstices sit at the top and bottom, the equinoxes near the crossing; the larger lower lobe corresponds to the months around perihelion.</figcaption>
 </figure>
 
