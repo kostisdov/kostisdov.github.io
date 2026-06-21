@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, date, tags } = post.data;
+const { title, description, date, tags, image } = post.data;
 
 const formatted = date.toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -16,7 +16,7 @@ const formatted = date.toLocaleDateString('en-GB', {
 });
 ---
 
-<Base title={`${title} — Kostis Dovelos`} description={description}>
+<Base title={`${title} — Kostis Dovelos`} description={description} image={image}>
   <header class="article-header">
     <p class="meta">
       {formatted}{tags.length > 0 && ` · ${tags.join(' · ')}`}
