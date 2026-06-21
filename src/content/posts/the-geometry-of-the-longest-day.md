@@ -3,6 +3,7 @@ title: "The geometry of the longest day"
 description: "The summer solstice is the extremum of a deterministic signal: the Sun's apparent annual motion. The same spherical geometry that fixes the longest day also explains why, near it, the Sun appears to stand still, and why clock time and sundial time diverge."
 date: 2026-06-21
 tags: ["physics", "astronomy"]
+image: "/og/solstice.png"
 ---
 
 The apparent motion of the Sun across a year is a deterministic, quasi-periodic signal. Its
