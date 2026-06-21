@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ---- site palette -----------------------------------------------------------
-PAPER = "#f6f1e7"
+PAPER = "#fbfaf8"
 INK = "#221e17"
 INK_SOFT = "#5c554a"
 ACCENT = "#c34a22"
