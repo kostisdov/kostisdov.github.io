@@ -4,8 +4,9 @@ Run with the conda env that has numpy/matplotlib, e.g.:
     /usr/local/Caskroom/miniforge/base/envs/wifi_analyzer/bin/python scripts/social_cards.py
 
 Outputs:
-    public/og/default.png   site-wide fallback card
-    public/og/solstice.png  card for "The geometry of the longest day"
+    public/og/default.png              site-wide fallback card
+    public/og/solstice.png             card for "The geometry of the longest day"
+    public/og/beneath-the-noise-floor.png  card for "Beneath the noise floor"
 
 Cards are raster (PNG) because LinkedIn/Twitter will not render SVG og:images.
 Palette matches the site (soft off-white background).
@@ -91,6 +92,41 @@ plt.close(fig)
 
 
 # ---------------------------------------------------------------------------
+# Beneath the noise floor card: title block on the left, the Shannon-plane
+# bound curve with its -1.59 dB wall on the right.
+# ---------------------------------------------------------------------------
+SAGE = "#6f8b6a"
+eta = np.linspace(0.02, 7.0, 800)
+ebn0_db = 10.0 * np.log10((np.power(2.0, eta) - 1.0) / eta)
+WALL = 10.0 * np.log10(np.log(2.0))
+
+fig = new_card()
+fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
+         family="monospace", va="center")
+fig.text(0.060, 0.63, "Beneath the\nnoise floor", fontsize=54, color=INK,
+         va="center", linespacing=1.05)
+fig.text(0.062, 0.28, "How a radio decodes a signal weaker than its own noise,\n"
+                      "and the one limit that never moves: Eb/N0 = −1.59 dB.",
+         fontsize=20, color=INK_SOFT, style="italic", va="center",
+         linespacing=1.3)
+fig.text(0.062, 0.10, "kostisdov.github.io", fontsize=15, color=ACCENT,
+         family="monospace", va="center")
+
+ax = fig.add_axes([0.66, 0.14, 0.30, 0.72])
+ax.fill_betweenx(eta, ebn0_db, 30, color=ACCENT, alpha=0.10)
+ax.plot(ebn0_db, eta, color=ACCENT, lw=2.6)
+ax.axvline(WALL, color=ACCENT_DEEP, lw=1.6, ls="--")
+ax.text(WALL - 0.4, 6.6, "−1.59 dB", color=ACCENT_DEEP, fontsize=13,
+        ha="right", va="top")
+ax.set_xlim(-3, 20)
+ax.set_ylim(0, 7)
+ax.set_facecolor(PAPER)
+ax.axis("off")
+fig.savefig(os.path.join(OUT, "beneath-the-noise-floor.png"), facecolor=PAPER)
+plt.close(fig)
+
+
+# ---------------------------------------------------------------------------
 # Default site card: wordmark + tagline, with a faint interference ridgeline
 # echoing the home-page hero art.
 # ---------------------------------------------------------------------------
@@ -121,6 +157,6 @@ fig.savefig(os.path.join(OUT, "default.png"), facecolor=PAPER)
 plt.close(fig)
 
 print("wrote:")
-for name in ("solstice.png", "default.png"):
+for name in ("solstice.png", "beneath-the-noise-floor.png", "default.png"):
     p = os.path.join(OUT, name)
     print(f"  {p}  ({os.path.getsize(p)} bytes)")
