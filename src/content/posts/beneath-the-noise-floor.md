@@ -210,26 +210,6 @@ resolution, multiple access, and a low probability of intercept. Satellite navig
 canonical example, heavy spreading for despreading gain and jam resistance alongside FEC for the
 coding gain that approaches the wall.
 
-## Which bandwidth enters the noise floor
-
-Spreading widens the occupied bandwidth by $\text{SF}$, so the integrated noise floor rises by
-$10\log_{10}\text{SF}$. Nothing is lost: that same $10\log_{10}\text{SF}$ is the despreading
-processing gain, which lowers the required SNR by the same amount. The spreading factor lands on
-the floor or on the SNR requirement, never both, so it cancels and the sensitivity does not depend
-on where it is booked.
-
-For a link budget, book it as a processing-gain term against the information-bandwidth floor:
-
-$$
-P_\text{sens} = \underbrace{-174 + 10\log_{10}W_\text{info} + \text{NF}}_{\text{information floor}}
-+ \text{SNR}_\text{req} - \underbrace{10\log_{10}\text{SF}}_{\text{processing gain}},
-$$
-
-where $\text{SNR}_\text{req}$ is the post-despread requirement, spec'd against $E_b/N_0$. Charging
-it against the wider occupied-bandwidth floor double-counts and mislays $10\log_{10}\text{SF}$
-decibels. That occupied-bandwidth floor is still the right frame for the physical spectrum: what an
-analyser shows, interference, and whether the emission hides under the noise.
-
 ## Designing a long-range link, end to end
 
 The pieces assemble into a design procedure, and one example fixes the order of the decisions.
