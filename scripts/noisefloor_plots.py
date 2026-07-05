@@ -142,6 +142,10 @@ axL.text(0, WIDE_LVL - 1.3, "signal over occupied band $W$",
 axL.set_title("spread across $W$", fontsize=10.5, color=INK)
 axL.set_ylabel("power spectral density (dB)")
 despine(axL)
+# bandwidth bracket: the full channel W
+axL.annotate("", xy=(-5, 11.5), xytext=(5, 11.5),
+             arrowprops=dict(arrowstyle="<->", color=INK_SOFT, lw=1.0))
+axL.text(0, 12.1, "$W$", color=INK_SOFT, fontsize=10, ha="center", va="bottom")
 
 # --- right: narrowband, post-despread -------------------------------------
 # faint ghost of the pre-despread level, for the lift reference
@@ -168,6 +172,11 @@ axR.set_title("despread to $W_\\text{info}$", fontsize=10.5, color=INK)
 despine(axR, keep=("bottom",))
 axR.spines["left"].set_visible(False)
 axR.tick_params(left=False)
+# bandwidth bracket: the narrow information band (compare with W on the left)
+axR.annotate("", xy=(-0.7, 11.5), xytext=(0.7, 11.5),
+             arrowprops=dict(arrowstyle="<->", color=INK_SOFT, lw=1.2))
+axR.text(1.1, 11.5, "$W_\\text{info}=W/\\text{SF}$", color=INK_SOFT, fontsize=9,
+         ha="left", va="center")
 
 fig.tight_layout()
 save(fig, "below-floor")
