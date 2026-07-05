@@ -62,7 +62,7 @@ For a fixed noise floor, sensitivity improves by lowering the required SNR, and 
   amount and cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the
   information needs, is exactly spreading, the next section.
 - **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall (the
-  section that follows), or by multi-antenna combining.
+  section that follows), or by multi-antenna processing.
 
 Power is conserved along the transmit chain. From information bits through symbols to spreading
 chips,
@@ -205,8 +205,9 @@ $$
 
 Every term is a design lever, and bandwidth is not among them: the only ways to buy sensitivity are
 a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
-$E_b/N_0$ from coding gain toward the wall or from combining $M$ antennas (whose maximum-ratio
-combiner sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation loss.
+$E_b/N_0$ from coding gain toward the wall or from multi-antenna processing (maximum-ratio combining
+of $M$ antennas sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation
+loss.
 
 Run the numbers at two rates in the same $400$ kHz channel, taking $L_\text{impl} = 0$. Filling the
 channel with data at $R_b = 200$ kbit/s gives $P_\text{sens} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
