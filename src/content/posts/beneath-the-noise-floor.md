@@ -106,7 +106,7 @@ low $R_b$ is the sensitivity, and $E_b/N_0$ never moves.
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
-<figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it to the information bandwidth W_info = W/SF and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
+<figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only the narrow information bandwidth W_info, and spreading fills the channel with it at SF = W/W_info. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
 Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the noise
