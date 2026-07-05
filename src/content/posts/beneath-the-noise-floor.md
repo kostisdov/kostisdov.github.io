@@ -58,10 +58,11 @@ $P = E_b R_b$.
 For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
 
 - **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
-  rate, the fall in $\eta$ a byproduct, since widening $W$ instead would lift the floor by the same
-  amount and cancel. This is the next section, on spreading.
-- **Lower the required $E_b/N_0$ by coding gain**: moving toward the $-1.59$ dB wall, the subject of
-  the section that follows.
+  rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
+  amount and cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the
+  information needs, is exactly spreading, the next section.
+- **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall (the
+  section that follows), or by multi-antenna combining.
 
 Power is conserved along the transmit chain. From information bits through symbols to spreading
 chips,
