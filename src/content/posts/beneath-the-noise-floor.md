@@ -186,9 +186,10 @@ range within a fixed channel of $W = 400$ kHz, with noise figure $\text{NF} = 3$
 noise density is $N_0 = -174 + 3 = -171$ dBm/Hz. Take BPSK with a rate-$1/2$ low-density
 parity-check (LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB.
 
-Range is bought by sensitivity, and sensitivity by a low rate. With the input noise density
-$N_0 = kT + \text{NF}$ and an implementation loss $L_\text{impl}$, the decibel or two a real
-receiver loses to imperfect synchronization, filtering, and quantization, and since
+Range is bought by sensitivity, and sensitivity by a low rate. The input noise density is
+$N_0 = kT + \text{NF}$, and a real receiver also pays an implementation loss $L_\text{impl}$, the
+gap from the ideal: carrier and timing synchronization error, phase noise, channel-estimation
+error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB in all. Since
 $E_b/N_0 = P/(N_0 R_b)$,
 
 $$
