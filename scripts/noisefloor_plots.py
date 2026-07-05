@@ -137,9 +137,9 @@ axL.annotate("", xy=(0, FLOOR), xytext=(0, WIDE_LVL),
              arrowprops=dict(arrowstyle="<->", color=ACCENT_DEEP, lw=1.1))
 axL.text(0.3, (FLOOR + WIDE_LVL) / 2, r"SNR $=-10$ dB", color=ACCENT_DEEP,
          fontsize=9.5, ha="left", va="center")
-axL.text(0, WIDE_LVL - 1.3, "signal, spread over $W_\\text{wide}$",
+axL.text(0, WIDE_LVL - 1.3, "signal over occupied band $W$",
          color=ACCENT, fontsize=9.5, ha="center", va="top")
-axL.set_title("pre-despread (wideband)", fontsize=10.5, color=INK)
+axL.set_title("spread across $W$", fontsize=10.5, color=INK)
 axL.set_ylabel("power spectral density (dB)")
 despine(axL)
 
@@ -160,11 +160,11 @@ axR.text(2.6, (FLOOR + WIDE_LVL) / 2,
          fontsize=9.2, ha="left", va="center")
 axR.text(0, FLOOR + 0.7, r"SNR $=0$ dB", color=ACCENT_DEEP, fontsize=9.5,
          ha="center", va="bottom")
-axR.text(-3.1, -12.6, "signal, in $W_\\text{sym}$", color=ACCENT,
+axR.text(-3.1, -12.6, "signal in $W_\\text{info}$", color=ACCENT,
          fontsize=9.5, ha="center", va="center")
 axR.annotate("", xy=(-0.75, -12.0), xytext=(-1.6, -12.6),
              arrowprops=dict(arrowstyle="->", color=ACCENT, lw=1.0))
-axR.set_title("post-despread (narrowband)", fontsize=10.5, color=INK)
+axR.set_title("despread to $W_\\text{info}$", fontsize=10.5, color=INK)
 despine(axR, keep=("bottom",))
 axR.spines["left"].set_visible(False)
 axR.tick_params(left=False)
@@ -173,72 +173,7 @@ fig.tight_layout()
 save(fig, "below-floor")
 
 
-# ---------------------------------------------------------------------------
-# Figure 3: coding vs diversity. Left (AWGN): uncoded BPSK, which coincides with
-# repetition + MRC; the Shannon wall; the coding-gain gap that real FEC recovers.
-# Right (Rayleigh): MRC of order L = 1, 2, 4, closed-form BPSK BER, showing the
-# diversity slope steepen. Total average Eb/N0 split across L branches.
-# ---------------------------------------------------------------------------
-fig, (axA, axR2) = plt.subplots(1, 2, figsize=(8.0, 4.2))
-
-# --- AWGN panel ---
-ebn0_db_ax = np.linspace(-2, 12, 400)
-g = 10.0 ** (ebn0_db_ax / 10.0)
-ber_uncoded = Q(np.sqrt(2.0 * g))
-axA.semilogy(ebn0_db_ax, ber_uncoded, color=INK, lw=1.9,
-             label="uncoded BPSK\n(= repetition + MRC)")
-CG = 6.0
-ber_coded = Q(np.sqrt(2.0 * 10.0 ** ((ebn0_db_ax + CG) / 10.0)))
-axA.semilogy(ebn0_db_ax, ber_coded, color=ACCENT, lw=1.7, ls="--",
-             label="representative FEC\n(schematic)")
-axA.axvline(WALL, color=ACCENT_DEEP, lw=1.1, ls=":")
-axA.text(WALL + 0.2, 3e-6, "wall $-1.59$ dB", color=ACCENT_DEEP, fontsize=8.5,
-         rotation=90, va="bottom")
-lvl = 1e-4
-x_un = np.interp(np.log10(lvl), np.log10(ber_uncoded[::-1]), ebn0_db_ax[::-1])
-x_cd = np.interp(np.log10(lvl), np.log10(ber_coded[::-1]), ebn0_db_ax[::-1])
-axA.annotate("", xy=(x_cd, lvl), xytext=(x_un, lvl),
-             arrowprops=dict(arrowstyle="<->", color=SAGE, lw=1.3))
-axA.text((x_un + x_cd) / 2, lvl * 1.5, "coding gain", color=SAGE, fontsize=8.8,
-         ha="center", va="bottom")
-axA.set_title("AWGN", fontsize=11, color=INK)
-axA.set_xlabel(r"$E_b/N_0$ (dB)")
-axA.set_ylabel("bit error rate")
-axA.set_ylim(1e-6, 0.5)
-axA.set_xlim(-2, 12)
-axA.legend(loc="upper right", frameon=False, fontsize=8.2, handlelength=1.6)
-despine(axA)
-
-# --- Rayleigh panel: MRC diversity, total Eb/N0 split across L branches ---
-def mrc_ber(ebn0_db_total, L):
-    gtot = 10.0 ** (ebn0_db_total / 10.0)
-    gbar = gtot / L                       # per-branch average SNR
-    mu = np.sqrt(gbar / (1.0 + gbar))
-    s = np.zeros_like(gbar)
-    for k in range(L):
-        s += comb(L - 1 + k, k) * ((1.0 + mu) / 2.0) ** k
-    return ((1.0 - mu) / 2.0) ** L * s
-
-
-ebn0_r = np.linspace(0, 30, 400)
-cols = {1: INK_SOFT, 2: ACCENT, 4: ACCENT_DEEP}
-for L in (1, 2, 4):
-    axR2.semilogy(ebn0_r, mrc_ber(ebn0_r, L), color=cols[L], lw=1.8,
-                  label=f"$L = {L}$")
-axR2.set_title("Rayleigh fading, MRC", fontsize=11, color=INK)
-axR2.set_xlabel(r"average $E_b/N_0$ (dB)")
-axR2.set_ylim(1e-6, 0.5)
-axR2.set_xlim(0, 30)
-axR2.legend(loc="upper right", frameon=False, fontsize=9.5, title="diversity",
-            title_fontsize=9)
-despine(axR2)
-axR2.tick_params(labelleft=True)
-
-fig.tight_layout()
-save(fig, "ber-coding-diversity")
-
-
 print("wrote:")
-for name in ("shannon-plane", "below-floor", "ber-coding-diversity"):
+for name in ("shannon-plane", "below-floor"):
     p = os.path.join(OUT, name + ".svg")
     print(f"  {p}  ({os.path.getsize(p)} bytes)")

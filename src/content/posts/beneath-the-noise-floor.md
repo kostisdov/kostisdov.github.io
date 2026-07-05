@@ -1,5 +1,5 @@
 ---
-title: "Operating beneath the noise floor: fundamentals and design principles"
+title: "Operating beneath the noise floor"
 description: "A long-range radio link can decode a signal whose power sits below the thermal noise. Doing so breaks no law: the signal-to-noise ratio in the occupied band has no lower limit, while the true wall is on energy per bit, Eb/N0 = −1.59 dB. The fundamentals, and how they set the design of a weak-signal link."
 date: 2026-07-04
 tags: ["signals", "wireless"]
@@ -17,19 +17,19 @@ the noise floor a receiver can work.
 
 ## The receiver noise floor and sensitivity
 
-Every receiver is preceded by thermal noise. A resistor at temperature $T$ delivers a noise
-power spectral density $kT$, which at room temperature is $-174$ dBm/Hz. Integrated over a
-bandwidth $B$ and raised by the front-end noise figure (NF), the noise floor referred to the
-input is [1]
+Every receiver is preceded by thermal noise. A resistor at temperature $T$ delivers a noise power
+spectral density $kT = -174$ dBm/Hz at room temperature. Raised by the front-end noise figure
+(NF), it becomes the input-referred noise density $N_0 = kT + \text{NF}$, and over a bandwidth $B$
+the noise floor is [1]
 
 $$
-\text{floor} = -174\ \text{dBm/Hz} + 10\log_{10}\!\big(B/\text{Hz}\big) + \text{NF},
+\text{floor} = N_0 + 10\log_{10}B = kT + \text{NF} + 10\log_{10}B,
 $$
 
-in dBm. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation and coding
-scheme (MCS) decodes once the signal-to-noise ratio reaches a required value $\text{SNR}_\text{req}$,
-set by the modulation order and the code, so the sensitivity, the least recoverable signal power,
-is
+in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
+and coding scheme (MCS) decodes once the signal-to-noise ratio reaches a required value
+$\text{SNR}_\text{req}$, set by the modulation order and the code, so the sensitivity, the least
+recoverable signal power, is
 
 $$
 P_\text{sens} = \text{floor} + \text{SNR}_\text{req}.
@@ -42,75 +42,77 @@ pushed negative, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
-The occupied-band SNR compares powers over the bandwidth the signal occupies. It suits the
-analogue front-end, but the decoder cares about the energy in each information bit. With $R_b$ the
-information rate and $P$ the received power, the energy per bit is $E_b = P/R_b$, and the
-detection figure of merit is $E_b/N_0$ [2]. The two ratios connect through the spectral efficiency
+The occupied-band SNR suits the analogue front-end, but the decoder cares about the energy in each
+information bit, and the SNR factors cleanly into the two:
 
 $$
-\eta = \frac{R_b}{W} \quad [\text{bits/s/Hz}],
+\text{SNR} = \frac{P}{N_0 W} = \frac{E_b}{N_0}\,\eta,
 $$
 
-the bits per second carried in each hertz of occupied bandwidth $W$. Since the occupied-band noise
-power is $N_0 W$ and $P = E_b R_b$,
+a fundamental quantity, the energy per bit $E_b/N_0$, times an architectural one, the spectral
+efficiency $\eta$. Here $E_b = P/R_b$ is the energy per information bit, $E_b/N_0$ the detection
+figure of merit [2], and $\eta = R_b/W$ the bits per second carried in each hertz of occupied
+bandwidth $W$; the factorisation follows from the occupied-band noise power $N_0 W$ and
+$P = E_b R_b$.
+
+For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
+
+- **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
+  rate, the fall in $\eta$ a byproduct, since widening $W$ instead would lift the floor by the same
+  amount and cancel. This is the next section, on spreading.
+- **Lower the required $E_b/N_0$ by coding gain**: moving toward the $-1.59$ dB wall, the subject of
+  the section that follows.
+
+Power is conserved along the transmit chain. From information bits through symbols to spreading
+chips,
 
 $$
-\text{SNR} = \frac{P}{N_0 W} = \frac{E_b R_b}{N_0 W} = \frac{E_b}{N_0}\,\eta .
+P = E_b R_b = E_s R_s = E_\text{chip} R_\text{chip},
 $$
 
-This factorisation is the pivot: the occupied-band SNR is the product of a fundamental quantity,
-$E_b/N_0$, and an architectural one, $\eta$. Lowering $\eta$ at fixed $E_b/N_0$ drives the SNR down
-without touching the energy accounting.
-
-Power is conserved along the transmit chain. From information bits through coded bits, symbols,
-and chips,
-
-$$
-P = E_b R_b = E_c R_{c} = E_s R_s = E_\text{chip} R_\text{chip},
-$$
-
-each equality a rate conversion that holds power fixed while spreading it across more degrees of
-freedom. Expanding the bandwidth, by coding or spreading, dilutes the same $P$ over more hertz; it
+each equality a rate conversion that holds power fixed while diluting it across more degrees of
+freedom; expanding the bandwidth, by coding or spreading, spreads the same $P$ over more hertz and
 never adds power.
 
-## Spreading: trading SNR for bandwidth at fixed energy per bit
+## Spreading: processing gain at fixed bandwidth
 
-Direct-sequence spreading replaces each symbol with $\text{SF}$ chips, the spreading factor. The
-chip rate is $R_\text{chip} = \text{SF}\cdot R_s$, the occupied bandwidth grows by $\text{SF}$,
-and, power conserved, $E_\text{chip} = E_s/\text{SF}$ [3]. With $R_b$ fixed and $W$ up by
-$\text{SF}$, the spectral efficiency falls to $\eta/\text{SF}$ and the occupied-band SNR falls with
-it:
-
-$$
-\text{SNR} \;\longrightarrow\; \frac{\text{SNR}}{\text{SF}}, \qquad
-\frac{E_b}{N_0}\ \text{unchanged}.
-$$
-
-The signal is now spread thinner than the noise, its occupied-band SNR negative. At the receiver,
-despreading correlates against the known chip sequence, summing the $\text{SF}$ chips coherently
-while the uncorrelated noise adds incoherently; the signal collapses to the information bandwidth
-with its SNR multiplied by $\text{SF}$, the processing gain of $10\log_{10}\text{SF}$ decibels.
-
-Take $\text{SF} = 10$ and a pre-despread SNR of $-10$ dB, that is $0.1$. Despreading over ten chips
-gives $+10$ dB, and
+Reducing the bit rate is the first lever, and spreading is how a low rate occupies a fixed channel.
+In an occupied bandwidth $W$, an information rate $R_b$ needs an information bandwidth of only
+$W_\text{info} \approx R_s$, far narrower than $W$; direct-sequence spreading widens each symbol
+back to $W$ with a chip sequence [3], at a spreading factor equal to the ratio,
 
 $$
-\text{SNR}_\text{info} = \text{SF}\cdot\text{SNR}_\text{occ} = 10 \times 0.1 = 1 = 0\ \text{dB}.
+\text{SF} = \frac{W}{W_\text{info}} = \frac{R_\text{chip}}{R_s},
+\qquad \text{processing gain} = 10\log_{10}\text{SF}.
 $$
 
-The signal that sat $10$ dB under the noise emerges level with it, enough for a robust MCS to
-decode (Fig. 1).
+Spread across $W$, the signal's power is diluted over $\text{SF}$ times more hertz than it needs, so
+its occupied-band SNR is $\text{SF}$ times smaller than in the information band, at unchanged
+$E_b/N_0$: the harder the spread, the deeper below the noise it sinks. Despreading correlates
+against the known chip sequence, summing the $\text{SF}$ chips coherently while the uncorrelated
+noise adds incoherently, and the signal collapses back to $W_\text{info}$ with its SNR lifted by
+$\text{SF}$,
+
+$$
+\text{SNR}_\text{info} = \text{SF}\cdot\text{SNR}_\text{occ}.
+$$
+
+Take $\text{SF} = 10$: a signal at $-10$ dB in the occupied band ($0.1$) despreads over ten chips to
+$10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and decodable (Fig. 1).
+Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
+processing gain and the rate reduction are one and the same number: spreading is the mechanism, the
+low $R_b$ is the sensitivity, and $E_b/N_0$ never moves.
 
 <figure>
-<img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels: a signal below the noise floor over the occupied bandwidth, and the same signal after despreading rising to the floor over the information bandwidth." />
-<figcaption>Fig. 1: The effect of despreading on the signal's power spectral density. Left: before despreading the signal fills the occupied bandwidth W_occ and sits 10 dB below the noise floor N₀, an SNR of −10 dB. Right: correlating against the code collapses it to the information bandwidth W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to an SNR of 0 dB. The noise density N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
+<img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
+<figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it to the information bandwidth W_info = W/SF and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
-Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the
-noise floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one quantity that
-is actually bounded.
+Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the noise
+floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one quantity that is
+actually bounded.
 
-## The energy-per-bit wall
+## Coding gain and the energy-per-bit wall
 
 The Shannon capacity of an additive white Gaussian noise channel of bandwidth $W$, power $P$, and
 noise density $N_0$ is [4]
@@ -146,94 +148,74 @@ as $\eta \to 0$, that is with infinite bandwidth [5].
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/shannon-plane.svg" alt="Spectral efficiency versus the minimum required Eb/N0 in dB, with the achievable region to the right of the bound curve and a vertical asymptote at minus 1.59 dB." />
-<figcaption>Fig. 2: The energy-per-bit bound in the spectral-efficiency plane. At each spectral efficiency η, reliable communication requires an energy per bit of at least Eb/N0 = (2^η − 1)/η (red curve); the region to the right is achievable, the region to the left is not. The requirement rises steeply where bits are packed densely into the band, and descends toward the wall at −1.59 dB (dashed) as η → 0, the infinite-bandwidth limit. The line η = 1, at 0 dB, divides the bandwidth-limited regime above, where hertz are scarce, from the power-limited regime below, where energy per bit is scarce and where low-rate coding and spreading operate.</figcaption>
+<figcaption>Fig. 2: The energy-per-bit bound in the spectral-efficiency plane. Reliable communication at spectral efficiency η needs an energy per bit of at least Eb/N0 = (2<sup>η</sup> − 1)/η (red curve); the region to its right is achievable, the left is not. The requirement climbs steeply as bits are packed more densely, and falls to the wall at −1.59 dB (dashed) as η → 0, the infinite-bandwidth limit. The line η = 1 (0 dB) separates the bandwidth-limited regime above, where hertz are the scarce resource, from the power-limited regime below, where energy per bit is scarce and low-rate coding and spreading operate.</figcaption>
 </figure>
 
 Lowering $\eta$ walks the operating point down the curve toward the wall, which infinite bandwidth
-reaches and nothing passes.
+reaches and nothing passes. Coding gain is what walks a finite-bandwidth system toward it, and how
+close it gets, against what it costs, is the next section.
 
 ## Coding gain versus processing gain
 
-The two levers act on different factors of $\text{SNR} = (E_b/N_0)\,\eta$. Forward error correction
-(FEC) lowers the $E_b/N_0$ required for a target error rate, a genuine reduction in energy per bit
-that moves the operating point toward the $-1.59$ dB wall. Spreading lowers $\eta$, and with it the
-occupied-band SNR, at fixed $E_b/N_0$: it buys headroom and robustness, not a lower fundamental
-requirement.
+Two mechanisms expand the bandwidth, doing different jobs. Coding gain, from forward error
+correction (FEC), lowers the required $E_b/N_0$ toward the $-1.59$ dB wall, the only lever that
+moves the fundamental requirement. Processing gain, from spreading, lowers the occupied-band SNR at
+fixed $E_b/N_0$: it buys robustness rather than range, since a spreading code is only a repetition
+code and adds no coding gain in a Gaussian channel. In fading it earns more, its independently
+faded copies giving diversity, a steepening of the error-rate curve that coding alone does not
+provide [6].
 
-That spreading yields no coding gain in a Gaussian channel is worth proving. A spreading factor
-$\text{SF}$ is a rate-$1/\text{SF}$ repetition code: each bit is sent as $\text{SF}$ copies of
-energy $E_s = E_b/\text{SF}$. Maximum-ratio combining (MRC) sums the per-copy SNRs,
-
-$$
-\frac{E_b}{N_0}\bigg|_\text{combined} = \sum_{i=1}^{\text{SF}} \frac{E_s}{N_0}
-= \text{SF}\cdot\frac{E_b/\text{SF}}{N_0} = \frac{E_b}{N_0},
-$$
-
-so the combined energy per bit equals that of sending the bit once with all its energy: the
-post-combining error rate is the uncoded curve $Q\!\big(\sqrt{2E_b/N_0}\big)$, the
-$+10\log_{10}\text{SF}$ processing gain cancelling the $-10\log_{10}\text{SF}$ energy dilution. A
-real code of the same rate spreads redundancy across different bits with large minimum distance,
-so errors are corrected by structure, not merely averaged. Repetition has minimum distance
-$\text{SF}$ at rate $1/\text{SF}$, a rate-distance product of $1$, the same as uncoded; good codes
-exceed it. That is the formal sense in which repetition is the worst code of its rate.
-
-The same suboptimality appears in capacity. Despreading discards the degrees of freedom the
-occupied bandwidth carried, so the full occupied-bandwidth channel can carry more than the
-despread information band it collapses to. A low-rate code over the same bandwidth keeps those
-degrees of freedom; plain spreading discards them. Both expand bandwidth, but only coding turns
-the expansion into information.
-
-<figure>
-<img src="/posts/beneath-the-noise-floor/ber-coding-diversity.svg" alt="Two bit-error-rate panels: an AWGN panel where uncoded BPSK coincides with repetition and MRC, and a Rayleigh fading panel where MRC diversity of order one, two, and four gives progressively steeper slopes." />
-<figcaption>Fig. 3: Coding gain and diversity gain are distinct. Left (AWGN): uncoded BPSK, which repetition plus MRC reproduces exactly; a representative FEC curve (schematic) sits several dB to the left, the coding gain, bounded by the Shannon wall at −1.59 dB. Right (Rayleigh fading, MRC): combining L = 1, 2, 4 independently faded copies steepens the error-rate slope, the diversity gain of order L, absent in the non-fading channel on the left.</figcaption>
-</figure>
-
-The verdict flips in fading. When the copies fade independently, separated in time, frequency, or
-space beyond the coherence interval, MRC over $\text{SF}$ branches yields diversity of order
-$\text{SF}$: the error-rate curve steepens from $\sim(E_b/N_0)^{-1}$ to $\sim(E_b/N_0)^{-\text{SF}}$
-[6]. This is diversity gain, a change of slope, not coding gain, a shift on the Gaussian curve, and
-it needs the copies to be genuinely independent; spreading in a flat, slow channel gives correlated
-copies and no diversity, whereas frequency-selective multipath resolved by a RAKE receiver supplies
-it. Fig. 3 places the two side by side.
-
-Because real links face both interference and fading, they split the bandwidth expansion between
-the two mechanisms,
+A real link spends its bandwidth budget on both,
 
 $$
 W_\text{expansion} = \underbrace{\tfrac{1}{R_c}}_{\text{FEC}} \times
 \underbrace{\text{SF}}_{\text{spreading}},
 $$
 
-giving FEC as much of the budget as the decoder allows, since only FEC buys down $E_b/N_0$, and
-spending the rest on spreading for what FEC does not provide: interference rejection, multipath
-resolution, multiple access, and a low probability of intercept. Satellite navigation is the
-canonical example, heavy spreading for despreading gain and jam resistance alongside FEC for the
-coding gain that approaches the wall.
+giving FEC as much as the decoder complexity allows, since only FEC buys down $E_b/N_0$, and the
+rest to spreading for the robustness FEC cannot provide: interference rejection, multipath
+resolution, multiple access, and low probability of intercept. Satellite navigation is the
+canonical balance, heavy spreading for jam resistance and multiple access alongside FEC for the
+coding gain that approaches the wall. The split is an implementation-complexity trade, not a
+fundamental one.
 
-## Designing a long-range link, end to end
+## Designing a long-range link
 
-The pieces assemble into a design procedure, and one example fixes the order of the decisions.
-Consider a telemetry link that must close over a long range, at a low data rate, and survive both
-interference and interception. Fix the information rate at $R_b = 2$ kbit/s and the noise figure at
-$\text{NF} = 3$ dB, so the noise density at the input is $N_0 = -174 + 3 = -171$ dBm/Hz.
+The pieces assemble into a design procedure. Consider a telemetry link that must close over a long
+range within a fixed channel of $W = 400$ kHz, with noise figure $\text{NF} = 3$ dB, so the input
+noise density is $N_0 = -174 + 3 = -171$ dBm/Hz. Take BPSK with a rate-$1/2$ low-density
+parity-check (LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB.
 
-The MCS sets the required energy per bit. Take BPSK with a rate-$1/2$ low-density parity-check
-(LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB, a few decibels inside the wall.
-Sensitivity then follows from the energy accounting alone, since $E_b/N_0 = P/(N_0 R_b)$:
+Range is bought by sensitivity, and sensitivity by a low rate. With the input noise density
+$N_0 = kT + \text{NF}$ and an implementation loss $L_\text{impl}$, the decibel or two a real
+receiver loses to imperfect synchronization, filtering, and quantization, and since
+$E_b/N_0 = P/(N_0 R_b)$,
 
 $$
 \begin{aligned}
-P_\text{sens} &= \Big(\frac{E_b}{N_0}\Big)_\text{req} + N_0 + 10\log_{10}\!\big(R_b/\text{Hz}\big) \\
-&= 1.5 - 171 + 33.0 = -136.5\ \text{dBm}.
+P_\text{sens} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
++ \underbrace{10\log_{10}\!\big(R_b/\text{Hz}\big)}_{\text{data rate}} \\[6pt]
+&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding, antennas}}
++ \underbrace{L_\text{impl}}_{\text{implementation}}
+\quad [\text{dBm}].
 \end{aligned}
 $$
 
-This is the thesis in one line: sensitivity is set by the required $E_b/N_0$, the noise density,
-and the bit rate, and by nothing else. No bandwidth and no spreading factor appears, and the
-ultimate sensitivity floor is $N_0 R_b \ln 2$, the same expression at the wall.
+Every term is a design lever, and bandwidth is not among them: the only ways to buy sensitivity are
+a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
+$E_b/N_0$ from coding gain toward the wall or from combining $M$ antennas (whose maximum-ratio
+combiner sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation loss.
 
-Suppose the link geometry, transmit power, antenna gains, and path loss deliver a received power
-$P_r = -133$ dBm at the design range. The received energy per bit is
+Run the numbers at two rates in the same $400$ kHz channel, taking $L_\text{impl} = 0$. Filling the
+channel with data at $R_b = 200$ kbit/s gives $P_\text{sens} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
+Dropping the rate a hundredfold, to $R_b = 2$ kbit/s, gives $-174 + 3 + 33.0 + 1.5 = -136.5$ dBm,
+$20$ dB better, purely through the $10\log_{10}$ of the rate. The low-rate signal now occupies an
+information bandwidth of only $4$ kHz, so filling the $400$ kHz channel spreads it by
+$\text{SF} = W/R_s = 100$; the $20$ dB of sensitivity and the $20$ dB of processing gain are the
+same number.
+
+Suppose the geometry delivers a received power $P_r = -133$ dBm at the design range. The received
+energy per bit is
 
 $$
 \begin{aligned}
@@ -242,33 +224,20 @@ $$
 \end{aligned}
 $$
 
-exceeding the requirement by $3.5$ dB, so the link closes. Nothing so far has mentioned bandwidth.
+so the low-rate link closes with $3.5$ dB of margin, while the high-rate one, at $E_b/N_0 = -15$
+dB, does not come close. Over the $400$ kHz channel the noise floor is $N_0 + 10\log_{10}W = -115.0$
+dBm, so the received signal at $-133$ dBm sits $18$ dB beneath it: a spectrum analyser shows only
+noise. Despreading recovers the $20$ dB of processing gain, lifting the information-band SNR from
+$-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the last $3$ dB, for $E_b/N_0 = 5$ dB. An
+occupied-band SNR of $-18$ dB and an energy per bit of $+5$ dB coexist without contradiction; the
+analyser reading is an artefact of the spread, and the decoder lives on $E_b/N_0$.
 
-Robustness is a separate decision, and where the spreading factor enters. To bury the emission and
-resist a jammer, spread with $\text{SF} = 100$. The coded symbol rate is $R_s = R_b/R_c = 4$
-ksym/s, so the occupied bandwidth is $W = \text{SF}\cdot R_s = 400$ kHz, and the noise over it is
-
-$$
-\text{floor}_\text{occ} = N_0 + 10\log_{10}\!\big(W/\text{Hz}\big) = -171 + 56.0 = -115.0\ \text{dBm}.
-$$
-
-The received signal, at $-133$ dBm, now sits $18$ dB beneath this occupied-bandwidth floor: a
-spectrum analyser shows only noise. Yet it carries $E_b/N_0 = 5.0$ dB, far above the wall, because
-despreading recovers $10\log_{10}100 = 20$ dB of processing gain, lifting the information-band SNR
-from $-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the remaining $3$ dB. An occupied-band
-SNR of $-18$ dB and an energy per bit of $+5$ dB coexist without contradiction.
-
-The same link without spreading sharpens the point. It would occupy just $4$ kHz, read $+2$ dB on
-the analyser ($\eta = 0.5$), and close on the same $E_b/N_0 = 5$ dB. Spreading by $100$ swings the
-analyser reading $20$ dB, from $+2$ to $-18$, and changes nothing the decoder depends on. The
-reading is an artefact of how wide the signal is spread; the decoder lives on $E_b/N_0$.
-
-The design principle is the separation of the two decisions. The bit rate and the coded modulation
-fix the sensitivity, and with it the range; the spreading factor is chosen independently, for
-interference rejection and low probability of intercept, and it is what carries the emission below
-the noise at no cost in sensitivity [1]. Conflating them, by charging the spreading bandwidth to
-the link budget or reading the buried SNR as a shortfall, is the most common error in weak-signal
-design.
+The mirror image is worth stating. Had the rate stayed fixed and the bandwidth been expanded by
+spreading, rather than the rate lowered inside a fixed band, sensitivity would not have moved at
+all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then buys only robustness. The
+two cases are the two readings of $\text{SF}\cdot R_b$, and the sensitivity lives entirely in the
+rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
+shortfall, is the most common error in weak-signal design.
 
 The link closes on paper, but a digital receiver adds one more noise floor, set by the
 analogue-to-digital converter (ADC) and the gain ahead of it. With the automatic gain control (AGC)
@@ -276,7 +245,7 @@ applying a gain $G_\text{AGC}$ and the ADC full scale taken as $0$ dBm, the ther
 to the converter is
 
 $$
-P_\text{therm} = -174 + 10\log_{10}\!\big(B/\text{Hz}\big) + \text{NF} + G_\text{AGC}
+P_\text{therm} = kT + \text{NF} + 10\log_{10}B + G_\text{AGC}
 \quad [\text{dBFS}],
 $$
 
@@ -320,7 +289,8 @@ one the rest of the article assumed [1].
 
 Digitisation is only half of realizing the processing gain; the other half is synchronization,
 since the receiver must acquire and track the code and carrier at the operating SNR, and any
-residual misalignment is an implementation loss added straight onto the required $E_b/N_0$.
+residual misalignment is the implementation loss $L_\text{impl}$ of the sensitivity equation, paid
+straight onto the required $E_b/N_0$.
 
 ## The two things that never move
 
@@ -330,8 +300,8 @@ coherently. Two quantities do not move. The noise floor over the true detection 
 temperature, bandwidth, and noise figure. The energy-per-bit wall sits at $E_b/N_0 = -1.59$ dB, the
 $\eta \to 0$ limit of the Shannon bound, and no bandwidth expansion crosses it. Operating below the
 noise floor is a statement about power and SNR, always achievable; operating below $-1.59$ dB of
-energy per bit is a statement about information, never achievable. Keeping the two apart, coding to
-buy down energy per bit and spreading to buy robustness, is the whole discipline of weak-signal
+energy per bit is a statement about information, never achievable. Keeping the two apart, a low rate
+and coding to buy sensitivity, spreading to buy robustness, is the whole discipline of weak-signal
 design. The same accounting decides whether a waveform can be hidden under the noise while still
 being read, where a later post on low-probability-of-intercept design will begin.
 
