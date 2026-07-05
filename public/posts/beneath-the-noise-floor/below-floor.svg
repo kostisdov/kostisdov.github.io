@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-05T15:01:09.666327</dc:date>
+    <dc:date>2026-07-05T17:38:54.022720</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -43,7 +43,7 @@ L 265.969583 222.605333
 L 265.969583 189.232 
 L 76.233598 189.232 
 z
-" clip-path="url(#pc024488677)" style="fill: #c34a22; opacity: 0.25; stroke: #c34a22; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#paac570cea3)" style="fill: #c34a22; opacity: 0.25; stroke: #c34a22; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="text_1">
@@ -54,12 +54,12 @@ z
     <g id="ytick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m52c250888a" d="M 0 0 
+       <path id="me4aed98ecd" d="M 0 0 
 L -3.5 0 
 " style="stroke: #5c554a; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="222.605333" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="222.605333" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -69,7 +69,7 @@ L -3.5 0
     <g id="ytick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="189.232" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="189.232" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
@@ -79,7 +79,7 @@ L -3.5 0
     <g id="ytick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="155.858667" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="155.858667" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
@@ -89,7 +89,7 @@ L -3.5 0
     <g id="ytick_4">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="122.485333" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="122.485333" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
@@ -99,7 +99,7 @@ L -3.5 0
     <g id="ytick_5">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="89.112" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="89.112" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
@@ -109,7 +109,7 @@ L -3.5 0
     <g id="ytick_6">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m52c250888a" x="57.26" y="55.738667" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
+       <use xlink:href="#me4aed98ecd" x="57.26" y="55.738667" style="fill: #5c554a; stroke: #5c554a; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_7">
@@ -123,7 +123,7 @@ L -3.5 0
    <g id="line2d_7">
     <path d="M 57.26 122.485333 
 L 284.943182 122.485333 
-" clip-path="url(#pc024488677)" style="fill: none; stroke: #5c554a; stroke-width: 1.3; stroke-linecap: square"/>
+" clip-path="url(#paac570cea3)" style="fill: none; stroke: #5c554a; stroke-width: 1.3; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
     <path d="M 57.26 229.28 
@@ -222,7 +222,28 @@ L 173.501591 130.518736
      </text>
     </g>
    </g>
+   <g id="patch_7">
+    <path d="M 262.851007 45.726667 
+Q 171.102503 45.726667 79.353999 45.726667 
+" style="fill: none; stroke: #5c554a; stroke-linecap: round"/>
+    <path d="M 258.051007 43.326667 
+L 262.851007 45.726667 
+L 258.051007 48.126667 
+" style="fill: none; stroke: #5c554a; stroke-linecap: round"/>
+    <path d="M 84.153999 48.126667 
+L 79.353999 45.726667 
+L 84.153999 43.326667 
+" style="fill: none; stroke: #5c554a; stroke-linecap: round"/>
+   </g>
    <g id="text_12">
+    <!-- $W$ -->
+    <g style="fill: #5c554a" transform="translate(166.151591 39.553117)">
+     <text>
+      <tspan x="0" y="-0.703125" style="font-style: oblique; font-size: 10px; font-family: 'DejaVu Sans'; fill: #5c554a">W</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_13">
     <!-- spread across $W$ -->
     <g style="fill: #221e17" transform="translate(133.196591 23.04)">
      <text>
@@ -246,7 +267,7 @@ L 173.501591 130.518736
    </g>
   </g>
   <g id="axes_2">
-   <g id="patch_7">
+   <g id="patch_8">
     <path d="M 297.903182 229.28 
 L 525.586364 229.28 
 L 525.586364 29.04 
@@ -254,16 +275,16 @@ L 297.903182 29.04
 z
 " style="fill: #fbfaf8"/>
    </g>
-   <g id="patch_8">
+   <g id="patch_9">
     <path d="M 398.463254 222.605333 
 L 425.026292 222.605333 
 L 425.026292 122.485333 
 L 398.463254 122.485333 
 z
-" clip-path="url(#pb1f0e42ab3)" style="fill: #c34a22; opacity: 0.28; stroke: #c34a22; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p786feb8f01)" style="fill: #c34a22; opacity: 0.28; stroke: #c34a22; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_3">
-    <g id="text_13">
+    <g id="text_14">
      <text style="font-size: 12px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: middle; fill: #5c554a" x="411.744773" y="242.356875" transform="rotate(-0 411.744773 242.356875)">frequency</text>
     </g>
    </g>
@@ -278,19 +299,19 @@ z
    <g id="line2d_8">
     <path d="M 297.903182 122.485333 
 L 525.586364 122.485333 
-" clip-path="url(#pb1f0e42ab3)" style="fill: none; stroke: #5c554a; stroke-width: 1.3; stroke-linecap: square"/>
+" clip-path="url(#p786feb8f01)" style="fill: none; stroke: #5c554a; stroke-width: 1.3; stroke-linecap: square"/>
    </g>
    <g id="line2d_9">
     <path d="M 316.87678 189.232 
 L 506.612765 189.232 
-" clip-path="url(#pb1f0e42ab3)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #c34a22; stroke-opacity: 0.7"/>
+" clip-path="url(#p786feb8f01)" style="fill: none; stroke-dasharray: 1,1.65; stroke-dashoffset: 0; stroke: #c34a22; stroke-opacity: 0.7"/>
    </g>
-   <g id="patch_9">
+   <g id="patch_10">
     <path d="M 297.903182 229.28 
 L 525.586364 229.28 
 " style="fill: none; stroke: #d8cfbc; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="text_14">
+   <g id="text_15">
     <!-- noise floor  $N_0$ -->
     <g style="fill: #5c554a" transform="translate(301.697902 119.148)">
      <text>
@@ -312,10 +333,10 @@ L 525.586364 229.28
      </text>
     </g>
    </g>
-   <g id="text_15">
+   <g id="text_16">
     <text style="font-size: 8.5px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; text-anchor: start; fill: #c34a22; opacity: 0.9" x="316.87678" y="184.051229" transform="rotate(-0 316.87678 184.051229)">pre-despread level</text>
    </g>
-   <g id="patch_10">
+   <g id="patch_11">
     <path d="M 455.384049 187.231718 
 Q 455.384049 155.860309 455.384049 126.389557 
 " style="fill: none; stroke: #6f8b6a; stroke-width: 1.7; stroke-linecap: round"/>
@@ -324,7 +345,7 @@ L 455.384049 126.389557
 L 457.784049 131.189557 
 " style="fill: none; stroke: #6f8b6a; stroke-width: 1.7; stroke-linecap: round"/>
    </g>
-   <g id="text_16">
+   <g id="text_17">
     <text style="font-size: 9.2px; font-family: 'Georgia', 'Times New Roman', 'DejaVu Serif', serif; fill: #6f8b6a" transform="translate(461.076129 153.167954)">processing gain</text>
     <!-- $+10\log_{10}\text{SF}$ -->
     <g style="fill: #6f8b6a" transform="translate(461.076129 163.508754)">
@@ -342,7 +363,7 @@ L 457.784049 131.189557
      </text>
     </g>
    </g>
-   <g id="text_17">
+   <g id="text_18">
     <!-- SNR $=0$ dB -->
     <g style="fill: #1e3d52" transform="translate(385.097273 115.752754)">
      <text>
@@ -358,7 +379,7 @@ L 457.784049 131.189557
      </text>
     </g>
    </g>
-   <g id="text_18">
+   <g id="text_19">
     <!-- signal in $W_\text{info}$ -->
     <g style="fill: #c34a22" transform="translate(322.906617 209.151133)">
      <text>
@@ -380,7 +401,7 @@ L 457.784049 131.189557
      </text>
     </g>
    </g>
-   <g id="patch_11">
+   <g id="patch_12">
     <path d="M 383.32815 206.10411 
 Q 389.449855 204.583967 394.48648 203.33327 
 " style="fill: none; stroke: #c34a22; stroke-linecap: round"/>
@@ -389,7 +410,37 @@ L 394.48648 203.33327
 L 390.406363 206.819335 
 " style="fill: none; stroke: #c34a22; stroke-linecap: round"/>
    </g>
-   <g id="text_19">
+   <g id="patch_13">
+    <path d="M 421.683992 45.726667 
+Q 411.744389 45.726667 401.804786 45.726667 
+" style="fill: none; stroke: #5c554a; stroke-width: 1.2; stroke-linecap: round"/>
+    <path d="M 416.883992 43.326667 
+L 421.683992 45.726667 
+L 416.883992 48.126667 
+" style="fill: none; stroke: #5c554a; stroke-width: 1.2; stroke-linecap: round"/>
+    <path d="M 406.604786 48.126667 
+L 401.804786 45.726667 
+L 406.604786 43.326667 
+" style="fill: none; stroke: #5c554a; stroke-width: 1.2; stroke-linecap: round"/>
+   </g>
+   <g id="text_20">
+    <!-- $W_\text{info}=W/\text{SF}$ -->
+    <g style="fill: #5c554a" transform="translate(432.615731 48.152448)">
+     <text>
+      <tspan x="0" y="-0.3125" style="font-style: oblique; font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">W</tspan>
+      <tspan x="32.008447" y="-0.3125" style="font-style: oblique; font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">W</tspan>
+      <tspan x="8.898926" y="1.164062" style="font-size: 6.3px; font-family: 'DejaVu Sans'; fill: #5c554a">i</tspan>
+      <tspan x="10.649268" y="1.164062" style="font-size: 6.3px; font-family: 'DejaVu Sans'; fill: #5c554a">n</tspan>
+      <tspan x="14.642139" y="1.164062" style="font-size: 6.3px; font-family: 'DejaVu Sans'; fill: #5c554a">f</tspan>
+      <tspan x="16.860059" y="1.164062" style="font-size: 6.3px; font-family: 'DejaVu Sans'; fill: #5c554a">o</tspan>
+      <tspan x="22.714014" y="-0.3125" style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">=</tspan>
+      <tspan x="40.907373" y="-0.3125" style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">/</tspan>
+      <tspan x="43.9396" y="-0.3125" style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">S</tspan>
+      <tspan x="49.65249" y="-0.3125" style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #5c554a">F</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_21">
     <!-- despread to $W_\text{info}$ -->
     <g style="fill: #221e17" transform="translate(371.162273 23.04)">
      <text>
@@ -416,10 +467,10 @@ L 390.406363 206.819335
   </g>
  </g>
  <defs>
-  <clipPath id="pc024488677">
+  <clipPath id="paac570cea3">
    <rect x="57.26" y="29.04" width="227.683182" height="200.24"/>
   </clipPath>
-  <clipPath id="pb1f0e42ab3">
+  <clipPath id="p786feb8f01">
    <rect x="297.903182" y="29.04" width="227.683182" height="200.24"/>
   </clipPath>
  </defs>
