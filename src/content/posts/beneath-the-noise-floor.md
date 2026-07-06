@@ -27,9 +27,9 @@ $$
 $$
 
 in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
-and coding scheme (MCS) decodes once the signal-to-noise ratio reaches a required value
+and coding scheme (MCS) decodes once the SNR exceeds a required value
 $\text{SNR}_\text{req}$, set by the modulation order and the code, so the sensitivity, the least
-recoverable signal power, is
+recoverable signal power, becomes
 
 $$
 P_\text{sens} = \text{floor} + \text{SNR}_\text{req}.
@@ -38,7 +38,7 @@ $$
 Nothing forces $\text{SNR}_\text{req}$ to be positive. A robust MCS can require a negative SNR in
 decibels, and then $P_\text{sens}$ lies below the noise floor: the receiver recovers a signal
 weaker than the noise sharing its band. What follows is how far $\text{SNR}_\text{req}$ can be
-pushed negative, by what mechanisms, and against what limit.
+pushed down, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
@@ -60,9 +60,9 @@ For a fixed noise floor, sensitivity improves by lowering the required SNR, and 
 - **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
   rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
   amount and cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the
-  information needs, is exactly spreading, the next section.
-- **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall (the
-  section that follows), or by multi-antenna processing.
+  information needs, is exactly spreading.
+- **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall, or by
+  multi-antenna processing.
 
 Power is conserved along the transmit chain. From information bits through symbols to spreading
 chips,
@@ -114,7 +114,7 @@ more chips and lifts the signal further.
 These are not deep-space abstractions. LoRa is built on exactly this lever: its chirp spread
 spectrum holds a fixed channel (typically $125$ kHz) and selects a spreading factor from SF7 to
 SF12, each step doubling the symbol length and buying roughly $2.5$ dB, so sensitivity runs from
-about $-123$ dBm (SF7) to $-137$ dBm (SF12) in the same channel. GPS goes further: a $1.023$ Mchip/s C/A code
+about $-123$ dBm (SF7) to $-137$ dBm (SF12) in the same channel. GPS goes further: a $1.023$ Mchip/s coarse/acquisition code
 carrying a $50$ bit/s message is a processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$
 dB, so the signal arrives roughly $20$ dB below the thermal noise and is recovered by despreading.
 Both trade rate for range in a fixed band, exactly the lever of this section.
