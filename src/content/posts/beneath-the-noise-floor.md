@@ -109,6 +109,14 @@ low $R_b$ is the sensitivity, and $E_b/N_0$ never moves.
 <figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only the narrow information bandwidth W_info, and spreading fills the channel with it at SF = W/W_info. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
+These are not deep-space abstractions. LoRa is built on exactly this lever: its chirp spread
+spectrum holds a fixed channel (typically $125$ kHz) and selects a spreading factor from SF7 to
+SF12, each step doubling the symbol length and buying roughly $2.5$ dB, so sensitivity runs from
+about $-123$ dBm (SF7) to $-137$ dBm (SF12) in the same channel. GPS goes further: a $1.023$ Mchip/s C/A code
+carrying a $50$ bit/s message is a processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$
+dB, so the signal arrives roughly $20$ dB below the thermal noise and is recovered by despreading.
+Both trade rate for range in a fixed band, exactly the lever of this section.
+
 Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the noise
 floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one quantity that is
 actually bounded.
@@ -207,7 +215,15 @@ Every term is a design lever, and bandwidth is not among them: the only ways to 
 a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
 $E_b/N_0$ from coding gain toward the wall or from multi-antenna processing (maximum-ratio combining
 of $M$ antennas sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation
-loss.
+loss. In one view:
+
+| Lever | Sensitivity term it moves | Bandwidth cost | Ceiling |
+| :--- | :---: | :---: | :---: |
+| Lower noise figure | NF | none | hardware |
+| Reduce bit rate | 10·log₁₀ Rb | none (spread to fill W) | unbounded |
+| Coding gain (FEC) | (Eb/N0) required | expands W | −1.59 dB wall |
+| Multi-antenna processing | (Eb/N0) required | none | 10·log₁₀ M, plus diversity |
+| Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
 Run the numbers at two rates in the same $400$ kHz channel, taking $L_\text{impl} = 0$. Filling the
 channel with data at $R_b = 200$ kbit/s gives $P_\text{sens} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
