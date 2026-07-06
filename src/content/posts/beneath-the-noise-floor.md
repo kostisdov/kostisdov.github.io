@@ -27,9 +27,8 @@ $$
 $$
 
 in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
-and coding scheme (MCS) decodes once the SNR exceeds a required value
-$\text{SNR}_\text{req}$, set by the modulation order and the code, so the sensitivity, the least
-recoverable signal power, becomes
+and coding scheme (MCS) decodes once the SNR exceeds the required
+$\text{SNR}_\text{req}$, so the sensitivity at this MCS becomes
 
 $$
 P_\text{sens} = \text{floor} + \text{SNR}_\text{req}.
