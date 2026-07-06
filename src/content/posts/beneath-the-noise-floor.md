@@ -1,6 +1,6 @@
 ---
 title: "Operating beneath the noise floor"
-description: "A long-range radio link can decode a signal whose power sits below the thermal noise. It breaks no law: the signal-to-noise ratio in the occupied band has no lower limit, while the true wall is on energy per bit. The fundamentals, and how they set the design of a weak-signal link."
+description: "A long-range radio link can decode a signal whose power sits below the thermal noise. It breaks no law: the signal-to-noise ratio in the occupied band has no lower limit, while the true wall is on energy per bit. The fundamentals, and the link budget they dictate, where sensitivity is set by the bit rate and coding, not bandwidth."
 date: 2026-07-04
 tags: ["signals", "wireless"]
 image: "/og/beneath-the-noise-floor.png"
