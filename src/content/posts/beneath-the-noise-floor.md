@@ -102,7 +102,9 @@ Take $\text{SF} = 10$: a signal at $-10$ dB in the occupied band ($0.1$) desprea
 $10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and decodable (Fig. 1).
 Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
 processing gain and the rate reduction are one and the same number: spreading is the mechanism, the
-low $R_b$ is the sensitivity, and $E_b/N_0$ never moves.
+low $R_b$ is the sensitivity, and $E_b/N_0$ never moves. The processing gain is an integration gain:
+despreading coherently sums the $\text{SF}$ chips of each symbol, so a lower rate integrates over
+more chips and lifts the signal further.
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
