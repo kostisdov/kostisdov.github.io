@@ -56,11 +56,11 @@ $P = E_b R_b$.
 
 For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
 
-- Reduce the bit rate $R_b$: the required signal power drops by $10\log_{10}$ per decade of rate,
-  the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same amount and
-  cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the information
-  needs, is exactly spreading.
-- Lower the required $E_b/N_0$: by the coding gain of FEC toward the $-1.59$ dB wall, or by
+- **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
+  rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
+  amount and cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the
+  information needs, is exactly spreading.
+- **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall, or by
   multi-antenna processing.
 
 Power is conserved along the transmit chain. From information bits through symbols to spreading
@@ -175,6 +175,11 @@ fixed $E_b/N_0$: it buys robustness rather than range, since a spreading code is
 code and adds no coding gain in a Gaussian channel. In fading it earns more, its independently
 faded copies giving diversity, a steepening of the error-rate curve that coding alone does not
 provide [6].
+
+Robustness and range are two readings of the same operation, turning only on what is held fixed:
+spread a fixed rate wider and the gain is robustness, at no added range; hold the bandwidth and let
+the spread come from a lower rate, as in the last section, and the same $10\log_{10}\text{SF}$ is
+range. It is the $\text{SF}\cdot R_b$ invariant read from either side.
 
 A real link spends its bandwidth budget on both,
 
