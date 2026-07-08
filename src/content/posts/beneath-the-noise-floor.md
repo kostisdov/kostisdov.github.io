@@ -177,7 +177,7 @@ faded copies giving diversity, a steepening of the error-rate curve that coding 
 provide [6].
 
 Robustness and range are two readings of the same operation, turning only on what is held fixed:
-spread a fixed rate wider and the gain is robustness, at no added range; hold the bandwidth and let
+spread a fixed rate wider and the gain is robustness at no added range; hold the bandwidth and let
 the spread come from a lower rate, as in the last section, and the same $10\log_{10}\text{SF}$ is
 range.
 
