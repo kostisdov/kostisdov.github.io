@@ -110,10 +110,10 @@ more chips and lifts the signal further.
 <figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only the narrow information bandwidth W_info, and spreading fills the channel with it at SF = W/W_info. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
-The mechanism is not confined to deep-space links. LoRa applies it directly: its chirp spread
+The mechanism is not confined to deep-space links; LoRa applies it directly. Its chirp spread
 spectrum holds a fixed channel, typically $125$ kHz, and selects a spreading factor from SF7 to
-SF12, each step doubling the symbol length and adding roughly $2.5$ dB, so its sensitivity runs
-from about $-123$ dBm at SF7 to $-137$ dBm at SF12 in the same channel. GPS applies it more
+SF12, each step doubling the symbol length and adding roughly $2.5$ dB. Its sensitivity runs from
+about $-123$ dBm at SF7 to $-137$ dBm at SF12 in the same channel. GPS applies it more
 aggressively: a $1.023$ Mchip/s coarse/acquisition code carrying a $50$ bit/s message has a
 processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$ dB, so the signal arrives roughly
 $20$ dB below the thermal noise and is recovered by despreading. Both trade rate for range within a
@@ -179,7 +179,7 @@ provide [6].
 Robustness and range are two readings of the same operation, turning only on what is held fixed:
 spread a fixed rate wider and the gain is robustness, at no added range; hold the bandwidth and let
 the spread come from a lower rate, as in the last section, and the same $10\log_{10}\text{SF}$ is
-range. It is the $\text{SF}\cdot R_b$ invariant read from either side.
+range.
 
 A real link spends its bandwidth budget on both,
 
@@ -261,8 +261,8 @@ analyser reading is an artefact of the spread, and the decoder responds only to 
 The reverse case is instructive. Had the rate stayed fixed and the bandwidth been expanded by
 spreading, rather than the rate lowered inside a fixed band, sensitivity would not have moved at
 all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then buys only robustness. The
-two cases are the two readings of $\text{SF}\cdot R_b$, and the sensitivity depends entirely on the
-rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
+two cases differ only in whether the bandwidth or the rate is held fixed, and the sensitivity
+depends entirely on the rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
 shortfall, is the most common error in weak-signal design.
 
 The budget closes, but a digital receiver adds one more noise floor, set by the
