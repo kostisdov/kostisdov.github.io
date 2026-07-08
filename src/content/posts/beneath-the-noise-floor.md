@@ -56,11 +56,11 @@ $P = E_b R_b$.
 
 For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
 
-- **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
-  rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
-  amount and cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the
-  information needs, is exactly spreading.
-- **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall, or by
+- Reduce the bit rate $R_b$: the required signal power drops by $10\log_{10}$ per decade of rate,
+  the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same amount and
+  cancel). Holding a low rate in a fixed channel, occupying more bandwidth than the information
+  needs, is exactly spreading.
+- Lower the required $E_b/N_0$: by the coding gain of FEC toward the $-1.59$ dB wall, or by
   multi-antenna processing.
 
 Power is conserved along the transmit chain. From information bits through symbols to spreading
@@ -86,9 +86,9 @@ $$
 \qquad \text{processing gain} = 10\log_{10}\text{SF}.
 $$
 
-Spread across $W$, the signal's power is diluted over $\text{SF}$ times more hertz than it needs, so
-its occupied-band SNR is $\text{SF}$ times smaller than in the information band, at unchanged
-$E_b/N_0$: the harder the spread, the deeper below the noise it sinks. Despreading correlates
+Spread across $W$, the signal occupies $\text{SF}$ times more bandwidth than the information
+requires, so its occupied-band SNR is a factor $\text{SF}$ below its value in the information band,
+at unchanged $E_b/N_0$. Despreading correlates
 against the known chip sequence, summing the $\text{SF}$ chips coherently while the uncorrelated
 noise adds incoherently, and the signal collapses back to $W_\text{info}$ with its SNR lifted by
 $\text{SF}$,
@@ -110,17 +110,18 @@ more chips and lifts the signal further.
 <figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only the narrow information bandwidth W_info, and spreading fills the channel with it at SF = W/W_info. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
-These are not deep-space abstractions. LoRa is built on exactly this lever: its chirp spread
-spectrum holds a fixed channel (typically $125$ kHz) and selects a spreading factor from SF7 to
-SF12, each step doubling the symbol length and buying roughly $2.5$ dB, so sensitivity runs from
-about $-123$ dBm (SF7) to $-137$ dBm (SF12) in the same channel. GPS goes further: a $1.023$ Mchip/s coarse/acquisition code
-carrying a $50$ bit/s message is a processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$
-dB, so the signal arrives roughly $20$ dB below the thermal noise and is recovered by despreading.
-Both trade rate for range in a fixed band, exactly the lever of this section.
+The mechanism is not confined to deep-space links. LoRa applies it directly: its chirp spread
+spectrum holds a fixed channel, typically $125$ kHz, and selects a spreading factor from SF7 to
+SF12, each step doubling the symbol length and adding roughly $2.5$ dB, so its sensitivity runs
+from about $-123$ dBm at SF7 to $-137$ dBm at SF12 in the same channel. GPS applies it more
+aggressively: a $1.023$ Mchip/s coarse/acquisition code carrying a $50$ bit/s message has a
+processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$ dB, so the signal arrives roughly
+$20$ dB below the thermal noise and is recovered by despreading. Both trade rate for range within a
+fixed band.
 
 Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the noise
 floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one quantity that is
-actually bounded.
+bounded.
 
 ## Coding gain and the energy-per-bit wall
 
@@ -191,7 +192,7 @@ fundamental one.
 
 ## Designing a long-range link
 
-The pieces assemble into a design procedure. Consider a telemetry link that must close over a long
+These results combine into a design procedure. Consider a telemetry link that must close over a long
 range within a fixed channel of $W = 400$ kHz, with noise figure $\text{NF} = 3$ dB, so the input
 noise density is $N_0 = -174 + 3 = -171$ dBm/Hz. Take BPSK with a rate-$1/2$ low-density
 parity-check (LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB.
@@ -226,7 +227,7 @@ loss. In one view:
 | Multi-antenna processing | (Eb/N0) required | none | 10·log₁₀ M, plus diversity |
 | Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
-Run the numbers at two rates in the same $400$ kHz channel, taking $L_\text{impl} = 0$. Filling the
+Consider two rates in the same $400$ kHz channel, with $L_\text{impl} = 0$. Filling the
 channel with data at $R_b = 200$ kbit/s gives $P_\text{sens} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
 Dropping the rate a hundredfold, to $R_b = 2$ kbit/s, gives $-174 + 3 + 33.0 + 1.5 = -136.5$ dBm,
 $20$ dB better, purely through the $10\log_{10}$ of the rate. The low-rate signal now occupies an
@@ -245,21 +246,21 @@ $$
 $$
 
 so the low-rate link closes with $3.5$ dB of margin, while the high-rate one, at $E_b/N_0 = -15$
-dB, does not come close. Over the $400$ kHz channel the noise floor is $N_0 + 10\log_{10}W = -115.0$
+dB, falls far short of the requirement. Over the $400$ kHz channel the noise floor is $N_0 + 10\log_{10}W = -115.0$
 dBm, so the received signal at $-133$ dBm sits $18$ dB beneath it: a spectrum analyser shows only
 noise. Despreading recovers the $20$ dB of processing gain, lifting the information-band SNR from
 $-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the last $3$ dB, for $E_b/N_0 = 5$ dB. An
 occupied-band SNR of $-18$ dB and an energy per bit of $+5$ dB coexist without contradiction; the
-analyser reading is an artefact of the spread, and the decoder lives on $E_b/N_0$.
+analyser reading is an artefact of the spread, and the decoder responds only to $E_b/N_0$.
 
-The mirror image is worth stating. Had the rate stayed fixed and the bandwidth been expanded by
+The reverse case is instructive. Had the rate stayed fixed and the bandwidth been expanded by
 spreading, rather than the rate lowered inside a fixed band, sensitivity would not have moved at
 all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then buys only robustness. The
-two cases are the two readings of $\text{SF}\cdot R_b$, and the sensitivity lives entirely in the
+two cases are the two readings of $\text{SF}\cdot R_b$, and the sensitivity depends entirely on the
 rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
 shortfall, is the most common error in weak-signal design.
 
-The link closes on paper, but a digital receiver adds one more noise floor, set by the
+The budget closes, but a digital receiver adds one more noise floor, set by the
 analogue-to-digital converter (ADC) and the gain ahead of it. With the automatic gain control (AGC)
 applying a gain $G_\text{AGC}$ and the ADC full scale taken as $0$ dBm, the thermal noise referred
 to the converter is
@@ -302,12 +303,11 @@ together. For a representative front end, $\text{NF} = 2$ dB and $G_\text{AGC} =
 At $16$ bits the quantization floor sits $30$ dB or more below thermal, the combined floor equals
 the thermal one, and the receiver is thermal-limited at every bandwidth. At $12$ bits the margin
 narrows to $6$ dB at $2.5$ MHz, where quantization lifts the floor by nearly a decibel, a direct
-loss of sensitivity that eases at wider bandwidth only because the thermal floor itself rises. This
-is the practical content of "enough AGC gain and enough bits": the gain lifts thermal clear of
-quantization and the resolution keeps it there, so the digital floor falls back onto the analogue
-one the rest of the article assumed [1].
+loss of sensitivity that eases at wider bandwidth only because the thermal floor itself rises. The
+requirement is enough AGC gain to lift thermal clear of quantization and enough resolution to keep
+it there, so the digital floor falls back onto the analogue one the rest of the article assumed [1].
 
-Digitisation is only half of realizing the processing gain; the other half is synchronization,
+Digitization is only half of realizing the processing gain; the other half is synchronization,
 since the receiver must acquire and track the code and carrier at the operating SNR, and any
 residual misalignment is the implementation loss $L_\text{impl}$ of the sensitivity equation, paid
 straight onto the required $E_b/N_0$.
