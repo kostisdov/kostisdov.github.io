@@ -206,12 +206,12 @@ Range is bought by sensitivity, and sensitivity by a low rate. The input noise d
 $N_0 = kT + \text{NF}$, and a real receiver also pays an implementation loss $L_\text{impl}$, the
 gap from the ideal: carrier and timing synchronization error, phase noise, channel-estimation
 error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB in all. Since
-$E_b/N_0 = P/(N_0 R_b)$,
+$E_b/N_0 = P/(N_0 R_b)$, and with the bit rate $R_b$ in bit/s,
 
 $$
 \begin{aligned}
 P_\text{sens} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
-+ \underbrace{10\log_{10}\!\big(R_b/\text{Hz}\big)}_{\text{data rate}} \\[6pt]
++ \underbrace{10\log_{10} R_b}_{\text{data rate}} \\[6pt]
 &+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding, antennas}}
 + \underbrace{L_\text{impl}}_{\text{implementation}}
 \quad [\text{dBm}].
@@ -245,7 +245,7 @@ energy per bit is
 
 $$
 \begin{aligned}
-\frac{E_b}{N_0} &= P_r - N_0 - 10\log_{10}\!\big(R_b/\text{Hz}\big) \\
+\frac{E_b}{N_0} &= P_r - N_0 - 10\log_{10} R_b \\
 &= -133 + 171 - 33.0 = 5.0\ \text{dB},
 \end{aligned}
 $$
