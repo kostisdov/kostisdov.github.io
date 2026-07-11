@@ -27,17 +27,17 @@ $$
 $$
 
 in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
-and coding scheme (MCS) decodes once the SNR exceeds a required value $\text{SNR}_\text{req}$, so
-the sensitivity for that scheme is
+and coding scheme (MCS) decodes once the SNR exceeds a minimum value $\text{SNR}_\text{min}$, so
+the sensitivity, the minimum recoverable signal power $P_\text{min}$, is
 
 $$
-P_\text{sens} = \text{floor} + \text{SNR}_\text{req}.
+P_\text{min} = \text{floor} + \text{SNR}_\text{min}.
 $$
 
-Nothing forces $\text{SNR}_\text{req}$ to be positive. A robust MCS can require a negative SNR in
-decibels, and then $P_\text{sens}$ lies below the noise floor: the receiver recovers a signal
+Nothing forces $\text{SNR}_\text{min}$ to be positive. A robust MCS can require a negative SNR in
+decibels, and then $P_\text{min}$ lies below the noise floor: the receiver recovers a signal
 weaker than the noise sharing its band. The remainder of the article examines how far
-$\text{SNR}_\text{req}$ can be reduced, by what mechanisms, and against what limit.
+$\text{SNR}_\text{min}$ can be reduced, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
@@ -196,15 +196,23 @@ range within a fixed channel of $W = 400$ kHz, with noise figure $\text{NF} = 3$
 noise density is $N_0 = -174 + 3 = -171$ dBm/Hz. Take BPSK with a rate-$1/2$ low-density
 parity-check (LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB.
 
-Range follows from sensitivity, and sensitivity from a low rate. The input noise density is
-$N_0 = kT + \text{NF}$, and a real receiver also pays an implementation loss $L_\text{impl}$, the
-gap from the ideal: carrier and timing synchronization error, phase noise, channel-estimation
-error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB in all. Since
-$E_b/N_0 = P/(N_0 R_b)$, and with the bit rate $R_b$ in bit/s,
+Range follows from sensitivity, and sensitivity from a low rate. At the required $E_b/N_0$, the
+minimum received power is the energy per bit the decoder needs, spent at the bit rate:
+
+$$
+P_\text{min} = E_b R_b = \frac{E_b}{T_b}, \qquad E_b = (E_b/N_0)_\text{req}\,N_0 .
+$$
+
+A lower rate lengthens the time per bit $T_b$, so the same $E_b$ is delivered by a lower power. This
+is the mechanism behind the whole article: collect the required energy per bit over a longer time,
+and less power suffices. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
+$L_\text{impl}$, the gap from the ideal (carrier and timing synchronization error, phase noise,
+channel-estimation error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$
+dB), the sensitivity in decibels, with $R_b$ in bit/s, is
 
 $$
 \begin{aligned}
-P_\text{sens} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
+P_\text{min} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
 + \underbrace{10\log_{10} R_b}_{\text{data rate}} \\[6pt]
 &+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding, antennas}}
 + \underbrace{L_\text{impl}}_{\text{implementation}}
@@ -227,7 +235,7 @@ loss. In summary:
 | Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
 Consider two rates in the same $400$ kHz channel, with $L_\text{impl} = 0$. Filling the
-channel with data at $R_b = 200$ kbit/s gives $P_\text{sens} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
+channel with data at $R_b = 200$ kbit/s gives $P_\text{min} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
 Dropping the rate a hundredfold, to $R_b = 2$ kbit/s, gives $-174 + 3 + 33.0 + 1.5 = -136.5$ dBm,
 $20$ dB better, purely through the $10\log_{10}$ of the rate. The low-rate signal now occupies an
 information bandwidth of only $4$ kHz, so filling the $400$ kHz channel spreads it by
