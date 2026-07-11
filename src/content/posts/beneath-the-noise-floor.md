@@ -54,8 +54,8 @@ spectral efficiency $\eta$. Here $P$ is the received signal power, $E_b = P/R_b$
 information bit, $E_b/N_0$ the detection figure of merit [2], and $\eta = R_b/W$ the bits per second
 carried in each hertz of occupied bandwidth $W$.
 
-For a fixed noise floor, sensitivity improves by lowering the required SNR, which is possible in two
-ways:
+For a fixed noise floor, sensitivity improves by lowering $\text{SNR}_\text{min}$, which is possible
+in two ways:
 
 - **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
   rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
@@ -92,12 +92,8 @@ $10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and dec
 Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
 processing gain and the rate reduction are the same number: spreading is the mechanism, the reduced
 rate is the source of the sensitivity gain, and $E_b/N_0$ is unchanged. The processing gain is an
-integration gain.
-A lower rate lengthens the time per bit $T_b = 1/R_b$, and since the energy per bit is
-$E_b = P\,T_b$, the receiver collects the energy the decoder requires from a proportionally lower
-received power, integrated over the longer symbol. Despreading is that integration made explicit: it
-coherently sums the $\text{SF}$ chips of each symbol, so a lower rate integrates over more chips and
-lifts the signal further.
+integration gain: despreading coherently sums the $\text{SF}$ chips of each symbol, so a lower rate,
+with its longer symbol, integrates over more chips and lifts the signal further.
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
@@ -203,9 +199,9 @@ $$
 P_\text{min} = E_b R_b = \frac{E_b}{T_b}, \qquad E_b = (E_b/N_0)_\text{req}\,N_0 .
 $$
 
-A lower rate lengthens the time per bit $T_b$, so the same $E_b$ is delivered by a lower power. This
-is the mechanism behind the whole article: collect the required energy per bit over a longer time,
-and less power suffices. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
+A lower rate lengthens the time per bit $T_b = 1/R_b$, so the same $E_b$ is delivered by a lower
+power. This is the mechanism behind the whole article: collect the required energy per bit over a
+longer time, and less power suffices. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
 $L_\text{impl}$, the gap from the ideal (carrier and timing synchronization error, phase noise,
 channel-estimation error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$
 dB), the sensitivity in decibels, with $R_b$ in bit/s, is
@@ -214,7 +210,7 @@ $$
 \begin{aligned}
 P_\text{min} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
 + \underbrace{10\log_{10} R_b}_{\text{data rate}} \\[6pt]
-&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding, antennas}}
+&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding gain}}
 + \underbrace{L_\text{impl}}_{\text{implementation}}
 \quad [\text{dBm}].
 \end{aligned}
@@ -222,8 +218,8 @@ $$
 
 Every term is a design lever, and bandwidth is not among them. The only ways to improve sensitivity
 are a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
-$E_b/N_0$ from coding gain toward the wall or from multi-antenna processing (maximum-ratio combining
-of $M$ antennas sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation
+$E_b/N_0$ from coding gain toward the wall, an array gain of $10\log_{10}M$ from multi-antenna
+processing (maximum-ratio combining of $M$ antennas sums the branch SNRs), or less implementation
 loss. In summary:
 
 | Lever | Sensitivity term it moves | Bandwidth cost | Ceiling |
@@ -231,7 +227,7 @@ loss. In summary:
 | Lower noise figure | NF | none | hardware |
 | Reduce bit rate | 10·log₁₀ Rb | none (spread to fill W) | unbounded |
 | Coding gain (FEC) | (Eb/N0) required | expands W | −1.59 dB wall |
-| Multi-antenna processing | (Eb/N0) required | none | 10·log₁₀ M, plus diversity |
+| Multi-antenna processing | array gain | none | 10·log₁₀ M, plus diversity |
 | Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
 Consider two rates in the same $400$ kHz channel, with $L_\text{impl} = 0$. Filling the
