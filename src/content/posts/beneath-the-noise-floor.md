@@ -41,8 +41,9 @@ pushed down, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
-The received occupied-band SNR suits the analogue front-end, but the decoder cares about the energy
-in each information bit, and the SNR factors cleanly into the two:
+At the analog front end the relevant quantity is the received SNR over the occupied bandwidth,
+whereas the decoder operates on the energy per information bit. The two are related by a
+factorization of the SNR:
 
 $$
 \text{SNR} = \frac{P}{N_0 W} = \frac{E_b}{N_0}\,\eta,
@@ -258,7 +259,7 @@ depends entirely on the rate. Charging the spreading bandwidth to the link budge
 shortfall, is the most common error in weak-signal design.
 
 The budget closes, but a digital receiver adds one more noise floor, set by the
-analogue-to-digital converter (ADC) and the gain ahead of it. With the automatic gain control (AGC)
+analog-to-digital converter (ADC) and the gain ahead of it. With the automatic gain control (AGC)
 applying a gain $G_\text{AGC}$ and the ADC full scale taken as $0$ dBm, the thermal noise referred
 to the converter is
 
@@ -302,7 +303,7 @@ the thermal one, and the receiver is thermal-limited at every bandwidth. At $12$
 narrows to $6$ dB at $2.5$ MHz, where quantization lifts the floor by nearly a decibel, a direct
 loss of sensitivity that eases at wider bandwidth only because the thermal floor itself rises. The
 requirement is enough AGC gain to lift thermal clear of quantization and enough resolution to keep
-it there, so the digital floor falls back onto the analogue one the rest of the article assumed [1].
+it there, so the digital floor falls back onto the analog one the rest of the article assumed [1].
 
 Digitization is only half of realizing the processing gain; the other half is synchronization,
 since the receiver must acquire and track the code and carrier at the operating SNR, and any
