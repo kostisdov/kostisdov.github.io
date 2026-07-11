@@ -9,11 +9,11 @@ image: "/og/beneath-the-noise-floor.png"
 A radio link built for range or robustness, a deep-space probe, a satellite navigation signal, a
 tactical waveform, routinely operates where the received signal power is smaller than the noise in
 the same band. A spectrum analyser at the antenna shows only noise, yet the receiver decodes
-without error. This seems to contradict the noise floor as a hard limit, but it does not. The
-paradox dissolves once two quantities are separated: the signal-to-noise ratio in the occupied
-band, which has no lower bound, and the energy per bit relative to the noise density, which does.
-Reconciling them is the whole subject of a weak-signal link budget, and it fixes how far beneath
-the noise floor a receiver can work.
+without error. This appears to contradict the noise floor as a hard limit, but it does not. The
+apparent paradox resolves once two quantities are distinguished: the signal-to-noise ratio in the
+occupied band, which has no lower bound, and the energy per bit relative to the noise density, which
+does. Distinguishing them is the substance of a weak-signal link budget, and it determines how far
+beneath the noise floor a receiver can operate.
 
 ## The receiver noise floor and sensitivity
 
@@ -27,8 +27,8 @@ $$
 $$
 
 in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
-and coding scheme (MCS) decodes once the SNR exceeds the required
-$\text{SNR}_\text{req}$, so the sensitivity at this MCS becomes
+and coding scheme (MCS) decodes once the SNR exceeds a required value $\text{SNR}_\text{req}$, so
+the sensitivity for that scheme is
 
 $$
 P_\text{sens} = \text{floor} + \text{SNR}_\text{req}.
@@ -36,8 +36,8 @@ $$
 
 Nothing forces $\text{SNR}_\text{req}$ to be positive. A robust MCS can require a negative SNR in
 decibels, and then $P_\text{sens}$ lies below the noise floor: the receiver recovers a signal
-weaker than the noise sharing its band. What follows is how far $\text{SNR}_\text{req}$ can be
-pushed down, by what mechanisms, and against what limit.
+weaker than the noise sharing its band. The remainder of the article examines how far
+$\text{SNR}_\text{req}$ can be reduced, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
@@ -49,13 +49,13 @@ $$
 \text{SNR} = \frac{P}{N_0 W} = \frac{E_b}{N_0}\,\eta,
 $$
 
-a fundamental quantity, the energy per bit $E_b/N_0$, times an architectural one, the spectral
-efficiency $\eta$. Here $P$ is the received signal power, $E_b = P/R_b$ the energy per information
-bit, $E_b/N_0$ the detection figure of merit [2], and $\eta = R_b/W$ the bits per second carried in
-each hertz of occupied bandwidth $W$; the factorisation follows from the occupied-band noise power
-$N_0 W$ and $P = E_b R_b$.
+the product of a fundamental quantity, the energy per bit $E_b/N_0$, and an architectural one, the
+spectral efficiency $\eta$. Here $P$ is the received signal power, $E_b = P/R_b$ the energy per
+information bit, $E_b/N_0$ the detection figure of merit [2], and $\eta = R_b/W$ the bits per second
+carried in each hertz of occupied bandwidth $W$.
 
-For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
+For a fixed noise floor, sensitivity improves by lowering the required SNR, which is possible in two
+ways:
 
 - **Reduce the bit rate $R_b$**: the required signal power drops by $10\log_{10}$ per decade of
   rate, the fall in $\eta$ a byproduct (widening $W$ instead would lift the floor by the same
@@ -90,8 +90,9 @@ $$
 Take $\text{SF} = 10$: a signal at $-10$ dB in the occupied band ($0.1$) despreads over ten chips to
 $10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and decodable (Fig. 1).
 Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
-processing gain and the rate reduction are one and the same number: spreading is the mechanism, the
-low $R_b$ is the sensitivity, and $E_b/N_0$ never moves. The processing gain is an integration gain.
+processing gain and the rate reduction are the same number: spreading is the mechanism, the reduced
+rate is the source of the sensitivity gain, and $E_b/N_0$ is unchanged. The processing gain is an
+integration gain.
 A lower rate lengthens the time per bit $T_b = 1/R_b$, and since the energy per bit is
 $E_b = P\,T_b$, the receiver collects the energy the decoder requires from a proportionally lower
 received power, integrated over the longer symbol. Despreading is that integration made explicit: it
@@ -106,15 +107,15 @@ lifts the signal further.
 The mechanism is not confined to deep-space links; LoRa applies it directly. Its chirp spread
 spectrum holds a fixed channel, typically $125$ kHz, and selects a spreading factor from SF7 to
 SF12, each step doubling the symbol length and adding roughly $2.5$ dB. Its sensitivity runs from
-about $-123$ dBm at SF7 to $-137$ dBm at SF12 in the same channel. GPS applies it more
-aggressively: a $1.023$ Mchip/s coarse/acquisition code carrying a $50$ bit/s message has a
+about $-123$ dBm at SF7 to $-137$ dBm at SF12 in the same channel. GPS carries it further: a
+$1.023$ Mchip/s coarse/acquisition code carrying a $50$ bit/s message has a
 processing gain of $10\log_{10}(1.023\times10^6/50) \approx 43$ dB, so the signal arrives roughly
 $20$ dB below the thermal noise and is recovered by despreading. Both trade rate for range within a
 fixed band.
 
-Processing gain buys a chosen negative occupied-band SNR, and with it a sensitivity below the noise
-floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one quantity that is
-bounded.
+Processing gain places the signal at a chosen negative occupied-band SNR, and with it a sensitivity
+below the noise floor. It leaves $E_b/N_0$ unchanged, which the next section shows is the one
+quantity that is bounded.
 
 ## Coding gain and the energy-per-bit wall
 
@@ -161,11 +162,11 @@ close it gets, against what it costs, is the next section.
 
 ## Coding gain versus processing gain
 
-Two mechanisms expand the bandwidth, doing different jobs. Coding gain, from forward error
+Two mechanisms expand the bandwidth, serving different purposes. Coding gain, from forward error
 correction (FEC), lowers the required $E_b/N_0$ toward the $-1.59$ dB wall, the only lever that
 moves the fundamental requirement. Processing gain, from spreading, lowers the occupied-band SNR at
-fixed $E_b/N_0$: it buys robustness rather than range, since a spreading code is only a repetition
-code and adds no coding gain in a Gaussian channel. In fading it earns more, its independently
+fixed $E_b/N_0$: it provides robustness rather than range, since a spreading code is only a
+repetition code and adds no coding gain in a Gaussian channel. In fading it earns more, its independently
 faded copies giving diversity, a steepening of the error-rate curve that coding alone does not
 provide [6].
 
@@ -181,11 +182,11 @@ W_\text{expansion} = \underbrace{\tfrac{1}{R_c}}_{\text{FEC}} \times
 \underbrace{\text{SF}}_{\text{spreading}},
 $$
 
-giving FEC as much as the decoder complexity allows, since only FEC buys down $E_b/N_0$, and the
-rest to spreading for the robustness FEC cannot provide: interference rejection, multipath
+giving FEC as much as the decoder complexity allows, since only FEC reduces the required $E_b/N_0$,
+and the rest to spreading for the robustness FEC cannot provide: interference rejection, multipath
 resolution, multiple access, and low probability of intercept. Satellite navigation is the
 canonical balance, heavy spreading for jam resistance and multiple access alongside FEC for the
-coding gain that approaches the wall. The split is an implementation-complexity trade, not a
+coding gain that approaches the wall. The split is an implementation-complexity trade-off, not a
 fundamental one.
 
 ## Designing a long-range link
@@ -195,7 +196,7 @@ range within a fixed channel of $W = 400$ kHz, with noise figure $\text{NF} = 3$
 noise density is $N_0 = -174 + 3 = -171$ dBm/Hz. Take BPSK with a rate-$1/2$ low-density
 parity-check (LDPC) code, decoding at $(E_b/N_0)_\text{req} \approx 1.5$ dB.
 
-Range is bought by sensitivity, and sensitivity by a low rate. The input noise density is
+Range follows from sensitivity, and sensitivity from a low rate. The input noise density is
 $N_0 = kT + \text{NF}$, and a real receiver also pays an implementation loss $L_\text{impl}$, the
 gap from the ideal: carrier and timing synchronization error, phase noise, channel-estimation
 error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB in all. Since
@@ -211,11 +212,11 @@ P_\text{sens} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
 \end{aligned}
 $$
 
-Every term is a design lever, and bandwidth is not among them: the only ways to buy sensitivity are
-a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
+Every term is a design lever, and bandwidth is not among them. The only ways to improve sensitivity
+are a lower noise figure, a lower bit rate ($10\log_{10}$ per decade, unbounded), a lower required
 $E_b/N_0$ from coding gain toward the wall or from multi-antenna processing (maximum-ratio combining
 of $M$ antennas sums the branch SNRs for a $10\log_{10}M$ gain in $E_b/N_0$), or less implementation
-loss. In one view:
+loss. In summary:
 
 | Lever | Sensitivity term it moves | Bandwidth cost | Ceiling |
 | :--- | :---: | :---: | :---: |
@@ -253,7 +254,8 @@ analyser reading is an artefact of the spread, and the decoder responds only to 
 
 The reverse case is instructive. Had the rate stayed fixed and the bandwidth been expanded by
 spreading, rather than the rate lowered inside a fixed band, sensitivity would not have moved at
-all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then buys only robustness. The
+all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then provides only robustness.
+The
 two cases differ only in whether the bandwidth or the rate is held fixed, and the sensitivity
 depends entirely on the rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
 shortfall, is the most common error in weak-signal design.
@@ -319,8 +321,7 @@ temperature, bandwidth, and noise figure. The energy-per-bit wall sits at $E_b/N
 $\eta \to 0$ limit of the Shannon bound, and no bandwidth expansion crosses it. Operating below the
 noise floor is a statement about power and SNR, always achievable; operating below $-1.59$ dB of
 energy per bit is a statement about information, never achievable. Keeping the two apart, a low rate
-and coding to buy sensitivity, spreading to buy robustness, is the whole discipline of weak-signal
-design. The same accounting decides whether a waveform can be hidden under the noise while still
+and coding for sensitivity, spreading for robustness, is the discipline of weak-signal design. The same accounting decides whether a waveform can be hidden under the noise while still
 being read, where a later post on low-probability-of-intercept design will begin.
 
 ## References
