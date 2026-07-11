@@ -199,9 +199,9 @@ $$
 P_\text{min} = E_b R_b = \frac{E_b}{T_b}, \qquad E_b = (E_b/N_0)_\text{req}\,N_0 .
 $$
 
-A lower rate lengthens the time per bit $T_b = 1/R_b$, so the same $E_b$ is delivered by a lower
-power. This is the mechanism behind the whole article: collect the required energy per bit over a
-longer time, and less power suffices. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
+A lower rate lengthens the time per bit $T_b = 1/R_b$, so the receiver collects the energy the
+decoder requires from a proportionally lower received power, integrated over the longer symbol. This
+is the mechanism behind the whole article. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
 $L_\text{impl}$, the gap from the ideal (carrier and timing synchronization error, phase noise,
 channel-estimation error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$
 dB), the sensitivity in decibels, with $R_b$ in bit/s, is
