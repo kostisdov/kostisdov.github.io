@@ -41,18 +41,18 @@ pushed down, by what mechanisms, and against what limit.
 
 ## Signal-to-noise ratio, energy per bit, and spectral efficiency
 
-The occupied-band SNR suits the analogue front-end, but the decoder cares about the energy in each
-information bit, and the SNR factors cleanly into the two:
+The received occupied-band SNR suits the analogue front-end, but the decoder cares about the energy
+in each information bit, and the SNR factors cleanly into the two:
 
 $$
 \text{SNR} = \frac{P}{N_0 W} = \frac{E_b}{N_0}\,\eta,
 $$
 
 a fundamental quantity, the energy per bit $E_b/N_0$, times an architectural one, the spectral
-efficiency $\eta$. Here $E_b = P/R_b$ is the energy per information bit, $E_b/N_0$ the detection
-figure of merit [2], and $\eta = R_b/W$ the bits per second carried in each hertz of occupied
-bandwidth $W$; the factorisation follows from the occupied-band noise power $N_0 W$ and
-$P = E_b R_b$.
+efficiency $\eta$. Here $P$ is the received signal power, $E_b = P/R_b$ the energy per information
+bit, $E_b/N_0$ the detection figure of merit [2], and $\eta = R_b/W$ the bits per second carried in
+each hertz of occupied bandwidth $W$; the factorisation follows from the occupied-band noise power
+$N_0 W$ and $P = E_b R_b$.
 
 For a fixed noise floor, sensitivity improves by lowering the required SNR, and there are two ways:
 
@@ -62,17 +62,6 @@ For a fixed noise floor, sensitivity improves by lowering the required SNR, and 
   information needs, is exactly spreading.
 - **Lower the required $E_b/N_0$**: by the coding gain of FEC toward the $-1.59$ dB wall, or by
   multi-antenna processing.
-
-Power is conserved along the transmit chain. From information bits through symbols to spreading
-chips,
-
-$$
-P = E_b R_b = E_s R_s = E_\text{chip} R_\text{chip},
-$$
-
-each equality a rate conversion that holds power fixed while diluting it across more degrees of
-freedom; expanding the bandwidth, by coding or spreading, spreads the same $P$ over more hertz and
-never adds power.
 
 ## Spreading: processing gain at fixed bandwidth
 
@@ -101,13 +90,16 @@ Take $\text{SF} = 10$: a signal at $-10$ dB in the occupied band ($0.1$) desprea
 $10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and decodable (Fig. 1).
 Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
 processing gain and the rate reduction are one and the same number: spreading is the mechanism, the
-low $R_b$ is the sensitivity, and $E_b/N_0$ never moves. The processing gain is an integration gain:
-despreading coherently sums the $\text{SF}$ chips of each symbol, so a lower rate integrates over
-more chips and lifts the signal further.
+low $R_b$ is the sensitivity, and $E_b/N_0$ never moves. The processing gain is an integration gain.
+A lower rate lengthens the time per bit $T_b = 1/R_b$, and since the energy per bit is
+$E_b = P\,T_b$, the receiver collects the energy the decoder requires from a proportionally lower
+received power, integrated over the longer symbol. Despreading is that integration made explicit: it
+coherently sums the $\text{SF}$ chips of each symbol, so a lower rate integrates over more chips and
+lifts the signal further.
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
-<figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only the narrow information bandwidth W_info, and spreading fills the channel with it at SF = W/W_info. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to W_info and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
+<figcaption>Fig. 1: Despreading in the power spectral density; the channel bandwidth W is fixed. A low data rate needs only a narrow information bandwidth W/SF, and spreading fills the channel with it. Left: spread across W, the signal sits 10 dB below the noise floor N₀, an occupied-band SNR of −10 dB. Right: correlating against the code collapses it back to the information bandwidth and lifts it by the processing gain 10·log₁₀ SF = 10 dB, to 0 dB. N₀ is unchanged; only the accounting bandwidth moves.</figcaption>
 </figure>
 
 The mechanism is not confined to deep-space links; LoRa applies it directly. Its chirp spread
