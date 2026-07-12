@@ -127,6 +127,40 @@ plt.close(fig)
 
 
 # ---------------------------------------------------------------------------
+# Beyond the horizon card: title block on the left, the radio-horizon √h curve
+# with the geometric horizon beneath it on the right.
+# ---------------------------------------------------------------------------
+hh = np.linspace(0, 1000, 500)
+d_radio = 4.12 * (np.sqrt(hh) + np.sqrt(2.0))
+d_geo = 3.57 * (np.sqrt(hh) + np.sqrt(2.0))
+
+fig = new_card()
+fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
+         family="monospace", va="center")
+fig.text(0.060, 0.63, "Beyond the\nhorizon", fontsize=54, color=INK,
+         va="center", linespacing=1.05)
+fig.text(0.062, 0.28, "Why the horizon is not the range limit of a radio link,\n"
+                      "and what really sets beyond-line-of-sight range.",
+         fontsize=20, color=INK_SOFT, style="italic", va="center",
+         linespacing=1.3)
+fig.text(0.062, 0.10, "kostisdov.github.io", fontsize=15, color=ACCENT,
+         family="monospace", va="center")
+
+ax = fig.add_axes([0.66, 0.14, 0.30, 0.72])
+ax.fill_between(hh, d_geo, d_radio, color=SAGE, alpha=0.18, lw=0)
+ax.plot(hh, d_radio, color=ACCENT, lw=2.6)
+ax.plot(hh, d_geo, color=INK_SOFT, lw=1.6, ls="--")
+ax.plot(120, 4.12 * (np.sqrt(120) + np.sqrt(2.0)), "o", ms=8,
+        color=ACCENT_DEEP, mec=PAPER, mew=1.2)
+ax.set_xlim(0, 1000)
+ax.set_ylim(0, 140)
+ax.set_facecolor(PAPER)
+ax.axis("off")
+fig.savefig(os.path.join(OUT, "beyond-the-horizon.png"), facecolor=PAPER)
+plt.close(fig)
+
+
+# ---------------------------------------------------------------------------
 # Default site card: wordmark + tagline, with a faint interference ridgeline
 # echoing the home-page hero art.
 # ---------------------------------------------------------------------------
@@ -157,6 +191,7 @@ fig.savefig(os.path.join(OUT, "default.png"), facecolor=PAPER)
 plt.close(fig)
 
 print("wrote:")
-for name in ("solstice.png", "beneath-the-noise-floor.png", "default.png"):
+for name in ("solstice.png", "beneath-the-noise-floor.png",
+             "beyond-the-horizon.png", "default.png"):
     p = os.path.join(OUT, name)
     print(f"  {p}  ({os.path.getsize(p)} bytes)")
