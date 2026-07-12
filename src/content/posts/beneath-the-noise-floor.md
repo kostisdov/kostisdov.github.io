@@ -6,14 +6,14 @@ tags: ["signals", "wireless"]
 image: "/og/beneath-the-noise-floor.png"
 ---
 
-A radio link built for range or robustness, a deep-space probe, a satellite navigation signal, a
-tactical waveform, routinely operates where the received signal power is smaller than the noise in
-the same band. A spectrum analyser at the antenna shows only noise, yet the receiver decodes
-without error. This appears to contradict the noise floor as a hard limit, but it does not. The
-apparent paradox resolves once two quantities are distinguished: the signal-to-noise ratio in the
-occupied band, which has no lower bound, and the energy per bit relative to the noise density, which
-does. Distinguishing them is the substance of a weak-signal link budget, and it determines how far
-beneath the noise floor a receiver can operate.
+A receiver can decode a signal whose received power is weaker than the noise in the same band.
+Deep-space telemetry, satellite navigation, and covert tactical links all depend on it. A spectrum
+analyser at the antenna shows only noise, and still the decoder recovers the data without error.
+The noise floor appears to be a hard limit on what can be extracted; it is not. The paradox resolves
+once two quantities are kept apart: the signal-to-noise ratio over the occupied band, which has no
+lower bound, and the energy per bit relative to the noise density, which does. The relation between
+them is the substance of a weak-signal link budget, and it fixes how far beneath the noise floor a
+receiver can operate.
 
 ## The receiver noise floor and sensitivity
 
@@ -92,8 +92,10 @@ $10 \times 0.1 = 1 = 0$ dB in the information band, level with the noise and dec
 Because the low rate is what set the narrow information band, the $10\log_{10}\text{SF}$ of
 processing gain and the rate reduction are the same number: spreading is the mechanism, the reduced
 rate is the source of the sensitivity gain, and $E_b/N_0$ is unchanged. The processing gain is an
-integration gain: despreading coherently sums the $\text{SF}$ chips of each symbol, so a lower rate,
-with its longer symbol, integrates over more chips and lifts the signal further.
+integration gain. In the time domain, a lower rate lengthens the time per bit $T_b = 1/R_b$, so the
+receiver collects the energy the decoder requires from a proportionally lower received power,
+integrated over the longer symbol. Despreading realizes the same integration in the chip domain: it
+coherently sums the $\text{SF}$ chips of each symbol, and a lower rate integrates over more of them.
 
 <figure>
 <img src="/posts/beneath-the-noise-floor/below-floor.svg" alt="Two power spectral density panels within a fixed channel bandwidth: a signal spread below the noise floor, and the same signal after despreading rising to the floor in the narrow information band." />
