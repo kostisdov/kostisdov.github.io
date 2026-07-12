@@ -1,6 +1,6 @@
 ---
 title: "Operating beneath the noise floor"
-description: "A long-range radio link can decode a signal whose power sits below the thermal noise. It breaks no law: the signal-to-noise ratio in the occupied band has no lower limit, while the true wall is on energy per bit. The fundamentals, and how they set the design of a weak-signal link."
+description: "A long-range radio link can decode a signal whose power sits below the thermal noise. It breaks no law: the signal-to-noise ratio in the occupied band has no lower limit, while the true wall is on energy per bit. Together, these fundamentals set the design of a weak-signal link."
 date: 2026-07-04
 tags: ["signals", "wireless"]
 image: "/og/beneath-the-noise-floor.png"
@@ -17,8 +17,8 @@ receiver can operate.
 
 ## The receiver noise floor and sensitivity
 
-Every receiver is preceded by thermal noise. A resistor at temperature $T$ delivers a noise power
-spectral density $kT = -174$ dBm/Hz at room temperature. Raised by the front-end noise figure
+The noise floor of any receiver begins with the thermal noise at its input. A resistor at
+temperature $T$ delivers a noise power spectral density $kT = -174$ dBm/Hz at room temperature. Raised by the front-end noise figure
 (NF), it becomes the input-referred noise density $N_0 = kT + \text{NF}$, and over a bandwidth $B$
 the noise floor is [1]
 
