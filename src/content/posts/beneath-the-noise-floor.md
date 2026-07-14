@@ -77,8 +77,8 @@ $$
 $$
 
 Spread across $W$, the signal occupies $\text{SF}$ times more bandwidth than the information
-requires, so its occupied-band SNR is a factor $\text{SF}$ below its value in the information band,
-at unchanged $E_b/N_0$. Despreading correlates
+requires, so its occupied-band SNR is a factor $\text{SF}$ below its value in the information band at
+fixed $E_b/N_0$. Despreading correlates
 against the known chip sequence, summing the $\text{SF}$ chips coherently while the uncorrelated
 noise adds incoherently, and the signal collapses back to $W_\text{info}$ with its SNR lifted by
 $\text{SF}$,
@@ -232,7 +232,7 @@ loss. In summary:
 | Multi-antenna processing | array gain | none | 10·log₁₀ M, plus diversity |
 | Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
-Consider two rates in the same $400$ kHz channel, with $L_\text{impl} = 0$. Filling the
+Consider two rates in the same $400$ kHz channel with $L_\text{impl} = 0$. Filling the
 channel with data at $R_b = 200$ kbit/s gives $P_\text{min} = -174 + 3 + 53.0 + 1.5 = -116.5$ dBm.
 Dropping the rate a hundredfold, to $R_b = 2$ kbit/s, gives $-174 + 3 + 33.0 + 1.5 = -136.5$ dBm,
 $20$ dB better, purely through the $10\log_{10}$ of the rate. The low-rate signal now occupies an
@@ -263,8 +263,8 @@ spreading, rather than the rate lowered inside a fixed band, sensitivity would n
 all: at fixed $R_b$ the $10\log_{10}R_b$ term is fixed, and spreading then provides only robustness.
 The
 two cases differ only in whether the bandwidth or the rate is held fixed, and the sensitivity
-depends entirely on the rate. Charging the spreading bandwidth to the link budget, or reading the buried SNR as a
-shortfall, is the most common error in weak-signal design.
+depends entirely on the rate. Charging the spreading bandwidth to the link budget or reading the buried SNR as a shortfall is the
+most common error in weak-signal design.
 
 The budget closes, but a digital receiver adds one more noise floor, set by the
 analog-to-digital converter (ADC) and the gain ahead of it. With the automatic gain control (AGC)
