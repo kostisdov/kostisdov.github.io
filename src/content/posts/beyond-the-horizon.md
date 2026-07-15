@@ -4,7 +4,6 @@ description: "A terrestrial link built for range runs into the curvature of the 
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
-draft: true
 ---
 
 A long-range terrestrial link, a drone relay, a sensor backhaul, a tactical radio, is limited by
