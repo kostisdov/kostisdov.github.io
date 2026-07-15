@@ -1,6 +1,6 @@
 ---
 title: "The geometry of long-range radio links"
-description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. The geometry and propagation that set real beyond-line-of-sight range, and a worked drone budget."
+description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. What sets real beyond-line-of-sight range is the geometry and propagation past it, worked through here with a drone link budget."
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
@@ -52,12 +52,12 @@ sight, not communication.
 
 Because range grows as $\sqrt{h}$, height is the strongest lever on a terrestrial link. Doubling the
 range requires four times the height. Raising one terminal from a 2 m tripod to a 120 m drone
-extends its horizon from about 6 km to 45 km, an eightfold gain from geometry alone. Figure 2 traces
-the square-root law.
+extends its horizon from about 6 km to 45 km, nearly an eightfold gain from geometry alone. Figure 2
+traces the square-root law.
 
 <figure>
-<img src="/posts/beyond-the-horizon/range-vs-height.svg" alt="Horizon range versus drone height, the square-root curve, with the ground terminal fixed at 2 m and mast, drone, and 500 m points marked." />
-<figcaption>Fig. 2: Horizon range against the height of one terminal, the other fixed at 2 m. Range follows the √h law, so a mast at 30 m reaches 28 km, a drone at 120 m reaches 51 km, and 500 m reaches 98 km. The shaded band is the refraction gain of the radio horizon over the geometric one.</figcaption>
+<img src="/posts/beyond-the-horizon/range-vs-height.svg" alt="Horizon range of a single terminal versus its height, the square-root curve, with mast, drone, and 500 m points marked." />
+<figcaption>Fig. 2: The horizon range of a single terminal against its height. Range follows the √h law: a mast at 30 m reaches 23 km, a drone at 120 m reaches 45 km, and 500 m reaches 92 km. The shaded band is the refraction gain of the radio horizon (4.12√h) over the geometric one (3.57√h). A two-terminal link adds the second terminal's horizon, as in the worked budget below.</figcaption>
 </figure>
 
 Height is not simply another term in the budget. Transmit power adds decibels of margin to a link
@@ -204,9 +204,10 @@ The link closes with a margin of $-94.5 - (-99) = 4.5$ dB. The full budget:
 | Receiver sensitivity, $P_\text{sens}$ | −99.0 dBm |
 | **Margin** | **4.5 dB** |
 
-The design levers are visible in the budget. Raising the drone lifts the horizon and, for a fixed
-range, does not change the path loss, but it protects the Fresnel clearance and buys margin against
-sub-refraction. A lower data rate lowers the sensitivity directly, as the previous post showed. A
+The design levers are visible in the budget. Raising the drone lifts the horizon, and in the two-ray
+regime it also lowers the path loss by 20 dB per decade of height, on top of protecting the Fresnel
+clearance and buying margin against sub-refraction. A lower data rate lowers the sensitivity
+directly, as the previous post showed. A
 higher gain antenna helps, at the cost of pointing. Transmit power is the weakest lever, because it
 scales the margin without changing the geometry that sets whether a link is possible at all.
 

@@ -130,14 +130,13 @@ save(fig, "earth-bulge")
 
 
 # ---------------------------------------------------------------------------
-# Figure 2: range versus antenna height. Radio horizon d = 4.12*sqrt(h) vs
-# geometric 3.57*sqrt(h), for a drone-to-ground link with the ground terminal
-# fixed at 2 m. The sqrt(h) law: doubling range needs 4x height.
+# Figure 2: single-terminal horizon range versus antenna height. Radio horizon
+# d = 4.12*sqrt(h) vs geometric 3.57*sqrt(h). The sqrt(h) law: doubling range
+# needs 4x height. (A two-terminal link adds the second terminal's horizon.)
 # ---------------------------------------------------------------------------
-h = np.linspace(1, 1000, 600)     # drone height, m
-h_ground = 2.0
-d_radio = 4.12 * (np.sqrt(h) + np.sqrt(h_ground))
-d_geo = 3.57 * (np.sqrt(h) + np.sqrt(h_ground))
+h = np.linspace(1, 1000, 600)     # antenna height, m
+d_radio = 4.12 * np.sqrt(h)
+d_geo = 3.57 * np.sqrt(h)
 
 fig, ax = plt.subplots(figsize=(7.2, 4.0))
 ax.fill_between(h, d_geo, d_radio, color=SAGE, alpha=0.12, lw=0)
@@ -145,18 +144,18 @@ ax.plot(h, d_radio, color=ACCENT, lw=2.0, label="radio horizon ($4.12\\sqrt{h}$)
 ax.plot(h, d_geo, color=INK_SOFT, lw=1.4, ls="--",
         label="geometric ($3.57\\sqrt{h}$)")
 
-markers = [(30, "mast 30 m", 120, 14), (120, "drone 120 m", 250, 34),
-           (500, "500 m", 620, 80)]
+markers = [(30, "mast 30 m", 120, 11), (120, "drone 120 m", 260, 30),
+           (500, "500 m", 640, 72)]
 for hh, lbl, tx, ty in markers:
-    dd = 4.12 * (np.sqrt(hh) + np.sqrt(h_ground))
+    dd = 4.12 * np.sqrt(hh)
     ax.plot(hh, dd, "o", ms=5, color=ACCENT_DEEP, mec=PAPER, mew=0.8, zorder=5)
     ax.annotate(f"{lbl}\n{dd:.0f} km", xy=(hh, dd), xytext=(tx, ty),
                 color=ACCENT_DEEP, fontsize=8.6, ha="center", va="center",
                 arrowprops=dict(arrowstyle="-", color=INK_SOFT, lw=0.7))
 
 ax.set_xlim(0, 1000)
-ax.set_ylim(0, 140)
-ax.set_xlabel("drone height above ground (m), ground terminal at 2 m")
+ax.set_ylim(0, 135)
+ax.set_xlabel("antenna height above ground (m)")
 ax.set_ylabel("horizon range (km)")
 ax.legend(loc="lower right", frameon=False, fontsize=9.5, handlelength=1.8)
 despine(ax)
