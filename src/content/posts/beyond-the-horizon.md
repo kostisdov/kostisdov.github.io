@@ -1,6 +1,6 @@
 ---
 title: "The geometry of long-range radio links"
-description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard wall, but it is not. The geometry and propagation that set real beyond-line-of-sight range, and a worked drone budget."
+description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. The geometry and propagation that set real beyond-line-of-sight range, and a worked drone budget."
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
@@ -10,10 +10,10 @@ A long-range terrestrial link, a drone relay, a sensor backhaul, a tactical radi
 the shape of the Earth as much as by its power budget. The received signal weakens with distance,
 but the ground also curves away, and past a certain range the two terminals can no longer see each
 other at all. That range, the horizon, is often quoted as the hard limit on a beyond visual line of
-sight (BVLoS) link. It is not a wall. Radio bends past the geometric edge, diffracts into the
-shadow behind it, and on some days ducts for hundreds of kilometres. This post works through the
+sight (BVLoS) link. It is not. Radio waves bend past the geometric edge, diffract into the
+shadow behind it, and on some days duct for hundreds of kilometres. This post works through the
 geometry and the propagation that set real BVLoS range, and closes with a drone budget tied to the
-receiver sensitivity of the previous post.
+receiver sensitivity of [the previous post](/posts/beneath-the-noise-floor/).
 
 ## The horizon is not the range limit
 
@@ -44,9 +44,9 @@ one.
 <figcaption>Fig. 1: The radio horizon from a drone at 120 m. The Earth surface curves away below the antenna base, less steeply for the 4/3-Earth model (green) than for the geometric one (dashed). A grazing ray is tangent to the surface at the horizon. The geometric horizon is at 3.57√h ≈ 39 km; refraction extends the radio horizon to 4.12√h ≈ 45 km, the shaded reach beyond.</figcaption>
 </figure>
 
-Two points follow. The horizon depends only on height, not on power or frequency. And even the
-radio horizon is where the direct ray grazes, not where the signal ends, because diffraction
-carries energy into the region beyond.
+One point deserves emphasis: even the radio horizon is only where the direct ray grazes, not where
+the signal ends. Diffraction carries energy into the region beyond, so the horizon bounds line of
+sight, not communication.
 
 ## Antenna height dominates
 
@@ -108,7 +108,7 @@ budget needs.
 
 ## Diffraction past the horizon
 
-Beyond the horizon the direct ray is blocked, yet a link can still close. Radio diffracts around the
+Beyond the horizon the direct ray is blocked, yet a link can still close. Radio waves diffract around the
 Earth's curvature and over terrain, filling the geometric shadow with a field that decays smoothly
 rather than vanishing. The loss relative to free space is governed by the Fresnel-Kirchhoff
 diffraction parameter,
@@ -176,9 +176,9 @@ $$
 P_r = 30 + 2 + 10 - 136.5 = -94.5 \ \text{dBm}.
 $$
 
-Whether the link closes is decided by the receiver sensitivity. From the previous post, sensitivity
-is the noise density, the rate, the required energy per bit, and the implementation loss, with no
-dependence on bandwidth [6]:
+Whether the link closes is decided by the receiver sensitivity. From
+[the previous post](/posts/beneath-the-noise-floor/), sensitivity is the noise density, the rate,
+the required energy per bit, and the implementation loss, with no dependence on bandwidth [6]:
 
 $$
 P_\text{sens} = kT + \text{NF} + 10\log_{10} R_b + (E_b/N_0)_\text{req} + L_\text{impl}.
