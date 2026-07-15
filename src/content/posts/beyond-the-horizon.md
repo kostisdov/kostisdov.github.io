@@ -1,6 +1,6 @@
 ---
 title: "The geometry of long-range radio links"
-description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. What sets real beyond-line-of-sight range is the geometry and propagation past it, worked through here with a drone link budget."
+description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. What sets real beyond-line-of-sight range is the geometry and propagation past it."
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
