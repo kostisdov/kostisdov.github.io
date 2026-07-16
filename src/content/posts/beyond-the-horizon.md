@@ -54,8 +54,8 @@ Within radio line of sight the signal still weakens with distance, and it does s
 single free-space figure misses. Two distances mark the transitions. Take the running example of this
 post: a 120 m drone linking a 2 m ground terminal at 900 MHz. The two terminals' horizons add, the
 drone reaching 45 km on its own and the ground station a further 6 km, for a link radio horizon of
-about 51 km. In practice it is this two-terminal figure, not either terminal's horizon alone, that
-sets the range. Nearer in, the breakpoint falls at about 2.9 km, where the ground reflection begins to
+about 51 km. In practice this two-terminal figure sets the range, not either terminal alone. Nearer
+in, the breakpoint falls at about 2.9 km, where the ground reflection begins to
 cancel the direct ray and the loss steepens. The link radio horizon at 51 km is where the direct ray
 is finally blocked and only diffraction reaches into the shadow. The two are an order of magnitude
 apart, $2.9\ \text{km} \ll 51\ \text{km}$, and they play very different roles. A link passes through three regimes as range grows, measured against free space as
