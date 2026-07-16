@@ -51,18 +51,19 @@ of sight, not communication.
 ## The propagation regimes
 
 Within radio line of sight the signal still weakens with distance, and it does so in stages that a
-single free-space figure misses. Two distances mark the transitions. For the running example of this
-post, a 120 m drone linking a 2 m ground terminal at 900 MHz, the breakpoint falls at about 2.9 km,
-where the ground reflection begins to cancel the direct ray and the loss steepens. The radio horizon
-falls at 51 km, where the direct ray is finally blocked and only diffraction reaches into the shadow.
-The two are an order of magnitude apart, $2.9\ \text{km} \ll 51\ \text{km}$, and they play very
-different roles. A link passes through three regimes as range grows, measured against free space as
+single free-space figure misses. Two distances mark the transitions. Take the running example of this
+post: a 120 m drone linking a 2 m ground terminal at 900 MHz. The two terminals' horizons add, the
+drone reaching 45 km on its own and the ground station a further 6 km, for a link radio horizon of
+about 51 km. Nearer in, the breakpoint falls at about 2.9 km, where the ground reflection begins to
+cancel the direct ray and the loss steepens. The link radio horizon at 51 km is where the direct ray
+is finally blocked and only diffraction reaches into the shadow. The two are an order of magnitude
+apart, $2.9\ \text{km} \ll 51\ \text{km}$, and they play very different roles. A link passes through three regimes as range grows, measured against free space as
 the reference:
 
 | Regime | Distance | What happens | Falloff |
 | :--- | :--- | :--- | :---: |
 | Free space | reference | direct ray only, first Fresnel zone clear | $d^{2}$ |
-| Two-ray, below breakpoint | $d < d_\text{bp}$ | direct and reflected rays oscillate around free space | $\approx d^{2}$ |
+| Two-ray, below breakpoint | $d < d_\text{bp}$ | direct and reflected rays oscillate around free space, with deep nulls | $\approx d^{2}$ |
 | Two-ray, above breakpoint | $d_\text{bp} < d < d_\text{h}$ | direct and reflected rays nearly cancel | $d^{4}$ |
 | Diffraction | $d > d_\text{h}$ | Earth blocks the direct ray, field bends into the shadow | steep |
 
@@ -233,7 +234,7 @@ The link closes with a margin of $-94.5 - (-99) = 4.5$ dB. The full budget:
 | **Margin** | **4.5 dB** |
 
 The design levers are visible in the budget. Raising the drone lifts the horizon, and in the two-ray
-regime it also lowers the path loss by 20 dB per decade of height, on top of protecting the Fresnel
+regime it also lowers the path loss by 20 dB for every tenfold increase in height, on top of protecting the Fresnel
 clearance and buying margin against sub-refraction. A lower data rate lowers the sensitivity
 directly, as the previous post showed. A
 higher gain antenna helps, at the cost of pointing. Transmit power is the weakest lever because it
