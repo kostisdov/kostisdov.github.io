@@ -1,6 +1,6 @@
 ---
 title: "The geometry of long-range radio links"
-description: "A terrestrial link built for range runs into the curvature of the Earth long before it runs out of power. The horizon looks like a hard limit, but it is not. What sets real beyond-line-of-sight range is the geometry and propagation past it."
+description: "How far a beyond visual line of sight (BVLoS) radio link reaches is set by geometry: the radio horizon, the antenna height that fixes it, and the diffraction that carries the signal past it."
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
@@ -15,7 +15,7 @@ shadow behind it, and on some days duct for hundreds of kilometres. This post wo
 geometry and the propagation that set real BVLoS range, and closes with a drone budget tied to the
 receiver sensitivity of [the previous post](/posts/beneath-the-noise-floor/).
 
-## The horizon is not the range limit
+## The radio horizon is not the range limit
 
 The geometric horizon follows from a tangent line to a sphere. For an antenna at height $h$ above a
 smooth Earth of radius $R$, the tangent grazing distance is $d = \sqrt{2Rh}$. With $R = 6371$ km
@@ -45,8 +45,36 @@ one.
 </figure>
 
 One point deserves emphasis: even the radio horizon is only where the direct ray grazes, not where
-the signal ends. Diffraction carries energy into the region beyond, so the horizon bounds line of
-sight, not communication.
+the signal ends. Diffraction carries energy into the region beyond, so the radio horizon bounds line
+of sight, not communication.
+
+## The propagation regimes
+
+Within radio line of sight the signal still weakens with distance, and it does so in stages that a
+single free-space figure misses. Two distances mark the transitions. For the running example of this
+post, a 120 m drone linking a 2 m ground terminal at 900 MHz, the breakpoint falls at about 2.9 km,
+where the ground reflection begins to cancel the direct ray and the loss steepens. The radio horizon
+falls at 51 km, where the direct ray is finally blocked and only diffraction reaches into the shadow.
+The two are an order of magnitude apart, $2.9\ \text{km} \ll 51\ \text{km}$, and they play very
+different roles. A link passes through three regimes as range grows, measured against free space as
+the reference:
+
+| Regime | Distance | What happens | Falloff |
+| :--- | :--- | :--- | :---: |
+| Free space | reference | direct ray only, first Fresnel zone clear | $d^{2}$ |
+| Two-ray, below breakpoint | $d < d_\text{bp}$ | direct and reflected rays oscillate around free space | $\approx d^{2}$ |
+| Two-ray, above breakpoint | $d_\text{bp} < d < d_\text{h}$ | direct and reflected rays nearly cancel | $d^{4}$ |
+| Diffraction | $d > d_\text{h}$ | Earth blocks the direct ray, field bends into the shadow | steep |
+
+where $d_\text{bp}$ is the breakpoint and $d_\text{h}$ the radio horizon. The first three regimes are
+line of sight; only the last lies beyond it. Later sections put numbers on them: the two-ray loss and
+its breakpoint, then the diffraction loss past the horizon.
+
+The term "beyond line of sight" needs care against this map. Visual line of sight, the operator's
+eyesight, is only a kilometre or two for a small drone, far shorter than the radio horizon. A BVLoS
+drone link is beyond that *visual* limit but is kept within the *radio* horizon by flying high, so
+the radio operates in the two-ray regime, not the diffraction regime. Crossing the radio horizon into
+diffraction is the costly last resort, not the normal mode.
 
 ## Antenna height dominates
 
@@ -62,15 +90,15 @@ traces the square-root law.
 
 Height is not simply another term in the budget. Transmit power adds decibels of margin to a link
 that already closes, but no amount of power creates line of sight where the Earth blocks it. Past
-the horizon the direct ray is gone, and the signal that remains has propagated by diffraction or
+the radio horizon the direct ray is gone, and the signal that remains has propagated by diffraction or
 tropospheric scatter, with tens of decibels of excess loss. Height changes the propagation regime;
 power only scales it. This is why a modest transmitter on a high platform outperforms a strong one
 on the ground.
 
 ## Path loss beyond free space
 
-Within line of sight, the received power still falls with distance, and the rate of that fall is
-usually worse than the free-space figure. Free-space loss follows the inverse-square law [2],
+The two line-of-sight regimes differ only in how fast the loss grows with distance. Free-space loss
+follows the inverse-square law [2],
 
 $$
 L_\text{fs} = 32.44 + 20\log_{10} f_\text{MHz} + 20\log_{10} d_\text{km} \quad [\text{dB}],
@@ -86,7 +114,7 @@ $$
 L_\text{2-ray} = 40\log_{10} d - 20\log_{10} h_t - 20\log_{10} h_r \quad [\text{dB}],
 $$
 
-with $d$ and the heights in metres. It rises 40 dB per decade and, notably, does not depend on
+with $d$ and the heights in metres. It rises 40 dB per decade and does not depend on
 frequency. The crossover between the two regimes is the breakpoint,
 
 $$
@@ -106,9 +134,9 @@ tens of kilometres is deep in the $d^{4}$ regime. The free-space number quoted f
 understates the loss by 20 dB per decade past the breakpoint. That is the first correction a BVLoS
 budget needs.
 
-## Diffraction past the horizon
+## Diffraction past the radio horizon
 
-Beyond the horizon the direct ray is blocked, yet a link can still close. Radio waves diffract around the
+Beyond the radio horizon the direct ray is blocked, yet a link can still close. Radio waves diffract around the
 Earth's curvature and over terrain, filling the geometric shadow with a field that decays smoothly
 rather than vanishing. The loss relative to free space is governed by the Fresnel-Kirchhoff
 diffraction parameter,
@@ -130,7 +158,7 @@ Two thresholds matter in practice. Grazing incidence, where the ray just touches
 already costs 6 dB, so an unobstructed Fresnel zone is not free. Full free-space behaviour needs the
 ray to clear the obstruction by about 0.6 of the first Fresnel zone radius,
 $F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$. Below that clearance the diffraction loss grows, and a
-BVLoS link operating past the horizon pays it on top of the path loss. Smooth-sphere diffraction
+BVLoS link operating past the radio horizon pays it on top of the path loss. Smooth-sphere diffraction
 over the bulge itself is heavier than a single knife edge, but the principle is the same: the
 shadow is illuminated, at a cost that the geometry predicts.
 
@@ -138,7 +166,7 @@ shadow is illuminated, at a cost that the geometry predicts.
 
 The $k = 4/3$ factor rests on a standard refractivity gradient of about $-39$ N-units per kilometre.
 That gradient is a long-term median, and the real atmosphere departs from it hour to hour. When the
-gradient is weaker, the horizon shortens (sub-refraction). When it is stronger, the horizon extends,
+gradient is weaker, the radio horizon shortens (sub-refraction). When it is stronger, it extends,
 and beyond a critical gradient the atmosphere traps the wave against the surface entirely. This is
 ducting, a super-refractive layer that can carry a signal hundreds of kilometres past its nominal
 horizon, common over water and in coastal and evening conditions [5]. Figure 5 shows the horizon
@@ -154,13 +182,13 @@ occasional long reach and a hazard for co-channel interference from distant tran
 refraction is a fade mechanism that a static budget does not capture. The $4.12\sqrt{h}$ horizon is
 a planning figure, not a guarantee for any given hour.
 
-## A worked beyond-line-of-sight budget
+## A worked BVLoS budget
 
-The pieces combine into a range budget. Consider a drone relay at 900 MHz. The drone flies at 120 m
-with a 2 dBi antenna and 30 dBm (1 W) transmit power. The ground station sits at 2 m with a 10 dBi
-directional antenna. The target range is 40 km, inside the two-terminal radio horizon of
-$4.12(\sqrt{120} + \sqrt{2}) \approx 51$ km, so the link is line of sight, though well past the
-2.9 km breakpoint.
+The pieces combine into a range budget for the running example. The drone at 120 m carries a 2 dBi
+antenna and 30 dBm (1 W) of transmit power; the ground station at 2 m has a 10 dBi directional
+antenna. The target range is 40 km, inside the two-terminal radio horizon of
+$4.12(\sqrt{120} + \sqrt{2}) \approx 51$ km and well past the 2.9 km breakpoint, so by the map above
+the link is line of sight, deep in the two-ray regime.
 
 The path loss uses the $d^{4}$ regime. At 40 km the free-space figure is 123.6 dB, and the two-ray
 loss is
@@ -208,21 +236,41 @@ The design levers are visible in the budget. Raising the drone lifts the horizon
 regime it also lowers the path loss by 20 dB per decade of height, on top of protecting the Fresnel
 clearance and buying margin against sub-refraction. A lower data rate lowers the sensitivity
 directly, as the previous post showed. A
-higher gain antenna helps, at the cost of pointing. Transmit power is the weakest lever, because it
+higher gain antenna helps, at the cost of pointing. Transmit power is the weakest lever because it
 scales the margin without changing the geometry that sets whether a link is possible at all.
 
-## What the horizon formula hides
+The height dependence makes this concrete. Fix the range at 40 km, along with the transmit power,
+gains, and rate, and vary only the drone height, holding the ground terminal at 2 m. Within line of
+sight the excess over free space is the two-ray figure; beyond the radio horizon it is the spherical-earth
+diffraction loss of ITU-R P.526 [4], computed here for horizontal polarization over average ground,
+which deepens quickly into the shadow.
 
-The $4.12\sqrt{h}$ horizon is a useful first number and a poor last one. It assumes a fixed
-atmosphere, when $k$ swings from sub-refraction to ducting. It assumes a smooth sphere, when real
-terrain both blocks and, through diffraction, carries the signal past the geometric edge. It treats
-the horizon as a boundary, when the field beyond it is a predictable diffraction loss, not zero. And
-it says nothing about path loss, which past the breakpoint follows the $d^{4}$ law rather than the
-free-space figure most budgets quote.
+| Drone height (ground 2 m) | Radio horizon | 40 km path | Excess over free space | Margin |
+| :--- | :---: | :---: | :---: | :---: |
+| 120 m | 51 km | within radio horizon | +12.9 dB (two-ray) | **+4.5 dB** |
+| 40 m | 32 km | 8 km beyond radio horizon | +35.6 dB (diffraction) | **−18.2 dB** |
+| 15 m | 22 km | 18 km beyond radio horizon | +46.1 dB (diffraction) | **−28.7 dB** |
+
+At 120 m the radio horizon reaches 51 km, so the path is comfortably within line of sight and the
+link closes with 4.5 dB of margin. Drop the drone to 40 m and the radio horizon falls to 32 km,
+putting the
+path 8 km into the diffraction shadow, where P.526 adds 36 dB and the link fails by 18 dB. At 15 m
+the shadow is 18 km deep, the diffraction loss reaches 46 dB, and only far more height, gain, or a
+far lower rate could recover it. Height does not merely trim the budget: it decides whether the link
+is line of sight or diffraction-limited, a difference of tens of decibels.
+
+## What the radio horizon formula hides
+
+The $4.12\sqrt{h}$ radio horizon is a useful first number and a poor last one. It assumes a fixed
+atmosphere when $k$ swings from sub-refraction to ducting. It assumes a smooth sphere when real
+terrain both blocks the signal and diffracts it past the geometric edge. It treats the radio horizon
+as a boundary when the field beyond it is a predictable diffraction loss, not zero. And it says
+nothing about path loss, which past the breakpoint follows the $d^{4}$ law rather than the free-space
+figure most budgets quote.
 
 Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diffraction loss beyond
-the horizon, plus a fade margin, measured against the receiver sensitivity. The horizon marks where
-free space ends, not where the link ends. The signal that survives past it, weak and diffracted,
+the radio horizon, plus a fade margin, measured against the receiver sensitivity. The radio horizon
+marks where free space ends, not where the link ends. The signal that survives past it, weak and diffracted,
 still has to be pulled out of the noise, which is where the accounting of a later post on operating
 under interference will begin.
 

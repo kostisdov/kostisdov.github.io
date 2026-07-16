@@ -374,6 +374,11 @@ a:hover {
   font-size: 1.04em;
 }
 
+/* keep inline math (e.g. d_bp < d < d_h) on one line inside table cells */
+.prose td .katex {
+  white-space: nowrap;
+}
+
 /* ---------- side projects ---------- */
 
 .side-projects {
