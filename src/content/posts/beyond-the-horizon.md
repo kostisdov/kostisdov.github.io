@@ -123,7 +123,11 @@ $$
 d_\text{bp} \approx \frac{4 h_t h_r}{\lambda},
 $$
 
-where the first Fresnel zone first touches the ground. Below it the two rays interfere and the loss
+where the first Fresnel zone first touches the ground. That zone is the ellipsoid around the direct
+ray within which a secondary path is less than half a wavelength longer than the direct one; its
+radius at a point splitting the path into lengths $d_1$ and $d_2$ is
+$F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$, widest at midpath, and an obstruction inside it
+interferes with the signal. Below the breakpoint the two rays interfere and the loss
 oscillates around the free-space curve. Above it the $d^{4}$ law takes over. Figure 3 shows both.
 
 <figure>
@@ -156,12 +160,9 @@ whose loss depends only on $\nu$ [4]. Figure 4 plots it.
 <figcaption>Fig. 4: Knife-edge diffraction loss against the parameter ν. For ν below about −0.8 the ray has 0.6 of the first Fresnel zone clear and the loss is negligible. At grazing (ν = 0) the loss is 6 dB, and it climbs steadily into the shadow (ν > 0). "No line of sight" is not "no link"; it is a predictable excess loss.</figcaption>
 </figure>
 
-Two thresholds matter in practice. The first Fresnel zone is the ellipsoid around the direct ray
-within which a secondary path is less than half a wavelength longer than the direct one, so an
-obstruction inside it interferes with the signal. Its radius is
-$F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$, widest at midpath, and full free-space behaviour needs
-the ray to clear the obstruction by about 0.6 of it; at grazing, where the ray just touches the
-obstruction, a knife edge already costs 6 dB. This clearance is a line-of-sight criterion and applies
+Two thresholds matter in practice. Full free-space behaviour needs the ray to clear an obstruction by
+about 0.6 of the first Fresnel zone radius; at grazing, where the ray just touches the obstruction, a
+knife edge already costs 6 dB. This clearance is a line-of-sight criterion and applies
 well within the radio horizon. The obstruction may be a hilltop or the Earth's own bulge rising into
 the zone as the path lengthens. Clearance shrinks with range until the bulge grazes the ray at the
 radio horizon; beyond it the direct ray is blocked, and the smooth-sphere diffraction loss, heavier
