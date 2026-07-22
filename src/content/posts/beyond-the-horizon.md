@@ -157,9 +157,11 @@ whose loss depends only on $\nu$ [4]. Figure 4 plots it.
 </figure>
 
 Two thresholds matter in practice. Grazing incidence, where the ray just touches the obstruction,
-already costs 6 dB, so an unobstructed Fresnel zone is not free. Full free-space behaviour needs the
-ray to clear the obstruction by about 0.6 of the first Fresnel zone radius,
-$F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$. Below that clearance the diffraction loss grows, and a
+already costs 6 dB, so an unobstructed Fresnel zone is not free. The first Fresnel zone is the
+ellipsoid around the direct ray within which a secondary path is less than half a wavelength longer
+than the direct one, so an obstruction inside it interferes with the signal. Its radius is
+$F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$, widest at midpath, and full free-space behaviour needs
+the ray to clear the obstruction by about 0.6 of it. Below that clearance the diffraction loss grows, and a
 BVLoS link operating past the radio horizon pays it on top of the path loss. Smooth-sphere diffraction
 over the bulge itself is heavier than a single knife edge, but the principle is the same: the
 shadow is illuminated, at a cost that the geometry predicts.
