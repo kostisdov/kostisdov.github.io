@@ -136,7 +136,7 @@ tens of kilometres is deep in the $d^{4}$ regime. The free-space number quoted f
 understates the loss by 20 dB per decade past the breakpoint. That is the first correction a BVLoS
 budget needs.
 
-## Diffraction past the radio horizon
+## Diffraction and Fresnel clearance
 
 Beyond the radio horizon the direct ray is blocked, yet a link can still close. Radio waves diffract around the
 Earth's curvature and over terrain, filling the geometric shadow with a field that decays smoothly
@@ -156,15 +156,17 @@ whose loss depends only on $\nu$ [4]. Figure 4 plots it.
 <figcaption>Fig. 4: Knife-edge diffraction loss against the parameter ν. For ν below about −0.8 the ray has 0.6 of the first Fresnel zone clear and the loss is negligible. At grazing (ν = 0) the loss is 6 dB, and it climbs steadily into the shadow (ν > 0). "No line of sight" is not "no link"; it is a predictable excess loss.</figcaption>
 </figure>
 
-Two thresholds matter in practice. Grazing incidence, where the ray just touches the obstruction,
-already costs 6 dB, so an unobstructed Fresnel zone is not free. The first Fresnel zone is the
-ellipsoid around the direct ray within which a secondary path is less than half a wavelength longer
-than the direct one, so an obstruction inside it interferes with the signal. Its radius is
+Two thresholds matter in practice. The first Fresnel zone is the ellipsoid around the direct ray
+within which a secondary path is less than half a wavelength longer than the direct one, so an
+obstruction inside it interferes with the signal. Its radius is
 $F_1 = \sqrt{\lambda d_1 d_2 / (d_1 + d_2)}$, widest at midpath, and full free-space behaviour needs
-the ray to clear the obstruction by about 0.6 of it. Below that clearance the diffraction loss grows, and a
-BVLoS link operating past the radio horizon pays it on top of the path loss. Smooth-sphere diffraction
-over the bulge itself is heavier than a single knife edge, but the principle is the same: the
-shadow is illuminated, at a cost that the geometry predicts.
+the ray to clear the obstruction by about 0.6 of it; at grazing, where the ray just touches the
+obstruction, a knife edge already costs 6 dB. This clearance is a line-of-sight criterion and applies
+well within the radio horizon. The obstruction may be a hilltop or the Earth's own bulge rising into
+the zone as the path lengthens. Clearance shrinks with range until the bulge grazes the ray at the
+radio horizon; beyond it the direct ray is blocked, and the smooth-sphere diffraction loss, heavier
+than a single knife edge, adds to the free-space path loss. The principle is the same throughout: the
+shadow is illuminated at a cost that the geometry predicts.
 
 ## The atmosphere and the 4/3 fiction
 
