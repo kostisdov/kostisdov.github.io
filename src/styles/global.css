@@ -510,3 +510,26 @@ a:hover {
     gap: 0.15rem;
   }
 }
+
+.skill-list {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.skill-list li {
+  position: relative;
+  padding: 0.42rem 0 0.42rem 1.2rem;
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+.skill-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.05rem;
+  top: 0.92rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: var(--accent);
+}
