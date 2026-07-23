@@ -1,6 +1,6 @@
 ---
 title: "The geometry of long-range radio links"
-description: "How far a beyond visual line of sight (BVLoS) radio link reaches is set by geometry: the radio horizon, the antenna height that fixes it, and the diffraction that carries the signal past it."
+description: "How far a beyond visual line of sight (BVLoS) radio link reaches is set mainly by geometry: the radio horizon, the antenna height that fixes it, and the diffraction that carries the signal past it."
 date: 2026-07-11
 tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
