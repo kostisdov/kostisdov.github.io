@@ -6,8 +6,8 @@ tags: ["signals", "wireless"]
 image: "/og/beyond-the-horizon.png"
 ---
 
-A long-range terrestrial link, a drone relay, a sensor backhaul, a tactical radio, is limited by
-the shape of the Earth as much as by its power budget. The received signal weakens with distance,
+Long-range terrestrial links, from drone relays to tactical radios, are limited by
+the shape of the Earth as much as by their power budget. The received signal weakens with distance,
 but the ground also curves away, and past a certain range the two terminals can no longer see each
 other at all. That range, the horizon, is often quoted as the hard limit on a beyond visual line of
 sight (BVLoS) link. It is not. Radio waves bend past the geometric edge, diffract into the
