@@ -46,7 +46,7 @@ discarded energy becomes an irreducible error floor.
 
 <figure>
 <img src="/posts/doppler-resilient-ofdm/fig1_ici.svg" alt="Two heatmaps of the frequency-domain channel matrix magnitude: nearly diagonal at low Doppler, and a wide band around the diagonal at high Doppler." />
-<figcaption>Fig. 1: Magnitude of the frequency-domain channel matrix H for one realization of a doubly dispersive channel. At low mobility (left, ε = 0.05) the matrix is nearly diagonal and a single tap per subcarrier suffices. At high mobility (right, ε = 1.2) a band of off-diagonal energy appears, the inter-carrier interference that a single-tap equalizer discards.</figcaption>
+<figcaption>Fig. 1: Magnitude of the frequency-domain channel matrix H: nearly diagonal at low mobility (left, ε = 0.05), an off-diagonal ICI band at high mobility (right, ε = 1.2).</figcaption>
 </figure>
 
 ## The delay-Doppler alternative
@@ -123,7 +123,7 @@ OFDM, on the same channel, never leaves its floor. Figure 2 shows the four recei
 
 <figure>
 <img src="/posts/doppler-resilient-ofdm/fig2_ber.svg" alt="Coded BER against SNR at normalized Doppler 1.2: single-tap OFDM is a flat floor; ICI-aware OFDM, FDE-OTFS, and joint OTFS fall together within about 1 dB." />
-<figcaption>Fig. 2: Coded bit error rate against signal-to-noise ratio on a doubly dispersive channel at ε = 1.2 (QPSK, rate-1/2 LDPC). Standard single-tap CP-OFDM never leaves its ICI floor. The proposed ICI-aware OFDM tracks the full delay-Doppler OTFS detector within 1 dB. FDE-OTFS, the OTFS waveform equalized at OFDM complexity, coincides with the OFDM curve rather than with joint OTFS.</figcaption>
+<figcaption>Fig. 2: Coded BER at ε = 1.2 (QPSK, rate-1/2 LDPC). Single-tap CP-OFDM stays at its ICI floor; ICI-aware OFDM tracks joint OTFS within 1 dB; FDE-OTFS coincides with the OFDM curve, not joint OTFS.</figcaption>
 </figure>
 
 A single control experiment locates the source of the OTFS advantage. Take the OTFS waveform, its
