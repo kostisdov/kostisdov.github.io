@@ -1,7 +1,7 @@
 ---
 title: "What statistical physics sees in the heartbeat"
 description: "Detrended fluctuation analysis (DFA) was invented to find long-range correlations in DNA. Applied to cardiac rhythm, it measures the fractal scaling that standard HRV metrics are blind to, and that deteriorates before the linear statistics change."
-date: 2026-06-12
+date: 2026-08-02
 tags: ["signals", "biomedical"]
 draft: false
 ---
