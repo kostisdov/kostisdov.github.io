@@ -1,6 +1,6 @@
 ---
-title: "Rethinking OFDM for high-mobility channels"
-description: "Fast fading couples OFDM subcarriers through inter-carrier interference, and delay-Doppler waveforms such as OTFS are proposed as the remedy. A fair, matched-complexity comparison shows that a well-designed OFDM equalizer recovers most of the gap, because the advantage was never in the modulation."
+title: "OFDM vs OTFS: A pragmatic comparison"
+description: "Fast fading breaks the orthogonality of OFDM subcarriers and creates inter-carrier interference, for which delay-Doppler waveforms such as OTFS are proposed as the remedy. A fair, matched-complexity comparison shows that a well-designed OFDM equalizer recovers most of the gap."
 date: 2026-07-27
 tags: ["signals", "wireless"]
 draft: false
@@ -152,8 +152,8 @@ its backward compatibility with deployed hardware, is worth retaining. The hones
 delay-Doppler literature is not that OFDM must be replaced, but that it needs a better receiver in
 high mobility, a far more modest requirement.
 
-None of this is the final word. The comparison here is at QPSK, the gap to OTFS is real if small, and
-the delay-Doppler view remains an elegant way to reason about doubly dispersive channels. But for an
+None of this is the final word. This comparison aims to provide a grounded baseline. The
+delay-Doppler view remains an elegant way to reason about doubly dispersive channels. But for an
 engineer deciding where to invest, the lever is the equalizer, not the waveform. The full derivation,
 the matched-complexity framework, and reproducible code are in the
 [preprint and repository](https://github.com/kostisdov/ofdm_vs_otfs) [6].
