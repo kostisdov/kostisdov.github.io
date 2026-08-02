@@ -115,13 +115,15 @@ narrows as it slows, so equalizer complexity is spent only where the Doppler req
 
 Under this matched comparison the outcome is consistent, and it holds even in the extreme. At a
 normalized Doppler of $\varepsilon = 1.2$, where the maximum Doppler shift exceeds the subcarrier
-spacing outright, the ICI-aware OFDM receiver comes within about 1 dB of the full delay-Doppler OTFS
-detector, at up to two orders of magnitude fewer equalizer taps. Standard single-tap OFDM, on the
-same channel, never leaves its floor. Figure 2 shows the four receivers together.
+spacing outright, the ICI-aware OFDM receiver comes within 1 dB of the full delay-Doppler OTFS
+detector at a fraction of its equalizer cost. It inverts a frequency-domain band of about seven taps
+per subcarrier (half-width $Q = 3$), whereas the joint OTFS detector couples each delay-Doppler bin
+to roughly two hundred others (a delay-Doppler band of about $21 \times 9$ taps). Standard single-tap
+OFDM, on the same channel, never leaves its floor. Figure 2 shows the four receivers together.
 
 <figure>
 <img src="/posts/doppler-resilient-ofdm/fig2_ber.svg" alt="Coded BER against SNR at normalized Doppler 1.2: single-tap OFDM is a flat floor; ICI-aware OFDM, FDE-OTFS, and joint OTFS fall together within about 1 dB." />
-<figcaption>Fig. 2: Coded bit error rate against signal-to-noise ratio on a doubly dispersive channel at ε = 1.2 (QPSK, rate-1/2 LDPC). Standard single-tap CP-OFDM never leaves its ICI floor. The proposed ICI-aware OFDM tracks the full delay-Doppler OTFS detector within about 1 dB. FDE-OTFS, the OTFS waveform equalized at OFDM complexity, coincides with the OFDM curve rather than with joint OTFS.</figcaption>
+<figcaption>Fig. 2: Coded bit error rate against signal-to-noise ratio on a doubly dispersive channel at ε = 1.2 (QPSK, rate-1/2 LDPC). Standard single-tap CP-OFDM never leaves its ICI floor. The proposed ICI-aware OFDM tracks the full delay-Doppler OTFS detector within 1 dB. FDE-OTFS, the OTFS waveform equalized at OFDM complexity, coincides with the OFDM curve rather than with joint OTFS.</figcaption>
 </figure>
 
 A single control experiment locates the source of the OTFS advantage. Take the OTFS waveform, its
