@@ -1,13 +1,13 @@
 ---
 title: "OFDM vs OTFS: A pragmatic comparison"
-description: "Fast fading breaks the orthogonality of OFDM subcarriers and creates inter-carrier interference, for which delay-Doppler waveforms such as OTFS are proposed as the remedy. A fair, matched-complexity comparison shows that a well-designed OFDM equalizer recovers most of the gap."
+description: "Fast fading breaks the orthogonality of OFDM subcarriers and creates inter-carrier interference, for which delay-Doppler waveforms such as OTFS are proposed as the remedy. However, a fair comparison shows that a properly designed OFDM performs on par with OTFS at much lower complexity."
 date: 2026-07-27
 tags: ["signals", "wireless"]
 draft: false
 ---
 
 A radio link on a fast-moving platform, a low-Earth-orbit satellite or a high-speed train, sees a
-channel that changes not only across frequency but within an OFDM symbol. Orthogonal
+channel that changes not only across frequency but potentially within an OFDM symbol. Orthogonal
 frequency-division multiplexing (OFDM) rests on the opposite assumption, that the channel is constant
 over a symbol so that its subcarriers remain orthogonal. Once the platform moves quickly enough that
 assumption fails: each subcarrier drifts during the symbol and leaks energy into adjacent
