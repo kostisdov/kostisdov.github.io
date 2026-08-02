@@ -99,8 +99,8 @@ are identical, which already shows that the modulation alone changes nothing. Un
 floor. Under a banded equalizer at an equal tap budget, a frequency-domain band for OFDM and a
 delay-Doppler band for OTFS, the comparison is at last even-handed.
 
-The OFDM receiver appropriate to that experiment is a banded, multi-tap frequency-domain equalizer
-that accounts for the ICI [3], [4]. Rather than retain only the diagonal of $H$, it retains a band of
+The OFDM receiver appropriate to that experiment is a zero-padded OFDM (ZP-OFDM) with a banded,
+multi-tap frequency-domain equalizer that accounts for the ICI [3], [4]. Rather than retain only the diagonal of $H$, it retains a band of
 half-width $Q$ about the diagonal and inverts that band. The band is sized to the mobility,
 
 $$
@@ -116,9 +116,9 @@ narrows as it slows, so equalizer complexity is spent only where the Doppler req
 Under this matched comparison the outcome is consistent, and it holds even in the extreme. At a
 normalized Doppler of $\varepsilon = 1.2$, where the maximum Doppler shift exceeds the subcarrier
 spacing outright, the ICI-aware OFDM receiver comes within 1 dB of the full delay-Doppler OTFS
-detector at a fraction of its equalizer cost. It inverts a frequency-domain band of about seven taps
-per subcarrier (half-width $Q = 3$), whereas the joint OTFS detector couples each delay-Doppler bin
-to roughly two hundred others (a delay-Doppler band of about $21 \times 9$ taps). Standard single-tap
+detector at a fraction of its equalizer cost. It inverts a frequency-domain band of seven taps
+per subcarrier (half-width $Q = 3$), whereas the joint OTFS detector spans a delay-Doppler band of
+189 taps per bin ($21 \times 9$). Standard single-tap
 OFDM, on the same channel, never leaves its floor. Figure 2 shows the four receivers together.
 
 <figure>
