@@ -277,8 +277,7 @@ figure most budgets quote.
 
 Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diffraction loss beyond
 the radio horizon, plus a fade margin, measured against the receiver sensitivity. The radio horizon
-marks where free space ends, not where the link ends. The weak, diffracted field beyond it must still be recovered from the noise, the subject of a later
-post on operating under interference.
+marks where free space ends, not where the link ends. The weak, diffracted field beyond it must still be recovered from the noise.
 
 ## References
 
