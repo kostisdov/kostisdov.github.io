@@ -279,8 +279,8 @@ Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diff
 the radio horizon, plus a fade margin, measured against the receiver sensitivity. Two transitions
 precede the end of the link and are easily mistaken for it: the breakpoint, where free space gives
 way to the $d^{4}$ law, and the radio horizon, where line of sight gives way to diffraction. The link
-ends at neither, but at the range where the accumulated loss finally exceeds the margin above the
-receiver sensitivity.
+ends at neither, but at the range where the accumulated loss finally exceeds the receiver
+sensitivity.
 
 ## References
 
