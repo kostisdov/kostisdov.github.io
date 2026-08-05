@@ -19,8 +19,8 @@ receiver can operate.
 
 The noise floor of any receiver begins with the thermal noise at its input. A resistor at
 temperature $T$ delivers a noise power spectral density $kT = -174$ dBm/Hz at room temperature. Raised by the front-end noise figure
-(NF), it becomes the input-referred noise density $N_0 = kT + \text{NF}$, and over a bandwidth $B$
-the noise floor is [1]
+(NF), it becomes the input-referred noise density $N_0 = kT + \text{NF}$. The noise floor over a bandwidth
+$B$ is then [1]
 
 $$
 \text{floor} = N_0 + 10\log_{10}B = kT + \text{NF} + 10\log_{10}B,
@@ -28,7 +28,7 @@ $$
 
 in dBm, with $B$ in hertz. It rises with bandwidth: every doubling of $B$ adds $3$ dB. A modulation
 and coding scheme (MCS) decodes once the SNR exceeds a minimum value $\text{SNR}_\text{min}$, so
-the sensitivity, the minimum recoverable signal power $P_\text{min}$, is
+the sensitivity of that MCS is
 
 $$
 P_\text{min} = \text{floor} + \text{SNR}_\text{min}.
