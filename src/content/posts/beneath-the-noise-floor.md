@@ -26,7 +26,7 @@ $$
 \text{floor} = N_0 + 10\log_{10}B = kT + \text{NF} + 10\log_{10}B \quad [\text{dBm}],
 $$
 
-with $B$ in hertz. It rises with bandwidth, i.e., every doubling of $B$ adds $3$ dB. A modulation
+with $B$ in hertz. A modulation
 and coding scheme (MCS) decodes once the SNR exceeds a minimum value $\text{SNR}_\text{min}$, so
 the sensitivity of that MCS is
 
