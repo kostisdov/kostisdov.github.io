@@ -276,8 +276,11 @@ nothing about path loss, which past the breakpoint follows the $d^{4}$ law rathe
 figure most budgets quote.
 
 Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diffraction loss beyond
-the radio horizon, plus a fade margin, measured against the receiver sensitivity. The radio horizon
-marks where free space ends, not where the link ends. The weak, diffracted field beyond it must still be recovered from the noise.
+the radio horizon, plus a fade margin, measured against the receiver sensitivity. Two transitions
+precede the end of the link and are easily mistaken for it: the breakpoint, where free space gives
+way to the $d^{4}$ law, and the radio horizon, where line of sight gives way to diffraction. The link
+ends at neither, but at the range where the accumulated loss finally exceeds the margin above the
+receiver sensitivity.
 
 ## References
 
