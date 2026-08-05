@@ -75,8 +75,8 @@ its breakpoint, then the diffraction loss past the horizon.
 The term "beyond line of sight" needs care against this map. Visual line of sight, the operator's
 eyesight, is only a kilometre or two for a small drone, far shorter than the radio horizon. A BVLoS
 drone link is beyond that *visual* limit but is kept within the *radio* horizon by flying high, so
-the radio operates in the two-ray regime, not the diffraction regime. Crossing the radio horizon into
-diffraction is the costly last resort, not the normal mode.
+the radio operates in the two-ray regime, not the diffraction regime. Operating beyond the radio horizon, in the diffraction region, carries tens of decibels of excess
+loss and is avoided in a well-designed link.
 
 ## Antenna height dominates
 
@@ -277,9 +277,8 @@ figure most budgets quote.
 
 Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diffraction loss beyond
 the radio horizon, plus a fade margin, measured against the receiver sensitivity. The radio horizon
-marks where free space ends, not where the link ends. The signal that survives past it, weak and diffracted,
-still has to be pulled out of the noise, which is where the accounting of a later post on operating
-under interference will begin.
+marks where free space ends, not where the link ends. The weak, diffracted field beyond it must still be recovered from the noise, the subject of a later
+post on operating under interference.
 
 ## References
 
