@@ -275,12 +275,11 @@ as a boundary when the field beyond it is a predictable diffraction loss, not ze
 nothing about path loss, which past the breakpoint follows the $d^{4}$ law rather than the free-space
 figure most budgets quote.
 
-Real BVLoS range is set by the full budget: the $d^{4}$ path loss, plus any diffraction loss beyond
-the radio horizon, plus a fade margin, measured against the receiver sensitivity. Two transitions
-precede the end of the link and are easily mistaken for it: the breakpoint, where free space gives
-way to the $d^{4}$ law, and the radio horizon, where line of sight gives way to diffraction. The link
-ends at neither, but at the range where the accumulated loss finally exceeds the receiver
-sensitivity.
+Real BVLoS range follows from the full budget. That budget weighs the $d^{4}$ path loss and any
+diffraction loss beyond the radio horizon against the receiver sensitivity and a fade margin. Two
+transitions along the way are easily mistaken for the end of the link. At the breakpoint free space
+gives way to the $d^{4}$ law; at the radio horizon line of sight gives way to diffraction. The link
+ends at neither. It ends where the accumulated loss finally exceeds the receiver sensitivity.
 
 ## References
 
