@@ -34,7 +34,7 @@ $$
 P_\text{min} = \text{floor} + \text{SNR}_\text{min}.
 $$
 
-Nothing forces $\text{SNR}_\text{min}$ to be positive. A robust MCS can require a negative SNR in
+Note that nothing forces $\text{SNR}_\text{min}$ to be positive. A robust MCS can require a negative SNR in
 decibels, and then $P_\text{min}$ lies below the noise floor: the receiver recovers a signal
 weaker than the noise sharing its band. The remainder of the article examines how far
 $\text{SNR}_\text{min}$ can be reduced, by what mechanisms, and against what limit.
