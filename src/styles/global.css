@@ -574,3 +574,14 @@ a:hover {
     gap: 0.15rem;
   }
 }
+
+@media (max-width: 560px) {
+  .site-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .site-nav ul {
+    gap: 1.2rem;
+  }
+}
