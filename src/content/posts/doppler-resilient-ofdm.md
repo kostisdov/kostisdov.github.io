@@ -132,7 +132,7 @@ joint detector. Its curve does not follow joint OTFS; it coincides with the OFDM
 on its own, confers no gain. The advantage that OTFS displays comes from the joint equalizer that the
 spreading makes convenient, not from the spreading itself.
 
-What remains is a clean division of labour. A doubly dispersive channel carries a fixed amount of
+What remains is a clean division of labor. A doubly dispersive channel carries a fixed amount of
 diversity, and that diversity can be harvested in one of two places: in the equalizer, as OTFS does
 with a complex joint detector, or in the code and interleaver, as coded OFDM does with a simple one.
 The two reach the same diversity order. The question is therefore not which waveform is fundamentally
@@ -143,7 +143,7 @@ contains, the code and the pilots.
 
 This is not merely an academic question. High-mobility OFDM is already in service: 5G non-terrestrial
 networks (NTN) operate OFDM against the several-kilohertz Doppler of low-Earth-orbit satellites [5].
-And in 2025 the 3GPP standardization effort settled the 6G waveform in OFDM's favour, adopting
+And in 2025 the 3GPP standardization effort settled the 6G waveform in OFDM's favor, adopting
 cyclic-prefix OFDM in the downlink and adding discrete Fourier transform spread OFDM as an uplink
 option. A departure from OFDM was available, and was not taken.
 

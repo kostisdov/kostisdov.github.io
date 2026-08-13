@@ -465,6 +465,40 @@ a:hover {
   font-weight: 600;
 }
 
+.contact-line {
+  margin-top: 2.6rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.pub-list {
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.pub-list li {
+  padding: 0.4rem 0;
+}
+
+.pub-list li::marker {
+  color: var(--ink-soft);
+}
+
+.pub-list em {
+  font-style: italic;
+}
+
+.pub-more {
+  margin: 0.9rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
 @media (max-width: 640px) {
   .project-index {
     grid-template-columns: 1fr;

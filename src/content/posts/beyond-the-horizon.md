@@ -11,7 +11,7 @@ the shape of the Earth as much as by their power budget. The received signal wea
 but the ground also curves away, and past a certain range the two terminals can no longer see each
 other at all. That range, the horizon, is often quoted as the hard limit on a beyond visual line of
 sight (BVLoS) link. It is not. Radio waves bend past the geometric edge, diffract into the
-shadow behind it, and on some days duct for hundreds of kilometres. This post works through the
+shadow behind it, and on some days duct for hundreds of kilometers. This post works through the
 geometry and the propagation that set real BVLoS range, and closes with a drone budget tied to the
 receiver sensitivity of [the previous post](/posts/beneath-the-noise-floor/).
 
@@ -19,7 +19,7 @@ receiver sensitivity of [the previous post](/posts/beneath-the-noise-floor/).
 
 The geometric horizon follows from a tangent line to a sphere. For an antenna at height $h$ above a
 smooth Earth of radius $R$, the tangent grazing distance is $d = \sqrt{2Rh}$. With $R = 6371$ km
-and $h$ in metres, this is
+and $h$ in meters, this is
 
 $$
 d_\text{geo} = 3.57\sqrt{h} \quad [\text{km}].
@@ -73,7 +73,7 @@ line of sight; only the last lies beyond it. Later sections put numbers on them:
 its breakpoint, then the diffraction loss past the horizon.
 
 The term "beyond line of sight" needs care against this map. Visual line of sight, the operator's
-eyesight, is only a kilometre or two for a small drone, far shorter than the radio horizon. A BVLoS
+eyesight, is only a kilometer or two for a small drone, far shorter than the radio horizon. A BVLoS
 drone link is beyond that *visual* limit but is kept within the *radio* horizon by flying high, so
 the radio operates in the two-ray regime, not the diffraction regime. Operating beyond the radio horizon, in the diffraction region, carries tens of decibels of excess
 loss and is avoided in a well-designed link.
@@ -116,7 +116,7 @@ $$
 L_\text{2-ray} = 40\log_{10} d - 20\log_{10} h_t - 20\log_{10} h_r \quad [\text{dB}],
 $$
 
-with $d$ and the heights in metres. It rises 40 dB per decade and does not depend on
+with $d$ and the heights in meters. It rises 40 dB per decade and does not depend on
 frequency. The crossover between the two regimes is the breakpoint,
 
 $$
@@ -132,11 +132,11 @@ oscillates around the free-space curve. Above it the $d^{4}$ law takes over. Fig
 
 <figure>
 <img src="/posts/beyond-the-horizon/path-loss.svg" alt="Path loss versus distance, the two-ray model oscillating below the breakpoint and settling onto the d-to-the-fourth asymptote above it, diverging from free space." />
-<figcaption>Fig. 3: Path loss against distance at 900 MHz, drone at 120 m, ground at 2 m. The two-ray model (red) oscillates around free space (dashed) below the breakpoint at 2.9 km, then settles onto the d⁴ asymptote (dotted, 40 dB/decade). Beyond a few kilometres the honest exponent is 4, not 2.</figcaption>
+<figcaption>Fig. 3: Path loss against distance at 900 MHz, drone at 120 m, ground at 2 m. The two-ray model (red) oscillates around free space (dashed) below the breakpoint at 2.9 km, then settles onto the d⁴ asymptote (dotted, 40 dB/decade). Beyond a few kilometers the honest exponent is 4, not 2.</figcaption>
 </figure>
 
-For long range with modest antenna heights the breakpoint sits at a few kilometres, so a link of
-tens of kilometres is deep in the $d^{4}$ regime. The free-space number quoted for such a link
+For long range with modest antenna heights the breakpoint sits at a few kilometers, so a link of
+tens of kilometers is deep in the $d^{4}$ regime. The free-space number quoted for such a link
 understates the loss by 20 dB per decade past the breakpoint. That is the first correction a BVLoS
 budget needs.
 
@@ -152,7 +152,7 @@ $$
 $$
 
 where $h$ is the height of the obstruction above the direct ray, negative when the ray clears it,
-and $d_1, d_2$ are the distances to the obstruction. A single ridge is modelled as a knife edge,
+and $d_1, d_2$ are the distances to the obstruction. A single ridge is modeled as a knife edge,
 whose loss depends only on $\nu$ [4]. Figure 4 plots it.
 
 <figure>
@@ -160,7 +160,7 @@ whose loss depends only on $\nu$ [4]. Figure 4 plots it.
 <figcaption>Fig. 4: Knife-edge diffraction loss against the parameter ν. For ν below about −0.8 the ray has 0.6 of the first Fresnel zone clear and the loss is negligible. At grazing (ν = 0) the loss is 6 dB, and it climbs steadily into the shadow (ν > 0). "No line of sight" is not "no link"; it is a predictable excess loss.</figcaption>
 </figure>
 
-Two thresholds matter in practice. Full free-space behaviour needs the ray to clear an obstruction by
+Two thresholds matter in practice. Full free-space behavior needs the ray to clear an obstruction by
 about 0.6 of the first Fresnel zone radius; at grazing, where the ray just touches the obstruction, a
 knife edge already costs 6 dB. This clearance is a line-of-sight criterion and applies
 well within the radio horizon. The obstruction may be a hilltop or the Earth's own bulge rising into
@@ -171,11 +171,11 @@ shadow is illuminated at a cost that the geometry predicts.
 
 ## The atmosphere and the 4/3 fiction
 
-The $k = 4/3$ factor rests on a standard refractivity gradient of about $-39$ N-units per kilometre.
+The $k = 4/3$ factor rests on a standard refractivity gradient of about $-39$ N-units per kilometer.
 That gradient is a long-term median, and the real atmosphere departs from it hour to hour. When the
 gradient is weaker, the radio horizon shortens (sub-refraction). When it is stronger, it extends,
 and beyond a critical gradient the atmosphere traps the wave against the surface entirely. This is
-ducting, a super-refractive layer that can carry a signal hundreds of kilometres past its nominal
+ducting, a super-refractive layer that can carry a signal hundreds of kilometers past its nominal
 horizon, common over water and in coastal and evening conditions [5]. Figure 5 shows the horizon
 sliding with $k$.
 

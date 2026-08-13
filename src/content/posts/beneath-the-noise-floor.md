@@ -8,7 +8,7 @@ image: "/og/beneath-the-noise-floor.png"
 
 A receiver can decode a signal whose received power is weaker than the noise in the same band.
 Deep-space telemetry, satellite navigation, and covert tactical links all depend on it. A spectrum
-analyser at the antenna shows only noise, and still the decoder recovers the data without error.
+analyzer at the antenna shows only noise, and still the decoder recovers the data without error.
 The noise floor appears to be a hard limit on what can be extracted; it is not. The paradox resolves
 once two quantities are kept apart: the signal-to-noise ratio over the occupied band, which has no
 lower bound, and the energy per bit relative to the noise density, which does. The relation between
@@ -252,11 +252,11 @@ $$
 
 so the low-rate link closes with $3.5$ dB of margin, while the high-rate one, at $E_b/N_0 = -15$
 dB, falls far short of the requirement. Over the $400$ kHz channel the noise floor is $N_0 + 10\log_{10}W = -115.0$
-dBm, so the received signal at $-133$ dBm sits $18$ dB beneath it: a spectrum analyser shows only
+dBm, so the received signal at $-133$ dBm sits $18$ dB beneath it: a spectrum analyzer shows only
 noise. Despreading recovers the $20$ dB of processing gain, lifting the information-band SNR from
 $-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the last $3$ dB, for $E_b/N_0 = 5$ dB. An
 occupied-band SNR of $-18$ dB and an energy per bit of $+5$ dB coexist without contradiction; the
-analyser reading is an artefact of the spread, and the decoder responds only to $E_b/N_0$.
+analyzer reading is an artifact of the spread, and the decoder responds only to $E_b/N_0$.
 
 The reverse case is instructive. Had the rate stayed fixed and the bandwidth been expanded by
 spreading, rather than the rate lowered inside a fixed band, sensitivity would not have moved at

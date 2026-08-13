@@ -132,7 +132,7 @@ during expiration, an effect termed respiratory sinus arrhythmia and mediated by
 nerve, the parasympathetic branch of the autonomic nervous system. Greater HF power indicates
 higher vagal tone.
 
-The low-frequency band (LF, 0.04 to 0.15 Hz) is centred near 0.1 Hz, the characteristic
+The low-frequency band (LF, 0.04 to 0.15 Hz) is centered near 0.1 Hz, the characteristic
 frequency of the baroreflex, the blood-pressure regulation loop, and reflects a combination of
 sympathetic and parasympathetic activity.
 

@@ -7,7 +7,7 @@ draft: false
 ---
 
 The [first post](https://kostisdov.github.io/posts/reading-the-heart-with-a-radio-toolbox/)
-in this series analysed an ECG with a linear signal processing pipeline: a band-pass filter,
+in this series analyzed an ECG with a linear signal processing pipeline: a band-pass filter,
 R-peak detection to form a tachogram of RR intervals, and Welch's method to estimate the
 spectrum, yielding the low- and high-frequency bands and the LF/HF ratio.
 
