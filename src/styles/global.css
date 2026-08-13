@@ -111,6 +111,22 @@ a:hover {
   text-decoration: none;
 }
 
+.site-footer .sep {
+  color: var(--rule);
+}
+
+@media (max-width: 560px) {
+  .site-footer {
+    display: block;
+  }
+  .site-footer > span {
+    display: block;
+  }
+  .site-footer > span + span {
+    margin-top: 0.6rem;
+  }
+}
+
 /* ---------- home hero ---------- */
 
 .hero {
