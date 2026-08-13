@@ -46,7 +46,7 @@ with a one-year period, and the solstices are precisely its extrema.
 
 <figure>
 <img src="/posts/solstice/declination-geometry.svg?v=2" alt="Schematic of the celestial sphere: the equator and the tilted ecliptic crossing at the equinoxes, with the Sun at the June solstice." />
-<figcaption>Fig. 1: The celestial sphere viewed obliquely. The Sun travels once a year around the ecliptic (red), tilted by the obliquity ε from the celestial equator (grey); the two cross at the equinoxes, where the declination is zero. The declination δ is the Sun's angular height above the equator, and it reaches its extreme values of +ε at the June solstice and −ε at the December solstice.</figcaption>
+<figcaption>Fig. 1: The celestial sphere viewed obliquely. The Sun travels once a year around the ecliptic (red), tilted by the obliquity ε from the celestial equator (gray); the two cross at the equinoxes, where the declination is zero. The declination δ is the Sun's angular height above the equator, and it reaches its extreme values of +ε at the June solstice and −ε at the December solstice.</figcaption>
 </figure>
 
 <figure>
@@ -126,7 +126,7 @@ Fig. 3 are this stationarity made visible.
 
 ## The equation of time: when clocks and sundials disagree
 
-The signal analysed so far has been the declination, the Sun's north-south motion. Its
+The signal analyzed so far has been the declination, the Sun's north-south motion. Its
 east-west motion carries a second, subtler structure. Mean solar time, the time kept by a
 clock, advances as though the Sun crossed the meridian at a perfectly uniform rate. The true
 Sun does not. The difference between apparent solar time (a sundial) and mean solar time is
