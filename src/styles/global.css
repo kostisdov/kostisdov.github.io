@@ -475,17 +475,25 @@ a:hover {
 
 .pub-list {
   margin: 1rem 0 0;
-  padding-left: 1.5rem;
+  padding-left: 2.1rem;
+  list-style: none;
+  counter-reset: pub;
   font-size: 0.92rem;
   line-height: 1.5;
 }
 
 .pub-list li {
+  counter-increment: pub;
+  position: relative;
   padding: 0.4rem 0;
 }
 
-.pub-list li::marker {
+.pub-list li::before {
+  content: "[" counter(pub) "]";
+  position: absolute;
+  left: -2.1rem;
   color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .pub-list em {
