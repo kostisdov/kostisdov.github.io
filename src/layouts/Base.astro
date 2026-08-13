@@ -58,6 +58,9 @@ const ogImage = new URL(image, Astro.site);
         <ul>
           <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Posts</a></li>
           <li>
+            <a href="/consulting/" aria-current={path.startsWith('/consulting') ? 'page' : undefined}>Consulting</a>
+          </li>
+          <li>
             <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About Me</a>
           </li>
         </ul>
