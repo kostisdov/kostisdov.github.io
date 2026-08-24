@@ -133,9 +133,9 @@ on its own, confers no gain. The advantage that OTFS displays comes from the joi
 spreading makes convenient, not from the spreading itself.
 
 What remains is a clean division of labor. A doubly dispersive channel carries a fixed amount of
-diversity. That diversity can be harvested in one of two places. OTFS harvests it in the equalizer
-with a complex joint detector; coded OFDM harvests it in the code and interleaver and keeps the
-equalizer simpler. Both reach a similar diversity order. The question is therefore not which waveform is fundamentally
+diversity. OTFS harvests it in the equalizer with a complex joint detector, while coded OFDM
+harvests it in the code and interleaver and keeps the equalizer simpler. Both reach a similar
+diversity order. The question is therefore not which waveform is fundamentally
 superior but where to spend the complexity. OFDM spends it in components a modern link already
 contains: the code and the pilots.
 
