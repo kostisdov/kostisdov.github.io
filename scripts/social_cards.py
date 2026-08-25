@@ -167,10 +167,8 @@ plt.close(fig)
 fig = new_card()
 fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
          family="monospace", va="center")
-fig.text(0.060, 0.60, "Signals, systems,\nand other curiosities.", fontsize=54,
+fig.text(0.060, 0.56, "Signals, systems,\nand other curiosities.", fontsize=54,
          color=INK, va="center", linespacing=1.05)
-fig.text(0.062, 0.20, "Notes on waves, signals, and the physics of everyday phenomena.",
-         fontsize=21, color=INK_SOFT, style="italic", va="center")
 
 # faint ridgeline band across the lower third
 ax = fig.add_axes([0.0, 0.0, 1.0, 0.30])
