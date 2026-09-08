@@ -198,21 +198,23 @@ Range follows from sensitivity, and sensitivity from a low rate. At the required
 minimum received power is the energy per bit the decoder needs, spent at the bit rate:
 
 $$
-P_\text{min} = E_b R_b = \frac{E_b}{T_b}, \qquad E_b = (E_b/N_0)_\text{req}\,N_0 .
+P_\text{min} = E_b^\text{req} R_b = \frac{E_b^\text{req}}{T_b}, \qquad E_b^\text{req} = (E_b/N_0)_\text{req}\,N_0 .
 $$
 
 A lower rate lengthens the time per bit $T_b = 1/R_b$, so the receiver collects the energy the
 decoder requires from a proportionally lower received power, integrated over the longer symbol. This
-is the mechanism behind the whole article. Writing $N_0 = kT + \text{NF}$ and adding the implementation loss
-$L_\text{impl}$, the gap from the ideal (carrier and timing synchronization error, phase noise,
-channel-estimation error, filter and pulse-shaping mismatch, and quantization, typically $1$ to $3$
-dB), the sensitivity in decibels, with $R_b$ in bit/s, is
+is the mechanism behind the whole article. Taking $10\log_{10}$ of
+$P_\text{min} = (E_b/N_0)_\text{req}\,N_0\,R_b$, writing the noise density as $N_0 = kT + \text{NF} =
+-174 + \text{NF}$ dBm/Hz, and adding an implementation loss $L_\text{impl}$ for the gap from the
+ideal (carrier and timing synchronization error, phase noise, channel-estimation error, filter and
+pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB), the sensitivity, with $R_b$ in
+bit/s, is
 
 $$
 \begin{aligned}
 P_\text{min} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
 + \underbrace{10\log_{10} R_b}_{\text{data rate}} \\[6pt]
-&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{coding gain}}
+&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{required } E_b/N_0}
 + \underbrace{L_\text{impl}}_{\text{implementation}}
 \quad [\text{dBm}].
 \end{aligned}
@@ -254,7 +256,8 @@ so the low-rate link closes with $3.5$ dB of margin, while the high-rate one, at
 dB, falls far short of the requirement. Over the $400$ kHz channel the noise floor is $N_0 + 10\log_{10}W = -115.0$
 dBm, so the received signal at $-133$ dBm sits $18$ dB beneath it: a spectrum analyzer shows only
 noise. Despreading recovers the $20$ dB of processing gain, lifting the information-band SNR from
-$-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the last $3$ dB, for $E_b/N_0 = 5$ dB. An
+$-18$ dB to $+2$ dB, and the rate-$1/2$ code supplies the last $3$ dB (its two coded symbols per
+bit), for $E_b/N_0 = 5$ dB. An
 occupied-band SNR of $-18$ dB and an energy per bit of $+5$ dB coexist without contradiction; the
 analyzer reading is an artifact of the spread, and the decoder responds only to $E_b/N_0$.
 
