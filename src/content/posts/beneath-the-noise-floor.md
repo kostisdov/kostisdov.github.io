@@ -198,14 +198,15 @@ Range follows from sensitivity, and sensitivity from a low rate. At the required
 minimum received power is the energy per bit the decoder needs, spent at the bit rate:
 
 $$
-P_\text{min} = E_b^\text{req} R_b = \frac{E_b^\text{req}}{T_b}, \qquad E_b^\text{req} = (E_b/N_0)_\text{req}\,N_0 .
+P_\text{min} = \left(\frac{E_b}{N_0}\right)_\text{req} N_0\, R_b
+= \left(\frac{E_b}{N_0}\right)_\text{req} \frac{N_0}{T_b} .
 $$
 
 A lower rate lengthens the time per bit $T_b = 1/R_b$, so the receiver collects the energy the
 decoder requires from a proportionally lower received power, integrated over the longer symbol. This
-is the mechanism behind the whole article. Taking $10\log_{10}$ of
-$P_\text{min} = (E_b/N_0)_\text{req}\,N_0\,R_b$, writing the noise density as $N_0 = kT + \text{NF} =
--174 + \text{NF}$ dBm/Hz, and adding an implementation loss $L_\text{impl}$ for the gap from the
+is the mechanism behind the whole article. Taking $10\log_{10}$ of this, writing the noise density
+as $N_0 = kT + \text{NF} = -174 + \text{NF}$ dBm/Hz, and adding an implementation loss
+$L_\text{impl}$ for the gap from the
 ideal (carrier and timing synchronization error, phase noise, channel-estimation error, filter and
 pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB), the sensitivity, with $R_b$ in
 bit/s, is
