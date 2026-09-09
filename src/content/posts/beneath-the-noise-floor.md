@@ -294,9 +294,9 @@ P_\text{total} = 10\log_{10}\!\big(10^{P_\text{therm}/10} + 10^{P_\text{quant}/1
 \quad [\text{dBFS}].
 $$
 
-Whether $P_\text{total}$ collapses onto $P_\text{therm}$, leaving the receiver thermal-limited,
-depends on the margin between the two floors, which the ADC resolution and the AGC gain set
-together. For a representative front end, $\text{NF} = 3$ dB and $G_\text{AGC} = 40$ dB:
+Whether $P_\text{total}$ collapses onto $P_\text{therm}$ depends on the margin between the two
+floors, which the ADC resolution and the AGC gain set together. A wide margin leaves the receiver
+thermal-limited. For a representative front end, $\text{NF} = 3$ dB and $G_\text{AGC} = 40$ dB:
 
 | BW (MHz) | Bits | Thermal (dBFS) | Quant. (dBFS) | Margin (dB) | Combined (dBFS) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -311,8 +311,9 @@ At $16$ bits the quantization floor sits $31$ dB or more below thermal, the comb
 the thermal one, and the receiver is thermal-limited at every bandwidth. At $12$ bits the margin
 narrows to $7$ dB at $2.5$ MHz, where quantization lifts the floor by nearly a decibel, a direct
 loss of sensitivity that eases at wider bandwidth only because the thermal floor itself rises. The
-requirement is enough AGC gain to lift thermal clear of quantization and enough resolution to keep
-it there, so the digital floor falls back onto the analog one the rest of the article assumed [1].
+design goal is simple: enough AGC gain to lift the thermal floor clear of quantization, and enough
+resolution to keep it there. The digital floor then falls back onto the analog one the rest of the
+article assumed [1].
 
 Digitization is only half of realizing the processing gain; the other half is synchronization,
 since the receiver must acquire and track the code and carrier at the operating SNR, and any
