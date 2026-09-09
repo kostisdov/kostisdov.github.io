@@ -198,8 +198,7 @@ Range follows from sensitivity, and sensitivity from a low rate. At the required
 minimum received power is the energy per bit the decoder needs, spent at the bit rate:
 
 $$
-P_\text{min} = \left(\frac{E_b}{N_0}\right)_\text{req} N_0\, R_b
-= \left(\frac{E_b}{N_0}\right)_\text{req} \frac{N_0}{T_b} .
+P_\text{min} = \left(\frac{E_b}{N_0}\right)_\text{req} N_0\, R_b .
 $$
 
 A lower rate lengthens the time per bit $T_b = 1/R_b$, so the receiver collects the energy the
