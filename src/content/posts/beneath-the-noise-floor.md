@@ -168,10 +168,10 @@ repetition code and adds no coding gain in a Gaussian channel. In fading it earn
 faded copies giving diversity, a steepening of the error-rate curve that coding alone does not
 provide [6].
 
-Robustness and range are two readings of the same operation, turning only on what is held fixed:
-spread a fixed rate wider and the gain is robustness at no added range; hold the bandwidth and let
-the spread come from a lower rate, as in the last section, and the same $10\log_{10}\text{SF}$ is
-range.
+The same $10\log_{10}\text{SF}$ reads as robustness or as range depending on what is held fixed.
+Hold the information rate and widen the band: the occupied-band SNR falls, $E_b/N_0$ does not, and
+the gain is robustness with no added range. Hold the band and take the expansion from a lower rate,
+as with GPS and LoRa: each bit carries more energy, $E_b/N_0$ rises, and the same factor is range.
 
 A real link spends its bandwidth budget on both,
 
@@ -299,20 +299,20 @@ $$
 
 Whether $P_\text{total}$ collapses onto $P_\text{therm}$, leaving the receiver thermal-limited,
 depends on the margin between the two floors, which the ADC resolution and the AGC gain set
-together. For a representative front end, $\text{NF} = 2$ dB and $G_\text{AGC} = 40$ dB:
+together. For a representative front end, $\text{NF} = 3$ dB and $G_\text{AGC} = 40$ dB:
 
 | BW (MHz) | Bits | Thermal (dBFS) | Quant. (dBFS) | Margin (dB) | Combined (dBFS) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 2.5 | 12 | −68.0 | −74.0 | 6.0 | −67.0 |
-| 2.5 | 16 | −68.0 | −98.1 | 30.1 | −68.0 |
-| 5 | 12 | −65.0 | −74.0 | 9.0 | −64.5 |
-| 5 | 16 | −65.0 | −98.1 | 33.1 | −65.0 |
-| 10 | 12 | −62.0 | −74.0 | 12.0 | −61.7 |
-| 10 | 16 | −62.0 | −98.1 | 36.1 | −62.0 |
+| 2.5 | 12 | −67.0 | −74.0 | 7.0 | −66.2 |
+| 2.5 | 16 | −67.0 | −98.1 | 31.1 | −67.0 |
+| 5 | 12 | −64.0 | −74.0 | 10.0 | −63.6 |
+| 5 | 16 | −64.0 | −98.1 | 34.1 | −64.0 |
+| 10 | 12 | −61.0 | −74.0 | 13.0 | −60.8 |
+| 10 | 16 | −61.0 | −98.1 | 37.1 | −61.0 |
 
-At $16$ bits the quantization floor sits $30$ dB or more below thermal, the combined floor equals
+At $16$ bits the quantization floor sits $31$ dB or more below thermal, the combined floor equals
 the thermal one, and the receiver is thermal-limited at every bandwidth. At $12$ bits the margin
-narrows to $6$ dB at $2.5$ MHz, where quantization lifts the floor by nearly a decibel, a direct
+narrows to $7$ dB at $2.5$ MHz, where quantization lifts the floor by nearly a decibel, a direct
 loss of sensitivity that eases at wider bandwidth only because the thermal floor itself rises. The
 requirement is enough AGC gain to lift thermal clear of quantization and enough resolution to keep
 it there, so the digital floor falls back onto the analog one the rest of the article assumed [1].
