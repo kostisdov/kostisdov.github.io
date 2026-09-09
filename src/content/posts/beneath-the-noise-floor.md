@@ -212,13 +212,11 @@ pulse-shaping mismatch, and quantization, typically $1$ to $3$ dB), the sensitiv
 bit/s, is
 
 $$
-\begin{aligned}
-P_\text{min} = {}& \underbrace{-174 + \text{NF}}_{\text{noise density}}
-+ \underbrace{10\log_{10} R_b}_{\text{data rate}} \\[6pt]
-&+ \underbrace{(E_b/N_0)_\text{req}}_{\text{required } E_b/N_0}
+P_\text{min} = \underbrace{-174 + \text{NF}}_{\text{noise density}}
++ \underbrace{10\log_{10} R_b}_{\text{data rate}}
++ \underbrace{(E_b/N_0)_\text{req}}_{\text{required } E_b/N_0}
 + \underbrace{L_\text{impl}}_{\text{implementation}}
 \quad [\text{dBm}].
-\end{aligned}
 $$
 
 Every term is a design lever, and bandwidth is not among them. The only ways to improve sensitivity
@@ -230,9 +228,9 @@ loss. In summary:
 | Lever | Sensitivity term it moves | Bandwidth cost | Ceiling |
 | :--- | :---: | :---: | :---: |
 | Lower noise figure | NF | none | hardware |
-| Reduce bit rate | 10·log₁₀ Rb | none (spread to fill W) | unbounded |
-| Coding gain (FEC) | (Eb/N0) required | expands W | −1.59 dB wall |
-| Multi-antenna processing | array gain | none | 10·log₁₀ M, plus diversity |
+| Reduce bit rate | $10\log_{10} R_b$ | none (spread to fill W) | unbounded |
+| Coding gain (FEC) | $(E_b/N_0)_\text{required}$ | expands W | −1.59 dB wall |
+| Multi-antenna processing | array gain | none | $10\log_{10} M$, plus diversity |
 | Spreading at fixed Rb | in-band SNR only | expands W | 0 dB (robustness only) |
 
 Consider two rates in the same $400$ kHz channel with $L_\text{impl} = 0$. Filling the
