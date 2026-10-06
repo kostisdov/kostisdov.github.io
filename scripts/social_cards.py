@@ -161,6 +161,41 @@ plt.close(fig)
 
 
 # ---------------------------------------------------------------------------
+# When the airframe joins the array card: title block on the left, bearing
+# lines from three drones (textbook vs flight-calibrated) on the right.
+# ---------------------------------------------------------------------------
+_ad = np.load(os.path.join(os.path.dirname(__file__), "data", "airframe-array.npz"))
+
+fig = new_card()
+fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
+         family="monospace", va="center")
+fig.text(0.060, 0.63, "When the airframe\njoins the array", fontsize=50, color=INK,
+         va="center", linespacing=1.05)
+fig.text(0.062, 0.28, "Direction finding on a small drone, and why the array\n"
+                      "it carries is not the array in the datasheet.",
+         fontsize=20, color=INK_SOFT, style="italic", va="center",
+         linespacing=1.3)
+fig.text(0.062, 0.10, "kostisdov.github.io", fontsize=15, color=ACCENT,
+         family="monospace", va="center")
+
+ax = fig.add_axes([0.64, 0.10, 0.33, 0.80])
+_xy = _ad["ex_xy"]
+for _k, _c, _lw in (("ideal", INK_SOFT, 1.4), ("flight", ACCENT, 2.2)):
+    for _p, _b in zip(_xy, _ad[f"ex_bearing_{_k}"]):
+        ax.plot([_p[0], _p[0] + 7000 * np.cos(_b)], [_p[1], _p[1] + 7000 * np.sin(_b)],
+                color=_c, lw=_lw)
+ax.plot(0, 0, "*", ms=22, color=INK)
+ax.plot(_xy[:, 0], _xy[:, 1], "^", ms=13, color=ACCENT_DEEP)
+ax.set_xlim(-4200, 4200)
+ax.set_ylim(-4200, 4200)
+ax.set_aspect("equal")
+ax.set_facecolor(PAPER)
+ax.axis("off")
+fig.savefig(os.path.join(OUT, "when-the-airframe-joins-the-array.png"), facecolor=PAPER)
+plt.close(fig)
+
+
+# ---------------------------------------------------------------------------
 # Default site card: wordmark + tagline, with a faint interference ridgeline
 # echoing the home-page hero art.
 # ---------------------------------------------------------------------------
@@ -190,6 +225,7 @@ plt.close(fig)
 
 print("wrote:")
 for name in ("solstice.png", "beneath-the-noise-floor.png",
-             "beyond-the-horizon.png", "default.png"):
+             "beyond-the-horizon.png", "when-the-airframe-joins-the-array.png",
+             "default.png"):
     p = os.path.join(OUT, name)
     print(f"  {p}  ({os.path.getsize(p)} bytes)")
