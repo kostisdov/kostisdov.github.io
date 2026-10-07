@@ -52,7 +52,9 @@ $$
 
 The search runs over whichever response vectors the receiver holds: a formula, or a table of
 measured or simulated response vectors, a sampled version of the manifold. If they are not those
-of the installed array, the estimate is wrong regardless of noise.
+of the installed array, the estimate is wrong regardless of noise. MUSIC returns a direction of arrival (DoA) in
+the frame of the array; its azimuth, referred to north through the heading of the platform, is the
+bearing used for localization.
 
 ## A drone in the simulator
 
