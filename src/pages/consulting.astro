@@ -18,28 +18,28 @@ import Base from '../layouts/Base.astro';
     </article>
 
     <div class="prose">
-      <h2 class="section-head">Capabilities</h2>
+      <h2 class="section-head">Services</h2>
+      <ul class="capability-list">
+        <li>Architecture and trade-off studies for tactical and UxV datalinks, from requirements to link and system budgets.</li>
+        <li>Waveform and modem design for harsh propagation environments, such as high-Doppler and low-SNR conditions.</li>
+        <li>DSP and FPGA implementation of signal processing pipelines, from fixed-point HLS models to RTL verification with cocotb.</li>
+        <li>Array signal processing: MIMO, adaptive beamforming, and direction finding.</li>
+        <li>MAC and network design for MANETs: link adaptation, power control, and routing under jamming.</li>
+        <li>System validation and characterization, from hardware-in-the-loop testing to field trials.</li>
+      </ul>
+    </div>
+
+    <div class="prose">
+      <h2 class="section-head">RF digital twins</h2>
       <ul class="capability-list">
         <li>
-          <strong>Waveform &amp; PHY design.</strong> Custom waveform and baseband transceiver design
-          for harsh propagation environments, such as high-Doppler and low-SNR regimes.
+          <strong>Installed antennas.</strong> Full-wave EM simulation of arrays mounted on the
+          airframe, to predict and calibrate direction-finding and beamforming performance. See
+          <a href="/posts/when-the-airframe-joins-the-array/"><em>When the airframe joins the array</em></a>.
         </li>
         <li>
-          <strong>SDR &amp; link design.</strong> SDR architecture definition, link budget
-          analysis, and digital front-end optimization.
-        </li>
-        <li>
-          <strong>FPGA &amp; DSP implementation.</strong> Fixed-point modeling of baseband
-          algorithms, high-level synthesis, and RTL verification via cocotb. Resource-constrained
-          implementation of DSP pipelines for embedded platforms.
-        </li>
-        <li>
-          <strong>Array processing.</strong> Direction finding, interference mitigation algorithms,
-          MIMO and diversity schemes.
-        </li>
-        <li>
-          <strong>Integration &amp; testing.</strong> System evaluation, characterization, and field
-          testing of digital links.
+          <strong>Radio environment.</strong> Site-specific ray tracing coupled with network
+          simulation for coverage, link planning, and EW scenario analysis.
         </li>
       </ul>
     </div>
