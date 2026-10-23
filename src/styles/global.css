@@ -130,7 +130,7 @@ a:hover {
 /* ---------- home hero ---------- */
 
 .hero {
-  padding: 3.2rem 0 0;
+  padding: 3.2rem 0 3.6rem;
 }
 
 .hero h1 {
@@ -153,13 +153,6 @@ a:hover {
   font-size: 1.05rem;
   color: var(--ink-soft);
   margin: 0 0 2.2rem;
-}
-
-.field-art {
-  display: block;
-  width: 100%;
-  height: 280px;
-  margin: 0 0 3.5rem;
 }
 
 /* ---------- post index ---------- */
