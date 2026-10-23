@@ -109,7 +109,7 @@ The first design computes the reciprocal square root with a table, in four steps
 
 <figure>
 <img src="/posts/from-math-to-silicon/fig1-rsqrt-table.svg" alt="Left: the curve one over square root of u for u from a quarter to one, with a coarse piecewise-linear approximation. Right: the error of the 384-entry table, up to about 1000 LSB using the entry below the address alone and about 2 LSB with linear interpolation." />
-<figcaption>Fig. 2: Left: 1/√u over the normalised range, with a coarse interpolated table for illustration. Right: error of the 384-entry table actually used, in units of its own LSB (2⁻¹⁷). Grey: the entry below the address alone. Red: with linear interpolation.</figcaption>
+<figcaption>Fig. 2: Left: 1/√u over the normalised range, with a coarse interpolated table for illustration. Right: error of the 384-entry table used in the design, in units of its own LSB (2⁻¹⁷). Grey: the entry below the address alone. Red: with linear interpolation.</figcaption>
 </figure>
 
 After normalisation the table only sees $u$ between 1/4 and 1, for any input. So 384 entries cover
