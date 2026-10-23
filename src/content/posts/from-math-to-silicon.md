@@ -17,20 +17,17 @@ choice costs.
 ## The workflow
 
 Fig. 1 shows a typical flow for implementing a DSP block on an FPGA. The algorithm is first developed in
-floating point, typically double precision in Python or MATLAB. At this stage word lengths, rounding and
-overflow can still be ignored.
+floating point, typically double precision in Python or MATLAB, where word lengths, rounding and overflow
+can still be ignored. The fixed-point model comes next. It fixes the format of every signal and every
+rounding and saturation step, and it defines the performance of the final design. It becomes the golden
+reference model.
 
-The fixed-point model comes next. It fixes the format of every signal and every rounding and saturation
-step, and it defines the performance of the final design. It becomes the golden reference model.
-
-The implementation follows in one of two ways. In HLS, the C++ code is first checked in C simulation
-(C-sim). C synthesis then turns it into RTL, which is checked again in C/RTL co-simulation. The
-alternative is hand-written RTL. In both cases, RTL verification drives the design with test vectors and
-requires the outputs to be bit-accurate to the golden model.
-
-Synthesis and implementation then report the resources and the timing. The hardware test closes the loop
-on the board. Two feedback paths run through the flow. The error against the float model sets the word
-lengths. Resources and timing can send the design back to other word lengths or another architecture.
+The implementation follows either in HLS or as hand-written RTL. In HLS, the C++ code is checked in C
+simulation (C-sim), turned into RTL by C synthesis, and checked again in C/RTL co-simulation. In both
+cases, RTL verification requires the outputs to be bit-accurate to the golden model. Synthesis and
+implementation then report the resources and the timing, and the hardware test closes the loop on the
+board. Two feedback paths run through the flow: the error against the float model sets the word lengths,
+and resources and timing can send the design back to other word lengths or another architecture.
 
 <figure>
 <img src="/posts/from-math-to-silicon/fig0-workflow.svg" alt="Flow diagram: floating-point algorithm, fixed-point golden reference model, then either HLS C++ with C simulation, C synthesis and co-simulation or hand-written RTL, then RTL verification against golden vectors from the fixed-point model, synthesis and implementation, and hardware test, with feedback from the error budget and from resources and timing." />
@@ -281,10 +278,9 @@ a single 28-bit carry chain and will likely reach a higher Fmax than the multipl
 
 The resource figures come from Yosys, not from Vivado, and include no timing. Vivado may also place the
 384-entry table in block RAM rather than LUTs. In design A, the clock rate is most likely limited by
-the single-cycle multiply-add, the leading-zero count with its barrel shift, or the rounding shift. In design B, they are the normalisation and pre-rotation stage and the
-output stage. The HLS code was verified in C simulation only and not synthesised, so no C/RTL
-co-simulation was run. The RTL was simulated on 100,015 vectors; only the fixed-point models were checked
-over all $2^{32}$ inputs.
+the single-cycle multiply-add, the leading-zero count with its barrel shift, or the rounding shift. In
+design B, the likely limits are the normalisation and pre-rotation stage and the output stage. The HLS
+code was not synthesised, and the RTL was verified in simulation on test vectors rather than exhaustively.
 
 ## Summary
 
