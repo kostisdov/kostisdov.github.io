@@ -1,5 +1,41 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/rows.css';
+
+const roles = [
+  ['2026 - now', 'Senior DSP & Wireless Communications Engineer', 'KRUSH Labs', 'DSP, SDR development, and wireless communications engineering for next-generation UAV datalinks.'],
+  ['2026 - now', 'Wireless Systems Architect', 'Dovelos Engineering', 'Wireless engineering consultancy for defense, space, and telecom clients.'],
+  ['2024 - 2026', 'Senior Wireless Communications Engineer', 'Intracom Defense', 'PHY design of next-generation MANET radios for unmanned vehicles: waveform and modem design, MIMO, channel coding, link adaptation, LPD/LPI.'],
+  ['2022 - 2024', 'Antenna Engineer', 'Meta Materials Inc.', 'Metamaterial-based solutions for 5G mmWave coverage; evolutionary optimization of anomalous reflectors.'],
+  ['2021 - 2022', 'Postdoctoral Research Fellow', "Queen's University Belfast", 'Superdirectivity for energy-efficient mmWave/sub-THz massive MIMO (ERC project BEATRICE).'],
+  ['2017 - 2021', 'Doctoral Researcher', 'Universitat Pompeu Fabra, Barcelona', 'Novel PHY techniques for 6G: ultra-massive MIMO processing, modeling of intelligent reflecting surfaces, interference alignment for dense networks.'],
+  ['2015 - 2016', 'Research Intern', 'CTTC, Barcelona', 'Implemented a slotted ALOHA network using LoRa radios and STM32 microcontrollers.'],
+  ['2014 - 2015', 'Graduate Research Assistant', 'EPFL, Lausanne', 'Investigated the finite-length performance of irregular repetition slotted ALOHA (IRSA).'],
+];
+
+const pubs: { year: string; title: string; authors: string; venue: string; href?: string }[] = [
+  { year: '2026', title: 'OFDM with adaptive ICI-aware equalization for doubly dispersive channels', authors: 'K. Dovelos', venue: 'Preprint. Paper and code: github.com/kostisdov/ofdm_vs_otfs', href: 'https://github.com/kostisdov/ofdm_vs_otfs' },
+  { year: '2023', title: 'Superdirective antenna pairs for energy-efficient terahertz massive MIMO', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', venue: 'IEEE Trans. Commun.' },
+  { year: '2022', title: 'Superdirective arrays with finite-length dipoles: Modeling and new perspectives', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', venue: 'Proc. IEEE GLOBECOM' },
+  { year: '2021', title: 'Channel estimation and hybrid combining for wideband terahertz massive MIMO systems', authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', venue: 'IEEE J. Sel. Areas Commun.' },
+  { year: '2021', title: 'Intelligent reflecting surfaces at terahertz bands: Channel modeling and analysis', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, B. Bellalta, and M. Matthaiou', venue: 'Proc. IEEE ICC Workshops' },
+  { year: '2020', title: 'Massive MIMO with multi-antenna users under jointly correlated Ricean fading', authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', venue: 'Proc. IEEE ICC' },
+];
+
+const projects = [
+  {
+    name: 'Pyxida', href: 'https://pyxida.io', link: 'pyxida.io', meta: 'health · cardiology · 2026',
+    text: "A personal companion that helps adults with congenital heart disease (CHD) navigate lifelong care with confidence and clarity. It brings a patient's multi-year medical history and care into one coherent, longitudinal picture, and provides appointment preparation and personalized physical-activity guidance.",
+  },
+  {
+    name: 'FindMyHeart', href: 'https://github.com/kostisdov/FindMyHeart', link: 'GitHub', meta: 'health · metabolic · 2026',
+    text: 'A cardiometabolic companion built for what generic fitness apps miss. It synthesizes your medical records and medication profile with real-time wearable data, delivering clinically contextualized feedback and personalized lifestyle interventions. Developed during LifeHack Athens 2026, a 36-hour life sciences hackathon at the heart of Panathēnea.',
+  },
+  {
+    name: 'birdii', href: 'https://www.linkedin.com/company/birdii/', link: 'LinkedIn', meta: 'news · llms · 2025',
+    text: 'An AI-native news app that redefines how we engage with news. Instead of static headlines, birdii turns each article into something you can interact: summaries, additional background information for unfamiliar topics, and a conversational Q&A that lets you ask follow-up questions and dig as deep as you want.',
+  },
+];
 ---
 
 <Base
@@ -20,151 +56,58 @@ import Base from '../layouts/Base.astro';
         treatment planning and improve prognosis.
       </p>
     </article>
+  </section>
 
-    <ul class="timeline">
-      <li>
-        <span class="when">2026 - now</span>
-        <p class="what">
-          <strong>Senior DSP &amp; Wireless Communications Engineer</strong>, KRUSH Labs. DSP,
-          SDR development, and wireless communications engineering for next-generation UAV
-          datalinks.
-        </p>
-      </li>
-      <li>
-        <span class="when">2026 - now</span>
-        <p class="what">
-          <strong>Wireless Systems Architect</strong>, Dovelos Engineering. Wireless engineering
-          consultancy for defense, space, and telecom clients.
-        </p>
-      </li>
-      <li>
-        <span class="when">2024 - 2026</span>
-        <p class="what">
-          <strong>Senior Wireless Communications Engineer</strong>, Intracom Defense. PHY design
-          of next-generation MANET radios for unmanned vehicles: waveform and modem design, MIMO,
-          channel coding, link adaptation, LPD/LPI.
-        </p>
-      </li>
-      <li>
-        <span class="when">2022 - 2024</span>
-        <p class="what">
-          <strong>Antenna Engineer</strong>, Meta Materials Inc. Metamaterial-based solutions
-          for 5G mmWave coverage; evolutionary optimization of anomalous reflectors.
-        </p>
-      </li>
-      <li>
-        <span class="when">2021 - 2022</span>
-        <p class="what">
-          <strong>Postdoctoral Research Fellow</strong>, Queen's University Belfast.
-          Superdirectivity for energy-efficient mmWave/sub-THz massive MIMO (ERC project
-          BEATRICE).
-        </p>
-      </li>
-      <li>
-        <span class="when">2017 - 2021</span>
-        <p class="what">
-          <strong>Doctoral Researcher</strong>, Universitat Pompeu Fabra, Barcelona. Novel PHY techniques for 6G:
-          ultra-massive MIMO processing, modeling of intelligent reflecting surfaces, interference
-          alignment for dense networks.
-        </p>
-      </li>
-      <li>
-        <span class="when">2015 - 2016</span>
-        <p class="what">
-          <strong>Research Intern</strong>, CTTC, Barcelona. Implemented a slotted ALOHA
-          network using LoRa radios and STM32 microcontrollers.
-        </p>
-      </li>
-      <li>
-        <span class="when">2014 - 2015</span>
-        <p class="what">
-          <strong>Graduate Research Assistant</strong>, EPFL, Lausanne. Investigated the
-          finite-length performance of irregular repetition slotted ALOHA (IRSA).
-        </p>
-      </li>
+  <section class="rows-section">
+    <p class="rows-label">Experience</p>
+    <ul class="rows">
+      {roles.map(([when, role, org, what]) => (
+        <li>
+          <span class="key">{when}</span>
+          <div>
+            <p><strong>{role}</strong>, {org}</p>
+            <p class="sub">{what}</p>
+          </div>
+        </li>
+      ))}
     </ul>
+  </section>
 
-    <div class="prose">
-      <h2 class="section-head">Selected publications</h2>
-      <ol class="pub-list">
+  <section class="rows-section">
+    <p class="rows-label">Selected publications</p>
+    <ul class="rows">
+      {pubs.map((p) => (
         <li>
-          K. Dovelos, "OFDM with adaptive ICI-aware equalization for doubly dispersive channels,"
-          preprint, 2026. Paper and code:
-          <a href="https://github.com/kostisdov/ofdm_vs_otfs">github.com/kostisdov/ofdm_vs_otfs</a>.
+          <span class="key">{p.year}</span>
+          <div>
+            <p>{p.href ? <a href={p.href}>{p.title}</a> : p.title}</p>
+            <p class="sub">{p.authors}. <em>{p.venue}</em></p>
+          </div>
         </li>
-        <li>
-          K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou, "Superdirective antenna pairs
-          for energy-efficient terahertz massive MIMO," <em>IEEE Trans. Commun.</em>, 2023.
-        </li>
-        <li>
-          K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou, "Superdirective arrays with
-          finite-length dipoles: Modeling and new perspectives," in <em>Proc. IEEE GLOBECOM</em>, 2022.
-        </li>
-        <li>
-          K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta, "Channel estimation and hybrid
-          combining for wideband terahertz massive MIMO systems," <em>IEEE J. Sel. Areas Commun.</em>,
-          2021.
-        </li>
-        <li>
-          K. Dovelos, S. D. Assimonis, H. Q. Ngo, B. Bellalta, and M. Matthaiou, "Intelligent
-          reflecting surfaces at terahertz bands: Channel modeling and analysis," in <em>Proc. IEEE
-          ICC Workshops</em>, 2021.
-        </li>
-        <li>
-          K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta, "Massive MIMO with multi-antenna
-          users under jointly correlated Ricean fading," in <em>Proc. IEEE ICC</em>, 2020.
-        </li>
-      </ol>
-      <p class="pub-more">
-        <a href="https://scholar.google.com/citations?user=2kEnpJAAAAAJ&hl=en">Full list on Google Scholar →</a>
-      </p>
-    </div>
+      ))}
+    </ul>
+    <p class="rows-more">
+      <a href="https://scholar.google.com/citations?user=2kEnpJAAAAAJ&hl=en">Full list on Google Scholar →</a>
+    </p>
+  </section>
 
-    <section class="side-projects">
-      <article class="prose">
-        <h2 class="section-head">AI side projects</h2>
-        <p>
-          In my spare time, I apply AI to problems that carry personal and societal weight. If
-          you're interested in contributing, feel free to
-          <a href="mailto:konstantinos.dovelos@gmail.com">drop me a line</a>.
-        </p>
-      </article>
-      <ul class="project-index">
+  <section class="rows-section">
+    <p class="rows-label">AI side projects</p>
+    <p style="margin: 0 0 1rem; max-width: 36rem;">
+      In my spare time, I apply AI to problems that carry personal and societal weight. If
+      you're interested in contributing, feel free to
+      <a href="mailto:konstantinos.dovelos@gmail.com">drop me a line</a>.
+    </p>
+    <ul class="rows">
+      {projects.map((p) => (
         <li>
-          <h2><a href="https://pyxida.io">Pyxida</a></h2>
-          <p class="meta">health · cardiology · 2026</p>
-          <p>
-            A personal companion that helps adults with congenital heart disease (CHD) navigate
-            lifelong care with confidence and clarity. It brings a patient's multi-year medical
-            history and care into one coherent, longitudinal picture, and provides appointment
-            preparation and personalized physical-activity guidance.
-          </p>
-          <p class="project-link"><a href="https://pyxida.io">pyxida.io →</a></p>
+          <span class="key"><a href={p.href}>{p.name} →</a></span>
+          <div>
+            <p>{p.text}</p>
+            <p class="see">{p.meta} · <a href={p.href}>{p.link}</a></p>
+          </div>
         </li>
-        <li>
-          <h2>FindMyHeart</h2>
-          <p class="meta">health · metabolic · 2026</p>
-          <p>
-            A cardiometabolic companion built for what generic fitness apps miss. It
-            synthesizes your medical records and medication profile with real-time wearable
-            data, delivering clinically contextualized feedback and personalized lifestyle
-            interventions. Developed during LifeHack Athens 2026, a 36-hour life sciences
-            hackathon at the heart of Panathēnea.
-          </p>
-          <p class="project-link"><a href="https://github.com/kostisdov/FindMyHeart">GitHub →</a></p>
-        </li>
-        <li>
-          <h2>birdii</h2>
-          <p class="meta">news · llms · 2025</p>
-          <p>
-            An AI-native news app that redefines how we engage with news. Instead of static
-            headlines, birdii turns each article into something you can interact: summaries,
-            additional background information for unfamiliar topics, and a conversational Q&amp;A
-            that lets you ask follow-up questions and dig as deep as you want.
-          </p>
-          <p class="project-link"><a href="https://www.linkedin.com/company/birdii/">LinkedIn →</a></p>
-        </li>
-      </ul>
-    </section>
+      ))}
+    </ul>
   </section>
 </Base>

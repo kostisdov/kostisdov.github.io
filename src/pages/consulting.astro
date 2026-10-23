@@ -1,5 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/rows.css';
+
+const services = [
+  {
+    key: 'Architecture',
+    text: 'Architecture and trade-off studies for tactical and UxV datalinks, from requirements to link and system budgets.',
+    see: [
+      ['The geometry of long-range radio links', '/posts/beyond-the-horizon/'],
+      ['Operating beneath the noise floor', '/posts/beneath-the-noise-floor/'],
+    ],
+  },
+  {
+    key: 'Waveforms',
+    text: 'Waveform and modem design for harsh propagation environments, such as high-Doppler and low-SNR conditions.',
+    see: [['OFDM vs OTFS: A pragmatic comparison', '/posts/doppler-resilient-ofdm/']],
+  },
+  {
+    key: 'DSP / FPGA',
+    text: 'DSP and FPGA implementation of signal processing pipelines, from fixed-point models to RTL verification.',
+    see: [],
+  },
+  {
+    key: 'Arrays',
+    text: 'Array signal processing: MIMO, adaptive beamforming, and direction finding.',
+    see: [['When the airframe joins the array', '/posts/when-the-airframe-joins-the-array/']],
+  },
+  {
+    key: 'MAC layer',
+    text: 'MAC-layer design for link adaptation and power control.',
+    see: [],
+  },
+  {
+    key: 'Validation',
+    text: 'System validation and characterization, from hardware-in-the-loop testing to field trials.',
+    see: [],
+  },
+];
 ---
 
 <Base
@@ -16,52 +53,63 @@ import Base from '../layouts/Base.astro';
         design to DSP/FPGA implementation and field testing.
       </p>
     </article>
-
-    <div class="prose">
-      <h2 class="section-head">Services</h2>
-      <ul class="capability-list">
-        <li>Architecture and trade-off studies for tactical and UxV datalinks, from requirements to link and system budgets.</li>
-        <li>Waveform and modem design for harsh propagation environments, such as high-Doppler and low-SNR conditions.</li>
-        <li>DSP and FPGA implementation of signal processing pipelines, from fixed-point models to RTL verification.</li>
-        <li>Array signal processing: MIMO, adaptive beamforming, and direction finding.</li>
-        <li>MAC and network design for MANETs: link adaptation, power control, and routing under jamming.</li>
-        <li>System validation and characterization, from hardware-in-the-loop testing to field trials.</li>
-      </ul>
-    </div>
-
-    <div class="prose">
-      <h2 class="section-head">RF digital twins</h2>
-      <ul class="capability-list">
-        <li>
-          <strong>Installed antennas.</strong> Full-wave EM simulation of arrays mounted on the
-          airframe, to predict and calibrate direction-finding and beamforming performance. See
-          <a href="/posts/when-the-airframe-joins-the-array/"><em>When the airframe joins the array</em></a>.
-        </li>
-        <li>
-          <strong>Radio environment.</strong> Site-specific ray tracing coupled with network
-          simulation for coverage, link planning, and EW scenario analysis.
-        </li>
-      </ul>
-    </div>
-
-    <div class="prose">
-      <h2 class="section-head">Engagement models</h2>
-      <ul class="capability-list">
-        <li>
-          <strong>Technical consulting.</strong> Targeted architecture sprints, contract engineering,
-          and technical advisory for next-generation wireless systems.
-        </li>
-        <li>
-          <strong>R&amp;D partnerships.</strong> Joint proposals and consortium participation for
-          ESA, EU, and national space and defense initiatives.
-        </li>
-      </ul>
-    </div>
-
-    <div class="prose">
-      <p class="contact-line">
-        Enquiries: <a href="mailto:konstantinos.dovelos@gmail.com">konstantinos.dovelos@gmail.com</a>
-      </p>
-    </div>
   </section>
+
+  <section class="rows-section">
+    <p class="rows-label">Services</p>
+    <ul class="rows">
+      {services.map((s) => (
+        <li>
+          <span class="key">{s.key}</span>
+          <div>
+            <p>{s.text}</p>
+            {s.see.length > 0 && (
+              <p class="see">
+                See{' '}
+                {s.see.map(([title, href], i) => (
+                  <>{i > 0 && ' · '}<a href={href}>{title}</a></>
+                ))}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="rows-section">
+    <p class="rows-label">RF digital twins</p>
+    <ul class="rows">
+      <li>
+        <span class="key">Installed antennas</span>
+        <div>
+          <p>Full-wave EM simulation of arrays mounted on the airframe, to predict and calibrate direction-finding and beamforming performance.</p>
+          <p class="see">See <a href="/posts/when-the-airframe-joins-the-array/">When the airframe joins the array</a></p>
+        </div>
+      </li>
+      <li>
+        <span class="key">Radio environment</span>
+        <p>Site-specific ray tracing coupled with network simulation for coverage, link planning, and EW scenario analysis.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="rows-section">
+    <p class="rows-label">Engagement models</p>
+    <ul class="rows">
+      <li>
+        <span class="key">Technical consulting</span>
+        <p>Targeted architecture sprints, contract engineering, and technical advisory for next-generation wireless systems.</p>
+      </li>
+      <li>
+        <span class="key">R&amp;D partnerships</span>
+        <p>Joint proposals and consortium participation for ESA, EU, and national space and defense initiatives.</p>
+      </li>
+    </ul>
+  </section>
+
+  <div class="rows-cta">
+    <p>Enquiries</p>
+    <p class="see"><a href="mailto:konstantinos.dovelos@gmail.com">konstantinos.dovelos@gmail.com</a></p>
+  </div>
 </Base>

@@ -1,0 +1,107 @@
+/* Ruled rows: a mono key on the left, content on the right (consulting, about). */
+
+.rows-section {
+  margin-top: 3.2rem;
+}
+
+.rows-section:first-of-type {
+  margin-top: 2.6rem;
+}
+
+.rows-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.9rem;
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.rows > li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0 1.2rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rows .key {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  padding-top: 0.3rem;
+}
+
+.rows .key a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.rows p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.rows .sub {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+.rows .see {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin-top: 0.3rem;
+}
+
+.rows .see a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.rows .see a:hover {
+  text-decoration: underline;
+}
+
+.rows-more {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  margin: 0.8rem 0 0;
+}
+
+.rows-cta {
+  margin-top: 3.2rem;
+  padding: 1.3rem 1.4rem;
+  background: var(--paper-deep);
+  border-left: 3px solid var(--accent);
+}
+
+.rows-cta p {
+  margin: 0;
+}
+
+.rows-cta .see {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 560px) {
+  .rows > li {
+    grid-template-columns: 1fr;
+  }
+  .rows .key {
+    padding-top: 0;
+    margin-bottom: 0.2rem;
+  }
+}
