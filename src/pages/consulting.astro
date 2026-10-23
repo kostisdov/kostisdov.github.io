@@ -6,35 +6,26 @@ const services = [
   {
     key: 'Architecture',
     text: 'Architecture and trade-off studies for tactical and UxV datalinks, from requirements to link and system budgets.',
-    see: [
-      ['The geometry of long-range radio links', '/posts/beyond-the-horizon/'],
-      ['Operating beneath the noise floor', '/posts/beneath-the-noise-floor/'],
-    ],
   },
   {
     key: 'Waveforms',
     text: 'Waveform and modem design for harsh propagation environments, such as high-Doppler and low-SNR conditions.',
-    see: [['OFDM vs OTFS: A pragmatic comparison', '/posts/doppler-resilient-ofdm/']],
   },
   {
     key: 'DSP / FPGA',
     text: 'DSP and FPGA implementation of signal processing pipelines, from fixed-point models to RTL verification.',
-    see: [],
   },
   {
     key: 'Arrays',
     text: 'Array signal processing: MIMO, adaptive beamforming, and direction finding.',
-    see: [['When the airframe joins the array', '/posts/when-the-airframe-joins-the-array/']],
   },
   {
     key: 'MAC layer',
     text: 'MAC-layer design for link adaptation and power control.',
-    see: [],
   },
   {
     key: 'Validation',
     text: 'System validation and characterization, from hardware-in-the-loop testing to field trials.',
-    see: [],
   },
 ];
 ---
@@ -61,17 +52,7 @@ const services = [
       {services.map((s) => (
         <li>
           <span class="key">{s.key}</span>
-          <div>
-            <p>{s.text}</p>
-            {s.see.length > 0 && (
-              <p class="see">
-                See{' '}
-                {s.see.map(([title, href], i) => (
-                  <>{i > 0 && ' · '}<a href={href}>{title}</a></>
-                ))}
-              </p>
-            )}
-          </div>
+          <p>{s.text}</p>
         </li>
       ))}
     </ul>
