@@ -46,22 +46,23 @@ It is used as a limiter ahead of phase and frequency detectors and in clipping f
 reduction. It also computes the phase-only weights of beamformers and equal-gain combiners.
 
 The specification here is typical. $I$ and $Q$ are signed 16-bit samples in Q1.15, and so is the output.
-One sample enters every clock. The worst-case error in either output component must stay below one LSB
+Q1.15 means a sign bit and 15 fractional bits, covering $[-1, 1)$; one LSB is $2^{-15}$. One sample
+enters every clock. The worst-case error in either output component must stay below one LSB
 over all inputs. An input of $z = 0$ maps to zero.
 
 On a CPU the block is the formula:
 
 ```cpp
 std::complex<float> normalize_cpu(std::complex<float> z) {
-    float m = std::abs(z);  // sqrt(re^2 + im^2)
-    return m > 0.0f ? z / m : std::complex<float>(0.0f, 0.0f);
+    const float p = std::norm(z);  // re^2 + im^2
+    return p > 0.0f ? z * (1.0f / std::sqrt(p)) : std::complex<float>{};
 }
 ```
 
-On the test vectors, single precision is within 0.003 LSB of the exact result. The processor has a
+On the test vectors, single precision is within 0.005 LSB of the exact result. The processor has a
 multiplier, a square-root unit and a divider. An FPGA has adders, look-up tables (LUTs), small hardware
 multipliers (DSP slices) and block RAM. The square root and the division must be built from these. Each
-additional bit of accuracy costs logic.
+additional bit of accuracy widens registers, adders and multipliers, and so costs logic.
 
 ## From float to fixed point
 
@@ -79,7 +80,8 @@ the HLS code and the RTL must be bit-accurate to it, not to the float model.
 
 One property of the block shapes both designs below: $z/|z|$ does not depend on the scale of $z$.
 Shifting $I$ and $Q$ left by the same number of bits leaves the result unchanged. The precision available
-to the arithmetic improves. Both architectures use this.
+to the arithmetic improves. Architecture A normalises the power $P$ before its table lookup.
+Architecture B normalises $I$ and $Q$ before its first micro-rotation.
 
 The two operations that the fabric lacks can also be merged. Instead of a square root followed by a
 division,
@@ -88,7 +90,7 @@ $$
 \frac{z}{|z|} = z \cdot \left(I^2 + Q^2\right)^{-1/2},
 $$
 
-so one reciprocal square root replaces both. Tables with interpolation and Newton–Raphson iteration
+so one reciprocal square root replaces both. The CPU version above already computes it this way. Tables with interpolation and Newton–Raphson iteration
 compute it directly [3]. Architecture A uses a leading-zero normalisation and an interpolated table.
 Architecture B uses CORDIC [1], [2]. It avoids the reciprocal square root and rotates $z$ onto the unit
 circle instead.
@@ -157,18 +159,21 @@ void normalize_hls(sample_t i, sample_t q, sample_t &x, sample_t &y) {
 
 Unlike the CPU version, this code describes hardware. Each declared width sets the size of a register or
 an adder, and each operator is implemented as logic. The approximation is written out instead of being
-called from a library. HLS tools do provide functions such as `hls::rsqrt` [4]. Using one hands the
-choice of word lengths and error to the library.
+called from a library. HLS accepts `i / hls::sqrt(p)` directly and synthesises it [4]. It becomes a generic
+square-root implementation followed by a full-width divider, whose size, latency and error the library
+decides. The table version replaces both with a 384-entry table, one small multiplier for the
+interpolation, and shifts.
 
 ## Architecture B: CORDIC without the angle
 
 CORDIC computes rotations with additions and shifts only [1], [2]. In vectoring mode it rotates $z$ onto
-the real axis through micro-rotations by $\pm\arctan 2^{-j}$. Each sign is chosen from the sign of the
-imaginary part. The signs $d_j$ encode the angle of $z$. A common next step accumulates that angle and
+the real axis through micro-rotations by $\pm\arctan 2^{-j}$. Each step rotates towards the real axis:
+upwards when the imaginary part is negative, downwards otherwise. The signs $d_j$ encode the angle of $z$. A common next step accumulates that angle and
 feeds it to a second CORDIC in rotation mode, which turns it into $\cos\theta$ and $\sin\theta$.
 
 The angle itself is not needed. Apply the same sequence of micro-rotations in the opposite direction to
-the vector $(1/K, 0)$. Here $K \approx 1.647$ is the CORDIC gain. The result is $e^{j\theta} = z/|z|$,
+the vector $(1/K, 0)$. Each micro-rotation also stretches the vector slightly. $K \approx 1.647$ is the product of these
+stretches, and starting from $1/K$ cancels it. The result is $e^{j\theta} = z/|z|$,
 with no angle register and no arctangent table. CORDIC arrays for QR decomposition pass direction bits
 between stages in the same way. Here each pipeline stage applies one micro-rotation to both vectors with
 a shared sign. That takes four adder/subtractors; the shifts are by constants and cost only wiring.
@@ -191,7 +196,7 @@ end
 The fixed-point model required two extra steps. CORDIC converges only for angles within about ±99.9°.
 A rotation by ±90° therefore first brings $z$ into the right half-plane, and the output undoes it.
 
-The second step matters more. A small input, for example $z = 1 + 0j$, holds too few bits for the shifts
+The second step matters more, because without it small inputs lose their angle. A small input, for example $z = 1 + 0j$, holds too few bits for the shifts
 $2^{-j}$ to act on. After a few stages its components shift to zero, and the remaining signs no longer
 depend on the angle. The fix is the scale invariance again. $I$ and $Q$ are shifted left together until
 the larger of the two reaches the top of its range. This keeps the error below one LSB at every
@@ -203,7 +208,8 @@ magnitude (Fig. 4).
 </figure>
 
 With 18 micro-rotations and 8 guard bits, CORDIC meets the same error budget as the table design
-(Fig. 3, right). Its datapath is 28 bits wide. Both fixed-point models were checked exhaustively over all $2^{32}$ inputs.
+(Fig. 3, right). Its datapath is 28 bits wide: 16 bits of input, one bit of sign growth, 8 guard bits
+and 3 bits for the CORDIC gain. Both fixed-point models were checked exhaustively over all $2^{32}$ inputs.
 The check uses C++ ports of the models, which match the Python models on every test vector. The
 worst-case error in either component is 0.795 LSB for architecture A and 0.797 LSB for architecture B.
 The RMS error is 0.296 and 0.306 LSB, against 0.289 LSB for ideal rounding. The saturation of +1.0 to
@@ -215,9 +221,9 @@ Both architectures are also written by hand in Verilog. Design A becomes a six-s
 normalisation, table read, interpolation, multiplication and rounding. Design B becomes twenty stages:
 normalisation and pre-rotation, eighteen identical micro-rotations, and the output rounding.
 
-For this block, HLS shortened the exploration of word lengths and table sizes, with verification at
-C-simulation speed.
-Hand-written RTL gave exact control over the pipeline stages and over which operations map to DSP slices.
+In HLS, the scheduler decides how many pipeline stages to insert for a given clock target. In RTL, each
+stage is written explicitly. For this block, HLS shortened the exploration of word lengths and table
+sizes, with verification at C-simulation speed. Hand-written RTL gave exact control over the pipeline stages and over which operations map to DSP slices.
 The HLS C simulation of A and the RTL of A are both bit-accurate to the golden model.
 
 ## RTL verification
@@ -265,6 +271,8 @@ LUT counts include inverter cells (7 and 123) and exclude shift-register LUTs (6
 
 At one sample per clock, the multiplier-free CORDIC uses 3.2 times the LUTs and 14 times the flip-flops
 of the table design. Each of its eighteen stages holds four 28-bit adder/subtractors and their registers.
+Eighteen stages, each registering four 28-bit values, give about 2,000 flip-flops, close to the 1,926
+reported. The 72 adder/subtractors account for most of the LUTs.
 The flip-flop ratio overstates the difference. Part of design A's pipeline sits in the internal
 registers of its five DSP slices. These serve the two squares, the interpolation and the two final
 products.
@@ -288,7 +296,8 @@ The FPGA version needed an error budget and two approximations of a reciprocal s
 normalisation that both architectures depend on. The fixed-point golden models were checked exhaustively,
 and both RTL designs were verified bit-accurate to them. Both designs keep the worst-case error below
 0.8 LSB over all inputs. The table design does it with a third of the LUTs, at the cost of five DSP
-slices. The code, models and testbenches are on [GitHub](https://github.com/kostisdov/dsp-to-silicon).
+slices. "Multiplier-free" is not the same as cheap: the right architecture depends on which resource
+the rest of the design runs out of first. The code, models and testbenches are on [GitHub](https://github.com/kostisdov/dsp-to-silicon).
 
 ## References
 
