@@ -1,5 +1,5 @@
 ---
-title: "From math to silicon: a DSP block on an FPGA"
+title: "From math to silicon: a DSP block on FPGA"
 description: "One DSP block, z/|z|, taken from a floating-point formula to two FPGA pipelines. The fixed-point golden model sets the performance, and the RTL is verified bit-accurate against it."
 date: 2026-10-23
 tags: ["signals", "fpga"]
