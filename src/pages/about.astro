@@ -13,26 +13,27 @@ const roles = [
   ['2014 - 2015', 'Graduate Research Assistant', 'EPFL, Lausanne', 'Investigated the finite-length performance of irregular repetition slotted ALOHA (IRSA).'],
 ];
 
-const pubs: { year: string; title: string; authors: string; venue: string; href?: string }[] = [
-  { year: '2026', title: 'OFDM with adaptive ICI-aware equalization for doubly dispersive channels', authors: 'K. Dovelos', venue: 'Preprint. Paper and code: github.com/kostisdov/ofdm_vs_otfs', href: 'https://github.com/kostisdov/ofdm_vs_otfs' },
-  { year: '2023', title: 'Superdirective antenna pairs for energy-efficient terahertz massive MIMO', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', venue: 'IEEE Trans. Commun.' },
-  { year: '2022', title: 'Superdirective arrays with finite-length dipoles: Modeling and new perspectives', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', venue: 'Proc. IEEE GLOBECOM' },
-  { year: '2021', title: 'Channel estimation and hybrid combining for wideband terahertz massive MIMO systems', authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', venue: 'IEEE J. Sel. Areas Commun.' },
-  { year: '2021', title: 'Intelligent reflecting surfaces at terahertz bands: Channel modeling and analysis', authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, B. Bellalta, and M. Matthaiou', venue: 'Proc. IEEE ICC Workshops' },
-  { year: '2020', title: 'Massive MIMO with multi-antenna users under jointly correlated Ricean fading', authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', venue: 'Proc. IEEE ICC' },
+// IEEE reference style
+const pubs: { authors: string; title: string; venue: string; year: string; href?: string }[] = [
+  { authors: 'K. Dovelos', title: 'OFDM with adaptive ICI-aware equalization for doubly dispersive channels', venue: 'preprint', year: '2026', href: 'https://github.com/kostisdov/ofdm_vs_otfs' },
+  { authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', title: 'Superdirective antenna pairs for energy-efficient terahertz massive MIMO', venue: '<em>IEEE Trans. Commun.</em>', year: '2023' },
+  { authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, and M. Matthaiou', title: 'Superdirective arrays with finite-length dipoles: Modeling and new perspectives', venue: 'in <em>Proc. IEEE GLOBECOM</em>', year: '2022' },
+  { authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', title: 'Channel estimation and hybrid combining for wideband terahertz massive MIMO systems', venue: '<em>IEEE J. Sel. Areas Commun.</em>', year: '2021' },
+  { authors: 'K. Dovelos, S. D. Assimonis, H. Q. Ngo, B. Bellalta, and M. Matthaiou', title: 'Intelligent reflecting surfaces at terahertz bands: Channel modeling and analysis', venue: 'in <em>Proc. IEEE ICC Workshops</em>', year: '2021' },
+  { authors: 'K. Dovelos, M. Matthaiou, H. Q. Ngo, and B. Bellalta', title: 'Massive MIMO with multi-antenna users under jointly correlated Ricean fading', venue: 'in <em>Proc. IEEE ICC</em>', year: '2020' },
 ];
 
 const projects = [
   {
-    name: 'Pyxida', href: 'https://pyxida.io', link: 'pyxida.io', meta: 'health · cardiology · 2026',
+    name: 'Pyxida', href: 'https://pyxida.io', meta: 'health · cardiology · 2026',
     text: "A personal companion that helps adults with congenital heart disease (CHD) navigate lifelong care with confidence and clarity. It brings a patient's multi-year medical history and care into one coherent, longitudinal picture, and provides appointment preparation and personalized physical-activity guidance.",
   },
   {
-    name: 'FindMyHeart', href: 'https://github.com/kostisdov/FindMyHeart', link: 'GitHub', meta: 'health · metabolic · 2026',
+    name: 'FindMyHeart', href: 'https://github.com/kostisdov/FindMyHeart', meta: 'health · metabolic · 2026',
     text: 'A cardiometabolic companion built for what generic fitness apps miss. It synthesizes your medical records and medication profile with real-time wearable data, delivering clinically contextualized feedback and personalized lifestyle interventions. Developed during LifeHack Athens 2026, a 36-hour life sciences hackathon at the heart of Panathēnea.',
   },
   {
-    name: 'birdii', href: 'https://www.linkedin.com/company/birdii/', link: 'LinkedIn', meta: 'news · llms · 2025',
+    name: 'birdii', href: 'https://www.linkedin.com/company/birdii/', meta: 'news · llms · 2025',
     text: 'An AI-native news app that redefines how we engage with news. Instead of static headlines, birdii turns each article into something you can interact: summaries, additional background information for unfamiliar topics, and a conversational Q&A that lets you ask follow-up questions and dig as deep as you want.',
   },
 ];
@@ -75,20 +76,17 @@ const projects = [
 
   <section class="rows-section">
     <p class="rows-label">Selected publications</p>
-    <ul class="rows">
-      {pubs.map((p) => (
+    <ul class="rows refs">
+      {pubs.map((p, i) => (
         <li>
-          <span class="key">{p.year}</span>
-          <div>
-            <p>{p.href ? <a href={p.href}>{p.title}</a> : p.title}</p>
-            <p class="sub">{p.authors}. <em>{p.venue}</em></p>
-          </div>
+          <span class="key">[{i + 1}]</span>
+          <p>
+            {p.authors}, “{p.title},” <Fragment set:html={p.venue} />, {p.year}.
+            {p.href && <> [Online]. Available: <a href={p.href}>{p.href.replace('https://', '')}</a></>}
+          </p>
         </li>
       ))}
     </ul>
-    <p class="rows-more">
-      <a href="https://scholar.google.com/citations?user=2kEnpJAAAAAJ&hl=en">Full list on Google Scholar →</a>
-    </p>
   </section>
 
   <section class="rows-section">
@@ -104,7 +102,7 @@ const projects = [
           <span class="key"><a href={p.href}>{p.name} →</a></span>
           <div>
             <p>{p.text}</p>
-            <p class="see">{p.meta} · <a href={p.href}>{p.link}</a></p>
+            <p class="see">{p.meta}</p>
           </div>
         </li>
       ))}

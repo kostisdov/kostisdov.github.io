@@ -73,10 +73,19 @@
   text-decoration: underline;
 }
 
-.rows-more {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  margin: 0.8rem 0 0;
+/* numbered references: a narrow key column */
+.rows.refs {
+  border-top: 0;
+}
+
+.rows.refs > li {
+  grid-template-columns: 2.2rem 1fr;
+  padding: 0.45rem 0;
+  border-bottom: 0;
+}
+
+.rows.refs p {
+  font-size: 0.97rem;
 }
 
 .rows-cta {
