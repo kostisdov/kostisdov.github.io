@@ -196,6 +196,51 @@ plt.close(fig)
 
 
 # ---------------------------------------------------------------------------
+# From math to silicon card: title block on the left; on the right a CORDIC
+# vectoring sequence taking z to the real axis, and the unit phasor z/|z|.
+# ---------------------------------------------------------------------------
+fig = new_card()
+fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
+         family="monospace", va="center")
+fig.text(0.060, 0.63, "From math\nto silicon", fontsize=54, color=INK,
+         va="center", linespacing=1.05)
+fig.text(0.062, 0.30, "One DSP block, z/|z|, from a floating-point formula\n"
+                      "to two bit-accurate FPGA pipelines.",
+         fontsize=20, color=INK_SOFT, style="italic", va="center",
+         linespacing=1.3)
+fig.text(0.062, 0.10, "kostisdov.github.io", fontsize=15, color=ACCENT,
+         family="monospace", va="center")
+
+ax = fig.add_axes([0.60, 0.08, 0.36, 0.84])
+_t = np.linspace(0, 2 * np.pi, 400)
+ax.plot(np.cos(_t), np.sin(_t), color=INK_SOFT, lw=1.0, alpha=0.5)
+ax.plot([-1.15, 1.15], [0, 0], color=INK_SOFT, lw=0.8, alpha=0.4)
+ax.plot([0, 0], [-1.15, 1.15], color=INK_SOFT, lw=0.8, alpha=0.4)
+_r, _th = 0.62, 58 * DEG
+_ang = _th
+for _j in range(9):  # vectoring micro-rotations towards the real axis
+    _d = 1 if _ang < 0 else -1
+    _a2 = _ang + _d * np.arctan(2.0 ** -_j)
+    _arc = np.linspace(_ang, _a2, 30)
+    ax.plot(_r * np.cos(_arc), _r * np.sin(_arc), color=ACCENT_DEEP, lw=1.6, alpha=0.85)
+    ax.plot([0, _r * np.cos(_a2)], [0, _r * np.sin(_a2)], color=ACCENT_DEEP, lw=0.8, alpha=0.25)
+    _ang = _a2
+ax.annotate("", xy=(_r * np.cos(_th), _r * np.sin(_th)), xytext=(0, 0),
+            arrowprops=dict(arrowstyle="-|>", color=INK_SOFT, lw=1.6, mutation_scale=18))
+ax.annotate("", xy=(np.cos(_th), np.sin(_th)), xytext=(0, 0),
+            arrowprops=dict(arrowstyle="-|>", color=ACCENT, lw=2.6, mutation_scale=22))
+ax.text(_r * np.cos(_th) - 0.30, _r * np.sin(_th) - 0.02, "z", fontsize=24, color=INK_SOFT, style="italic")
+ax.text(np.cos(_th) + 0.04, np.sin(_th) + 0.02, "z/|z|", fontsize=24, color=ACCENT, style="italic")
+ax.set_xlim(-1.2, 1.35)
+ax.set_ylim(-1.2, 1.2)
+ax.set_aspect("equal")
+ax.set_facecolor(PAPER)
+ax.axis("off")
+fig.savefig(os.path.join(OUT, "from-math-to-silicon.png"), facecolor=PAPER)
+plt.close(fig)
+
+
+# ---------------------------------------------------------------------------
 # Default site card: wordmark + tagline, with a faint interference ridgeline
 # echoing the home-page hero art.
 # ---------------------------------------------------------------------------
