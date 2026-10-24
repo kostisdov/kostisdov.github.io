@@ -117,11 +117,11 @@ Steps 2 and 4 are the normalisation and its undo; only step 3 approximates the f
 <figcaption>Fig. 2: Left: 1/√u over the normalised range, with a coarse interpolated table for illustration. Right: error of the 384-entry table used in the design, in units of its own LSB (2⁻¹⁷). Grey: the entry below the address alone. Red: with linear interpolation.</figcaption>
 </figure>
 
-After normalisation the table only sees $u$ between 1/4 and 1, for any input. So 384 entries cover
-the whole range. The entry below the address alone is off by up to 1,018 LSB of $r$. Interpolating to the
-next entry brings the error down to 2.4 LSB, at the cost of one small multiplier (Fig. 2). Without
-interpolation, the same accuracy would take more than 100,000 entries. Each entry stores a 19-bit base
-value and a 10-bit slope.
+Because of the normalisation, the table only has to cover $u$ between 1/4 and 1, whatever the input.
+Accuracy then comes from interpolation. The entry below the address alone is off by up to 1,018 LSB of
+$r$. Interpolating to the next entry brings the error down to 2.4 LSB, at the cost of one small
+multiplier (Fig. 2). Without interpolation, the same accuracy would take more than 100,000 entries. Each
+of the 384 entries stores a 19-bit base value and a 10-bit slope.
 
 The table size follows from the error budget. Fig. 3 (left) sweeps it, with the worst case taken over all
 $2^{32}$ inputs. Nine address bits (384 entries) is the smallest table tested that keeps the complete
