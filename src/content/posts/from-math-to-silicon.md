@@ -104,8 +104,13 @@ The first design computes the reciprocal square root with a table, in four steps
    lies in $[2^{30}, 2^{32})$, and $u = m / 2^{32}$ lies in $[1/4, 1)$. The shift is even so that the
    square root of $2^s$ is again a shift, by $s/2$.
 3. $1/\sqrt{u}$ from a table. The top nine bits of $m$ address it, and the next twelve bits interpolate
-   linearly. The result $r$ has 17 fractional bits.
-4. The products $I \cdot r$ and $Q \cdot r$, shifted right by $18 - s/2$ with a single rounding.
+   linearly. Since $u \ge 1/4$, the top two bits are never 00, so only 384 of the 512 addresses occur.
+   The result $r$ has 17 fractional bits.
+4. The products $I \cdot r$ and $Q \cdot r$, shifted right by $18 - s/2$ with a single rounding. The 18
+   collects the fixed scalings of $r$, $u$ and the Q1.15 output ($17 + 16 - 15$); the $-s/2$ undoes the
+   normalisation.
+
+Steps 2 and 4 are the normalisation and its undo; only step 3 approximates the function.
 
 <figure>
 <img src="/posts/from-math-to-silicon/fig1-rsqrt-table.svg" alt="Left: the curve one over square root of u for u from a quarter to one, with a coarse piecewise-linear approximation. Right: the error of the 384-entry table, up to about 1000 LSB using the entry below the address alone and about 2 LSB with linear interpolation." />
