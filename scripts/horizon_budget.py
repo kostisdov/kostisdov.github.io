@@ -7,7 +7,7 @@ Section 4.2) for beyond-the-horizon paths. Horizontal polarization over average
 ground (eps_r = 15, sigma = 0.005 S/m), 4/3-Earth.
 
 Run:
-    /usr/local/Caskroom/miniforge/base/envs/wifi_analyzer/bin/python scripts/horizon_budget.py
+    python scripts/horizon_budget.py
 """
 
 import numpy as np
