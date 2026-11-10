@@ -1,5 +1,5 @@
 ---
-title: "OFDM vs OTFS: A pragmatic comparison"
+title: "OFDM vs. OTFS: a pragmatic comparison"
 description: "Fast fading breaks the orthogonality of OFDM subcarriers and creates inter-carrier interference, for which delay-Doppler waveforms such as OTFS are proposed as the remedy. However, a fair comparison shows that a properly designed OFDM performs on par with OTFS at much lower complexity."
 date: 2026-07-27
 tags: ["signals", "wireless"]
