@@ -1,5 +1,5 @@
 ---
-title: "When the airframe joins the array"
+title: "When the airframe joins the antenna array"
 description: "On a small drone the airframe becomes part of the direction-finding array. A simulation study of what this does to bearings and to emitter localization, and of which calibration recovers them."
 date: 2026-10-06
 tags: ["signals", "wireless"]

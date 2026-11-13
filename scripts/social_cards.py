@@ -169,7 +169,7 @@ _ad = np.load(os.path.join(os.path.dirname(__file__), "data", "airframe-array.np
 fig = new_card()
 fig.text(0.062, 0.86, "KOSTIS  DOVELOS", fontsize=15, color=INK_SOFT,
          family="monospace", va="center")
-fig.text(0.060, 0.63, "When the airframe\njoins the array", fontsize=50, color=INK,
+fig.text(0.060, 0.63, "When the airframe\njoins the antenna array", fontsize=46, color=INK,
          va="center", linespacing=1.05)
 fig.text(0.062, 0.28, "Direction finding on a small drone, and why the array\n"
                       "it carries is not the array in the datasheet.",
