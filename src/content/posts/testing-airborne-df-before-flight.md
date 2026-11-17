@@ -147,8 +147,8 @@ each emitter, with equal probability, until a turn or a second pass separates th
 array measures a direction, and locates the two emitters to 1.4 m and 0.4 m.
 
 <figure>
-<img src="/posts/testing-airborne-df-before-flight/fig2-replay.jpg" alt="3D replay of the pass over the suburb: grey buildings, the aircraft, the ray paths to the two emitters, and the bearing loci over the street." />
-<figcaption>Fig. 2: Replay of the pass with the line array: the buildings, the aircraft, the ray paths to the emitters and the cone loci of the bearings.</figcaption>
+<img src="/posts/testing-airborne-df-before-flight/fig2-replay.png" alt="The replay dashboard at the end of the pass: on the left the suburb in 3D with the aircraft and the ray paths to the two emitters; on the right the position error against the predicted CEP50 for each track, the probability of the true position, the angle error over time, and a summary table." />
+<figcaption>Fig. 2: Replay of the pass with the circular array, at its end. Left: the buildings, the aircraft and the ray paths to the two emitters. Right, from the top: each track's position error and predicted CEP50 (log10 of metres), the probability of the true position, the angle error over the pass, and the summary: DF RMSE / CRB, the position error (1.41 m and 0.42 m), the estimated and predicted CEP50, and the NEES.</figcaption>
 </figure>
 
 ## Where it stands
