@@ -348,6 +348,19 @@ a:hover {
   vertical-align: top;
 }
 
+/* on a phone a wide table scrolls on its own instead of widening the page */
+@media (max-width: 560px) {
+  .prose table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.55rem;
+  }
+}
+
 .prose thead th {
   border-bottom: 1.5px solid var(--ink-soft);
   font-family: var(--mono);
