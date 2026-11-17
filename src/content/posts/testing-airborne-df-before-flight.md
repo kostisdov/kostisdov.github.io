@@ -19,7 +19,7 @@ through one example.
 <video controls preload="metadata" playsinline poster="/posts/testing-airborne-df-before-flight/poster.jpg" style="width: 100%; height: auto;">
 <source src="/posts/testing-airborne-df-before-flight/argand-studio.mp4" type="video/mp4" />
 </video>
-<figcaption>Argand Studio, from calibration on the airframe to a flight over a ray-traced site (2 min 23 s, no sound).</figcaption>
+<figcaption>Argand Studio, from calibration on the airframe to a flight over a ray-traced site (2 min 32 s, no sound).</figcaption>
 </figure>
 
 ## Three things the textbook leaves out
