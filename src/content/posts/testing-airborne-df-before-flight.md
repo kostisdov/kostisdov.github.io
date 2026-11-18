@@ -113,6 +113,15 @@ measurement of the installed array or a calibration flight, and each carries its
 earlier post, a model of the airframe still left about 2° of median error on a realistic drone, and
 only a calibration flight came close to the bound.
 
+Fig. 2 shows why the textbook table fails. For one emitter 30° below the horizon, the textbook table's score peaks 12° too
+close to the horizon, because the phases the airframe imposes on the elements match a different
+direction of the free-space array. With the installed table the peak falls on the true direction.
+
+<figure>
+<img src="/posts/testing-airborne-df-before-flight/spectrum.svg" alt="Two maps of the correlative score over azimuth and elevation below the horizon: with the textbook table the peak lies 12 degrees above the true direction, with the installed table it lies on it." />
+<figcaption>Fig. 2: Correlative-interferometer score for one emitter at azimuth 40°, 30° below the horizon, at 20 dB SNR per element, on the 2° search grid (half of the azimuth range shown). Circle: true direction; cross: peak. Left: textbook table. Right: installed table.</figcaption>
+</figure>
+
 ### An estimator against the bound
 
 Estimators are developed in the DF lab. In the video, a copy of the correlative interferometer
@@ -149,6 +158,17 @@ In free space both arrays sit at the bound, while over the suburb the errors are
 the bound at the same SNR. At 34 dB the noise contributes almost nothing, so the error comes from the
 multipath, which no free-space bench would show.
 
+Fig. 3 follows the error dwell by dwell. E2 stays in view, yet from about 6 s on its error swings back
+and forth about once a second, the pattern a direct path and a reflection produce as their relative phase turns with
+the motion of the aircraft. While the line of sight to E1 is blocked, the bearing follows the
+reflections and carries a steady bias. In free space the same pass gives an error that stays at zero
+on this scale.
+
+<figure>
+<img src="/posts/testing-airborne-df-before-flight/error-along-pass.svg" alt="Azimuth error per dwell for the two emitters along the 20 second pass: over the suburb it oscillates by up to a few degrees, with a steady bias for E1 while its line of sight is blocked; in free space it stays at zero." />
+<figcaption>Fig. 3: Azimuth error of the circular array per 0.1 s dwell along the pass, over the suburb and in free space. Shaded: line of sight to the emitter blocked.</figcaption>
+</figure>
+
 The line array looks more accurate, but the two angles are not directly comparable: it measures only
 the cone angle about its axis and cannot tell left from right. On this straight pass its geolocation
 keeps two mirror-image positions for each emitter with equal probability until a turn or a second
@@ -157,7 +177,7 @@ pass, from slant ranges of about 160 to 400 m, against a predicted CEP50 of abou
 
 <figure>
 <img src="/posts/testing-airborne-df-before-flight/fig2-replay.png" alt="The replay dashboard at the end of the pass: on the left the suburb in 3D with the aircraft and the ray paths to the two emitters; on the right the position error against the predicted CEP50 for each track, the probability of the true position, the angle error over time, and a summary table." />
-<figcaption>Fig. 2: Replay of the pass with the circular array, at its end. Left: the buildings, the aircraft and the ray paths to the two emitters. Right, from the top: each track's position error and predicted CEP50 (log10 of metres), the probability of the true position, the angle error over the pass, and the summary: DF RMSE / CRB, the position error (1.41 m and 0.42 m), the estimated and predicted CEP50, and the NEES. The aircraft is not to scale. Buildings © OpenStreetMap contributors.</figcaption>
+<figcaption>Fig. 4: Replay of the pass with the circular array, at its end. Left: the buildings, the aircraft and the ray paths to the two emitters. Right, from the top: each track's position error and predicted CEP50 (log10 of metres), the probability of the true position, the angle error over the pass, and the summary: DF RMSE / CRB, the position error (1.41 m and 0.42 m), the estimated and predicted CEP50, and the NEES. The aircraft is not to scale. Buildings © OpenStreetMap contributors.</figcaption>
 </figure>
 
 ## Limitations
@@ -170,8 +190,10 @@ from one pass with one seed, and nothing here has been flown.
 
 ## Where it stands
 
-Argand Studio is a working prototype and is available for consulting and pilot projects: the array on the airframe, the estimator against the bound, and the whole chain over
-the site where it will fly. If you are building an airborne DF or RF sensing payload and want to
+Argand Studio is a working prototype, and it already makes DF testing much more realistic than a
+free-space bench: the array is modelled on its airframe, estimators are scored against the bound,
+and the whole chain runs over the site where the payload will fly. It is available for consulting
+and pilot projects. If you are building an airborne DF or RF sensing payload and want to
 test it before it flies, [get in touch](mailto:konstantinos.dovelos@gmail.com).
 
 ## References
