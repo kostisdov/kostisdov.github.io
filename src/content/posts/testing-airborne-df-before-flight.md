@@ -1,15 +1,15 @@
 ---
 title: "Testing an airborne DF payload before it flies"
-description: "On a small drone, the airframe and the site below can set the direction-finding error, not the noise. Argand Studio, a simulation suite for airborne DF, and an example: a small UAV with a circular array, modelled on its airframe and flown over a suburb."
+description: "On a small drone, the airframe and the site below can set the direction-finding error rather than the noise. A simple example shows this: a small UAV with a circular array, modelled on its airframe and flown over a suburb in Argand Studio, a simulation suite for airborne DF."
 date: 2026-11-18
 tags: ["signals", "wireless"]
 draft: true
 image: "/og/testing-airborne-df-before-flight.png"
 ---
 
-Finding where a radio signal comes from is the same problem in radio astronomy, with arrays
-kilometres across, and in signals intelligence, with a few antennas on a drone. Direction finding
-(DF) is hardest on the drone. The array is a few wavelengths across at most, the airframe sits a
+Finding where a radio signal comes from is the same problem in radio astronomy with arrays
+kilometres across and in signals intelligence with a few antennas on a drone. Direction finding
+(DF) is usually hardest on the drone. The array is a few wavelengths across at most, the airframe sits a
 fraction of a wavelength from the antennas, and the ground and the buildings below return
 multipath. An estimator that reaches the Cramér–Rao bound (CRB) on a free-space array can then be
 off by degrees, and no amount of signal-to-noise ratio (SNR) brings it back. This post presents
@@ -28,7 +28,7 @@ through one example.
 **The installed array.** A DF estimator compares the phases and amplitudes received at the
 elements against a table of array response vectors, one per direction. The textbook table assumes
 identical, uncoupled elements in free space. Mounted on an airframe, each element has its own
-embedded pattern, shaped by the coupling to the other elements and by the field the structure
+embedded pattern shaped by the coupling to the other elements and by the field the structure
 scatters. An earlier post, [When the airframe joins the antenna array](/posts/when-the-airframe-joins-the-array),
 quantifies this for a quadcopter: with the textbook table, MUSIC reported bearings tens of degrees
 off; with the installed table it reached the bound.
@@ -45,7 +45,7 @@ actually receive, shows how they combine.
 
 ## Argand Studio
 
-Argand Studio puts the three in one tool. It has four steps:
+Argand Studio brings the three together in one tool with four steps:
 
 - **Platform.** The airframe and the array are modelled in Blender. The embedded pattern of every
   element is computed with a full-wave solver, openEMS (FDTD) [1] for the airframe, or NEC-2
@@ -64,11 +64,11 @@ Argand Studio puts the three in one tool. It has four steps:
   the same buildings and the same emitters. Each run can be replayed in 3D, with the flight, the
   ray paths and the bearings over time.
 
-The physics and the geometry come from open tools, openEMS, NEC-2, Sionna RT, Blender and Rerun
-for the replay; the DSP, DF, geolocation and the scoring are my own code.
+The physics and geometry come from open tools (openEMS, NEC-2, Sionna RT, Blender, and Rerun for
+the replay), while the DSP, DF, geolocation and scoring are my own code.
 
-The name honours Jean-Robert Argand, who in 1806 drew complex numbers as points in a plane [7].
-Every phase a DF estimator compares lives on his diagram.
+The name honours Jean-Robert Argand, who in 1806 drew complex numbers as points in a plane [7], the
+plane on which every phase a DF estimator compares is drawn.
 
 ## An example: a small UAV over a suburb
 
@@ -108,16 +108,16 @@ With the textbook table the elevation estimate is off by about 15° (median), an
 fall with SNR: it is a bias set by the model. Azimuth, which sets the bearing, is off by about 1.7°.
 More than 90 % of the estimates are gross errors. With the installed table the same estimator
 reaches the bound at every SNR. Here the table is the exact response of the model, so this is the
-best case: it tests the estimator, not the table. In practice the table comes from a model, a
+best case and tests the estimator rather than the table. In practice the table comes from a model, a
 measurement of the installed array or a calibration flight, and each carries its own error. In the
 earlier post, a model of the airframe still left about 2° of median error on a realistic drone, and
 only a calibration flight came close to the bound.
 
 ### An estimator against the bound
 
-The DF lab is where an estimator is developed. In the video, a copy of the correlative interferometer
+Estimators are developed in the DF lab. In the video, a copy of the correlative interferometer
 loses one line, the normalisation of each response vector. On the bench it shows an elevation bias
-of about 8°, with every estimate a gross error. The mistake is caught before any flight.
+of about 8° with every estimate a gross error, so the mistake is caught before any flight.
 
 ### A pass over a suburb
 
@@ -126,13 +126,13 @@ heights set to 9 m where OpenStreetMap gives none, as for most of them. Two emit
 above the street, each radiating −10 dBm in 25 kHz near 915 MHz. The aircraft flies a straight
 300 m pass at 120 m and 15 m/s, 200 dwells of 0.1 s. Sionna RT traces up to three specular
 reflections per path (no diffraction or diffuse scattering); over the pass there are about four
-paths per emitter and dwell. The line of sight to E1 is blocked for about a quarter of the pass; E2
-stays in view. To isolate the effect of the site, the array is modelled alone here, without the
+paths per emitter and dwell. The line of sight to E1 is blocked for about a quarter of the pass, while
+E2 stays in view. To isolate the effect of the site, the array is modelled alone here, without the
 airframe.
 
-The same pass is flown twice: with the five-element circular array, and with a five-element line
-array along the fuselage, both at half-wavelength spacing between neighbours. Table 2 compares them, and repeats the pass in
-free space as a control.
+The same pass is flown twice, with the five-element circular array and with a five-element line
+array along the fuselage, both at half-wavelength spacing between neighbours. Table 2 compares them
+and repeats the pass in free space as a control.
 
 | Array | Emitter | Error (°) | Error / CRB | Error / CRB, free space |
 | :--- | :---: | :---: | :---: | :---: |
@@ -145,14 +145,14 @@ free space as a control.
 free-space SNR of about 34 dB per element, its ratio to the single-path CRB, and that ratio for the
 same pass flown in free space.*
 
-In free space both arrays sit at the bound. Over the suburb the errors are 100 to 230 times the
-bound at the same SNR. At 34 dB the noise contributes almost nothing; the error is the multipath.
-A bench in free space, however long, would not show it.
+In free space both arrays sit at the bound, while over the suburb the errors are 100 to 230 times
+the bound at the same SNR. At 34 dB the noise contributes almost nothing, so the error comes from the
+multipath, which no free-space bench would show.
 
 The line array looks more accurate, but the two angles are not directly comparable: it measures only
-the cone angle about its axis and cannot tell left from right. On this straight pass, its geolocation keeps two mirror-image positions for
-each emitter, with equal probability, until a turn or a second pass separates them. The circular
-array measures a direction, and locates the two emitters to 1.4 m and 0.4 m at the end of the
+the cone angle about its axis and cannot tell left from right. On this straight pass its geolocation
+keeps two mirror-image positions for each emitter with equal probability until a turn or a second
+pass separates them. The circular array measures a direction and locates the two emitters to 1.4 m and 0.4 m at the end of the
 pass, from slant ranges of about 160 to 400 m, against a predicted CEP50 of about 1 m.
 
 <figure>
@@ -162,16 +162,15 @@ pass, from slant ranges of about 160 to 400 m, against a predicted CEP50 of abou
 
 ## Limitations
 
-The example uses one airframe, modelled as a perfect conductor. On the bench the installed table is
-the exact response of that model. The site runs use the array without the airframe, specular
-reflections only and default building heights. Receiver channels are ideal, the heading and the
-attitude are known exactly, and geolocation is given the emitters' height above the ground. Each
-result is one pass with one seed, and nothing here has been flown.
+The example uses one airframe modelled as a perfect conductor, and on the bench the installed table
+is the exact response of that model. The site runs use the array without the airframe, specular
+reflections only and default building heights. Receiver channels are ideal, the heading and attitude
+are known exactly, and geolocation is given the emitters' height above the ground. Each result comes
+from one pass with one seed, and nothing here has been flown.
 
 ## Where it stands
 
-Argand Studio is a working prototype, not yet a product, and it is available for consulting and
-pilot projects: the array on the airframe, the estimator against the bound, and the whole chain over
+Argand Studio is a working prototype and is available for consulting and pilot projects: the array on the airframe, the estimator against the bound, and the whole chain over
 the site where it will fly. If you are building an airborne DF or RF sensing payload and want to
 test it before it flies, [get in touch](mailto:konstantinos.dovelos@gmail.com).
 
