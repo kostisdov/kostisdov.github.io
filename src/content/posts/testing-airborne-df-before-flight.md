@@ -1,6 +1,6 @@
 ---
 title: "Testing an airborne DF payload before it flies"
-description: "On a small drone, the airframe and the site below can set the direction-finding error rather than the noise. A simple example shows this: a small UAV with a circular array, modelled on its airframe and flown over a suburb in Argand Studio, a simulation suite for airborne DF."
+description: "On a small drone, the airframe and the site below can set the direction-finding error rather than the noise. Argand Studio, a simulation suite for airborne DF, shows this with a simple example: a small UAV whose circular array is modelled on its airframe and flown over a suburb."
 date: 2026-11-18
 tags: ["signals", "wireless"]
 draft: true
