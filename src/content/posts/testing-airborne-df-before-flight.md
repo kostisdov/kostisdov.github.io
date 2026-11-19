@@ -64,9 +64,6 @@ Argand Studio brings the three together in one tool with four steps:
   the same buildings and the same emitters. Each run can be replayed in 3D, with the flight, the
   ray paths and the bearings over time.
 
-The physics and geometry come from open tools (openEMS, NEC-2, Sionna RT, Blender, and Rerun for
-the replay), while the DSP, DF, geolocation and scoring are my own code.
-
 The name honours Jean-Robert Argand, who in 1806 drew complex numbers as points in a plane [7], the
 plane on which every phase a DF estimator compares is drawn.
 
